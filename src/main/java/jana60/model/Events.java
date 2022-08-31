@@ -44,6 +44,62 @@ public class Events {
 	@Column(nullable = false)
 	private String canceledStatus;
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getPoster() {
+		return poster;
+	}
+
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
+
+	public String getPublishedStatus() {
+		return publishedStatus;
+	}
+
+	public void setPublishedStatus(String publishedStatus) {
+		this.publishedStatus = publishedStatus;
+	}
+
+	public String getCanceledStatus() {
+		return canceledStatus;
+	}
+
+	public void setCanceledStatus(String canceledStatus) {
+		this.canceledStatus = canceledStatus;
+	}
+
 	public String getName() {
 		return name;
 	}

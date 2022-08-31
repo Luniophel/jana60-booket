@@ -22,7 +22,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr th:each="e : $(eventInfo)">
+            <tr th:each="e : ${eventInfo}">
                 <td th:text="${e.name}"></td>
                 <td th:text="${e.description}"></td>
                 <td th:text="${e.startDate}"></td>

@@ -1,6 +1,7 @@
 package jana60.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,10 +20,9 @@ public class EventsController {
 	private RepoEvents repo;
 
 	@GetMapping("/{id}")
-	public String pizze(@PathVariable("id") Iterable<Integer> eventId , Model model) {
-		//List<Events> eventInfo = (List<Events>) repo.findById(eventId);
-		List <Events> eventInfo = (List<Events>) repo.findAllById(eventId);
-		model.addAttribute("eventInfo", eventInfo);		
+	public String eventInfo(@PathVariable("id") Integer eventId , Model model) {
+		Optional<Events> result = repo.findById(eventId);
+		model.addAttribute("eventInfo", result.get());		
 		return "evenstInfo";
 
 }
