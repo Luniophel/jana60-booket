@@ -1,8 +1,8 @@
-package jana60.Repository;
+package jana60.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import jana60.Model.Location;
+import jana60.model.Location;
 
 public interface LocationRepository extends CrudRepository<Location, Integer>{
 

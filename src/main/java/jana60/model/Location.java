@@ -1,4 +1,4 @@
-package jana60.Model;
+package jana60.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
