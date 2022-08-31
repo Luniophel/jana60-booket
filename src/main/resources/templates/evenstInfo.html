@@ -1,11 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>    
+<h1>
+    Descrizione dell evento con id
+</h1>
+<body>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Descrizione</th>
+                <th>Data inizio</th>
+                <th>Data fine</th>
+                <th>Stato pubblicato</th>
+                <th>Stato annullato</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="e : $(eventInfo)">
+                <td th:text="${e.name}"></td>
+                <td th:text="${e.description}"></td>
+                <td th:text="${e.startDate}"></td>
+                <td th:text="${e.endDate}"></td>
+                <td th:text="${e.publishedStatus}"></td>
+                <td th:text="${e.canceledStatus}"></td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
