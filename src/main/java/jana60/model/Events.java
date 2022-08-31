@@ -19,4 +19,42 @@ public class Events {
 	@NotEmpty(message = "Il nome e' obbliogatorio")
 	@Column(nullable = false)
 	private String name;
+	
+	@NotEmpty(message = "la descrizione e' obbliogatorio")
+	@Column(nullable = false)
+	private String description;
+	
+	@NotEmpty(message = "la locandina e' obbliogatorio")
+	@Column(nullable = false)
+	private String poster;
+	
+	@NotEmpty(message = "la data di inizio e' obbliogatorio")
+	@Column(nullable = false)
+	private String startDate;
+	
+	@NotEmpty(message = "la data di fine e' obbliogatorio")
+	@Column(nullable = false)
+	private String endDate;
+	
+	@NotEmpty(message = "lo stato e' obbliogatorio")
+	@Column(nullable = false)
+	private String publishedStatus;
+	
+	@NotEmpty(message = "lo stato e' obbliogatorio")
+	@Column(nullable = false)
+	private String canceledStatus;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
+	
+	
+	
+	
 }
