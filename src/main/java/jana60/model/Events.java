@@ -1,5 +1,7 @@
 package jana60.model;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,8 +26,7 @@ public class Events {
 	@Column(nullable = false)
 	private String description;
 	
-	@NotEmpty(message = "la locandina e' obbliogatorio")
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String poster;
 	
 	@NotEmpty(message = "la data di inizio e' obbliogatorio")
@@ -36,13 +37,29 @@ public class Events {
 	@Column(nullable = false)
 	private String endDate;
 	
-	@NotEmpty(message = "lo stato e' obbliogatorio")
+	@NotEmpty(message = "devi indicare se é attivo")
 	@Column(nullable = false)
 	private String publishedStatus;
 	
-	@NotEmpty(message = "lo stato e' obbliogatorio")
+	@NotEmpty(message = "devi indicare se é visibile")
 	@Column(nullable = false)
-	private String canceledStatus;
+	private String visible;
+	
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
+	}
 
 	public Integer getId() {
 		return id;
@@ -68,21 +85,6 @@ public class Events {
 		this.poster = poster;
 	}
 
-	public String getStartDate() {
-		return startDate;
-	}
-
-	public void setStartDate(String startDate) {
-		this.startDate = startDate;
-	}
-
-	public String getEndDate() {
-		return endDate;
-	}
-
-	public void setEndDate(String endDate) {
-		this.endDate = endDate;
-	}
 
 	public String getPublishedStatus() {
 		return publishedStatus;
@@ -92,12 +94,12 @@ public class Events {
 		this.publishedStatus = publishedStatus;
 	}
 
-	public String getCanceledStatus() {
-		return canceledStatus;
+	public String getVisible() {
+		return visible;
 	}
 
-	public void setCanceledStatus(String canceledStatus) {
-		this.canceledStatus = canceledStatus;
+	public void setVisible(String visible) {
+		this.visible = visible;
 	}
 
 	public String getName() {
