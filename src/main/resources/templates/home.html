@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <th:block th:replace="fragments :: src-head"></th:block>
-    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <th:block th:replace="fragments/resources :: src-head"></th:block>
     <title>Booket</title>
 </head>
 <body>
-    <th:block th:replace="fragments :: navbar(home)"></th:block> 
+    <th:block th:replace="fragments/navbar :: navbar"></th:block> 
     <div id="menu-bars" class="fas fa-bars"></div>
-    </header> 
     <!-- header section end-->
 <!-- home section start -->
 <section class="home" id="home">
@@ -27,6 +25,6 @@
      </div>
     </div>
 </section>
-   <th:block layout:fragment="script"></th:block>
+<th:block th:replace="fragments/script :: script"></th:block>
 </body>
 </html>
