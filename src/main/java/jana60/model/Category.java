@@ -1,10 +1,13 @@
 package jana60.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
@@ -22,6 +25,9 @@ public class Category
 	
 	@Lob
 	private String description;
+	
+	@ManyToMany(mappedBy="categories")
+	List<Events> events;
 	
 	
 	//GETTER & SETTER

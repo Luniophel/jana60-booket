@@ -9,7 +9,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Crea il tuo fantastico evento sponsorizzato da noi:</h1>
+    <h1>Modifica il tuo fantastico evento sponsorizzato da noi:</h1>
 
 
     <hr/>
@@ -38,7 +38,7 @@
       </div>
     </div>
     <div class="mb-3 col-3">
-      <input type="date" step="0.1" id="startDate" class="form-control" th:field="*{startDate}"  th:errorClass="is-invalid">
+      <input type="date" id="startDate" class="form-control" th:field="*{startDate}"  th:errorClass="is-invalid">
       <div th:if="${#fields.hasErrors('startDate')}" class="invalid-feedback">
         <ul>
           <li th:each="err : ${#fields.errors('startDate')}" th:text="${err}">
@@ -46,7 +46,7 @@
       </div>
     </div>
     <div class="mb-3 col-3">
-        <input type="date" step="0.1" id="endDate" class="form-control" th:field="*{endDate}"  th:errorClass="is-invalid">
+        <input type="date" id="endDate" class="form-control" th:field="*{endDate}"  th:errorClass="is-invalid">
         <div th:if="${#fields.hasErrors('endDate')}" class="invalid-feedback">
           <ul>
             <li th:each="err : ${#fields.errors('endDate')}" th:text="${err}">
@@ -57,13 +57,13 @@
         <legend>Inserisci lo stato di publicazione:</legend>
     
         <div>
-          <input type="radio" id="publishedStatus" name="publishedStatus" value="1"
+          <input type="radio" id="publishedStatus" name="publishedStatus" value="true"
                  checked>
           <label for="activeted">Attivo</label>
         </div>
     
         <div>
-          <input type="radio"  id="publishedStatus" name="publishedStatus" value="0"> 
+          <input type="radio"  id="publishedStatus" name="publishedStatus" value="false"> 
           <label for="notActived">Disattivo</label>
         </div>
     </fieldset>
@@ -72,13 +72,13 @@
         <legend>Inserisci lo stato di visibilitá:</legend>
     
         <div>
-          <input type="radio" id="visible" name="visible" value="1"
+          <input type="radio" id="visible" name="visible" value="true"
                  checked>
           <label for="activeted">Visibile</label>
         </div>
     
         <div>
-          <input type="radio"  id="visible" name="visible" value="0"> 
+          <input type="radio"  id="visible" name="visible" value="false"> 
           <label for="notActived">Non Visibile</label>
         </div>
     </fieldset>

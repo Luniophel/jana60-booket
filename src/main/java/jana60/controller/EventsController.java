@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jana60.model.Category;
 import jana60.model.Events;
+import jana60.repository.CategoryRepository;
 import jana60.repository.RepoEvents;
 
 @Controller
@@ -23,29 +25,52 @@ import jana60.repository.RepoEvents;
 public class EventsController {
 	@Autowired
 	private RepoEvents repo;
+	@Autowired
+	private CategoryRepository repoCategory;
 	
 	@GetMapping("/events")
 	public String event(Model model) {
 		List<Events> listEvents = (List<Events>) repo.findAll();
 		model.addAttribute("listEvents", listEvents);
-		return "events";
+		return "event/events";
 	}
 
 	@GetMapping("/events/{id}")
 	public String eventInfo(@PathVariable("id") Integer eventId , Model model) {
 		Optional<Events> result = repo.findById(eventId);
-		model.addAttribute("eventInfo", result.get());		
-		return "evenstInfo";
+		List<Category> listCategories = (List<Category>) repoCategory.findAll();
+		model.addAttribute("eventInfo", result.get());	
+		model.addAttribute("listCategories", listCategories);
+		return "event/evenstInfo";
 
 }
 	@GetMapping("/addEvent")
 	public String eventForm(Model model) {
 		model.addAttribute("event", new Events());
-		return "addEvent";
+		return "event/addEvent";
 	}
 	
 	@PostMapping("/addEvent")
 	public String save(@Valid @ModelAttribute("event") Events formEvent, BindingResult br) {
+		if (br.hasErrors()) {
+			return "/";
+		} else {
+			formEvent.setVisible(false);
+			repo.save(formEvent);
+			return "redirect:/events";
+		}
+	}
+	
+	@GetMapping("/editEvent/{id}")
+	public String editForm(@PathVariable("id") Integer eventId , Model model) {
+		Optional<Events> result = repo.findById(eventId);
+		model.addAttribute("event", result.get());
+		return "event/editEvent";
+		
+	}
+	
+	@PostMapping("/editEvent/{id}")
+	public String edit(@Valid @ModelAttribute("event") Events formEvent, BindingResult br) {
 		if (br.hasErrors()) {
 			return "/";
 		} else {
@@ -54,3 +79,4 @@ public class EventsController {
 		}
 	}
 	}
+	

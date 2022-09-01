@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
     <title>Document</title>
 </head>
 <h1>
@@ -30,9 +32,21 @@
                 <td th:text="${e.startDate}"></td>
                 <td th:text="${e.endDate}"></td>
                 <td th:text="${e.publishedStatus}"></td>
-                <td th:text="${e.canceledStatus}"></td>
+                <td th:text="${e.visible}"></td>
             </tr>
         </tbody>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="list : ${listCategories}">
+                        <td th:text="${list.name}"></td>
+                    </tr>
+                </tbody>
+            </table>
     </table>
 </body>
 </html>

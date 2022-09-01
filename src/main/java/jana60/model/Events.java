@@ -1,14 +1,18 @@
 package jana60.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import org.springframework.format.annotation.DateTimeFormat;
+
 
 @Entity
 @Table(name = "events")
@@ -29,35 +33,37 @@ public class Events {
 	@Column(nullable = true)
 	private String poster;
 	
-	@NotEmpty(message = "la data di inizio e' obbliogatorio")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(nullable = false)
-	private String startDate;
+	private LocalDate startDate;
 	
-	@NotEmpty(message = "la data di fine e' obbliogatorio")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(nullable = false)
-	private String endDate;
+	private LocalDate endDate;
 	
-	@NotEmpty(message = "devi indicare se é attivo")
 	@Column(nullable = false)
-	private String publishedStatus;
+	private Boolean publishedStatus;
 	
-	@NotEmpty(message = "devi indicare se é visibile")
 	@Column(nullable = false)
-	private String visible;
+	private Boolean visible;
 	
-	public String getStartDate() {
+	@ManyToMany
+	List<Category> categories;
+	
+
+	public LocalDate getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(String startDate) {
+	public void setStartDate(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 
-	public String getEndDate() {
+	public LocalDate getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(String endDate) {
+	public void setEndDate(LocalDate endDate) {
 		this.endDate = endDate;
 	}
 
@@ -84,21 +90,20 @@ public class Events {
 	public void setPoster(String poster) {
 		this.poster = poster;
 	}
-
-
-	public String getPublishedStatus() {
+	
+	public Boolean getPublishedStatus() {
 		return publishedStatus;
 	}
 
-	public void setPublishedStatus(String publishedStatus) {
+	public void setPublishedStatus(Boolean publishedStatus) {
 		this.publishedStatus = publishedStatus;
 	}
 
-	public String getVisible() {
+	public Boolean getVisible() {
 		return visible;
 	}
 
-	public void setVisible(String visible) {
+	public void setVisible(Boolean visible) {
 		this.visible = visible;
 	}
 
