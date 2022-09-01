@@ -32,7 +32,7 @@ public class EventsController {
 	public String event(Model model) {
 		List<Events> listEvents = (List<Events>) repo.findAll();
 		model.addAttribute("listEvents", listEvents);
-		return "event/events";
+		return "/event/events";
 	}
 
 	@GetMapping("/events/{id}")
@@ -41,13 +41,14 @@ public class EventsController {
 		List<Category> listCategories = (List<Category>) repoCategory.findAll();
 		model.addAttribute("eventInfo", result.get());	
 		model.addAttribute("listCategories", listCategories);
-		return "event/evenstInfo";
+		return "/event/evenstInfo";
 
 }
 	@GetMapping("/addEvent")
 	public String eventForm(Model model) {
 		model.addAttribute("event", new Events());
-		return "event/addEvent";
+		model.addAttribute("categoriesList", repoCategory.findAll());
+		return "/event/addEvent";
 	}
 	
 	@PostMapping("/addEvent")
@@ -55,7 +56,6 @@ public class EventsController {
 		if (br.hasErrors()) {
 			return "/";
 		} else {
-			formEvent.setVisible(false);
 			repo.save(formEvent);
 			return "redirect:/events";
 		}
@@ -65,12 +65,13 @@ public class EventsController {
 	public String editForm(@PathVariable("id") Integer eventId , Model model) {
 		Optional<Events> result = repo.findById(eventId);
 		model.addAttribute("event", result.get());
-		return "event/editEvent";
+		model.addAttribute("categoriesList", repoCategory.findAll());
+		return "/event/editEvent";
 		
 	}
 	
 	@PostMapping("/editEvent/{id}")
-	public String edit(@Valid @ModelAttribute("event") Events formEvent, BindingResult br) {
+	public String edit(@Valid @ModelAttribute("event") Events formEvent,@PathVariable("id") Integer eventId,  BindingResult br) {
 		if (br.hasErrors()) {
 			return "/";
 		} else {
