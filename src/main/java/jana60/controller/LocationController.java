@@ -20,4 +20,6 @@ public class LocationController {
 		model.addAttribute("location", locationRepo.findAll());
 		return "/location/location";
 	}
+	
+	
 }
