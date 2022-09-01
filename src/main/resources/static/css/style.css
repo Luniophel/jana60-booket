@@ -12,7 +12,6 @@
     text-transform: capitalize;
     transition: .2s linear;
 }
-
 html{
 font-size: 62.5%;
 overflow-x:hidden;
@@ -178,7 +177,7 @@ padding-top: 1rem;
 @media (max-width:768px){
 
     #menu-bars{
-     
+
         display: initial;
     }
      .header .navbar{
@@ -194,7 +193,7 @@ padding-top: 1rem;
     .fa-times{
      transform: rotate(180deg);  
      }
-            
+
      .header .navbar a{
         display: flex;
         background: #222;
