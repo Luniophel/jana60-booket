@@ -21,7 +21,7 @@ public class CategoriesController
 	{
 		
 		model.addAttribute("categoriesList", repo.findAll());
-		return "/categories";
+		return "/categories/categories";
 		
 	}
 	
