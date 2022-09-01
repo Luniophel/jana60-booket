@@ -1,9 +1,10 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+</head>
 <body>
-
     <!-- INIZIO Navbar-->
-    <nav th:fragment="navbar" class="navbar">
+    <th:block th:fragment="navbar" class="navbar">
 	    <header class="header">
 	        <a href="#" class="logo"><span>BOOK</span>ET</a>
 	        <nav class="navbar">
@@ -11,14 +12,12 @@
 	            <a href="#login">Login</a>
 	            <a href="#event">Event</a>
 	            <a href="#about">About</a>
-	            <a href="#gallery">Gallery</a>
-	            <a href="#review">Review</a>
-	            <a href="#contact">Contact</a>            
-	        </nav>
-	    	<div id="menu-bars" class="fas fa-bars"></div>
-	    </header>
-    </nav>
+	            <a href="#gallery">Gallery</a> 
+	            <a href="#contact">Contact</a>               
+	        </nav> 
+	           <div id="menu-bars" class="fas fa-bars"></div> 
+	    </header> 
+    </th:block>
     <!-- FINE Navbar-->
-
 </body>
 </html> 

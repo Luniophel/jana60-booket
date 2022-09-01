@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+     <th:block th:replace="fragments/resources :: src-head"></th:block>
+<title>404 Error page</title>
+<th:block th:replace="fragments/navbar :: navbar"></th:block> 
+<style>
+        body{
+	         display:flex;
+	         padding-top:60px;
+	         flex-direction:column;
+	         justify-content:center;
+	         align-items:center;
+	         height:100vh;
+	         font-family:sans-serif;
+	         font-size:calc(4em + 10vw);
+	         text-align:center;
+	         color:white;
+	         background-image:url("images/error.jpg");
+	         background-size:cover;
+	         background-position:top;
+	         overflow:hidden;
+	         height:100vh;
+	         
+	         
+             }
+             h1{
+	            font-size:1em;
+	            font-weight:700;
+	            margin-top:-300px;
+	            color:#000;
+                }
+             h1 span::after{
+	            content:'🕛';
+	            font-size:0.9em;
+	            animation: clock 5s linear infinite;
+	            }
+             h3{
+	            font-size:0.13em;
+	            font-weight:700;
+	            line-height:1.2;
+	            margin-top:-15px;
+	            color:#333;
+	            font-family:sans-serif;
+                }
+                
+</style>
+</head>
+<body> 
+<th:block th:replace="fragments/navbar :: navbar"></th:block>   
+    <h1>4<span></span>4</h1>
+     <h3>OPS!PAGE NOT FOUND.</h3>    
+ <th:block th:replace="fragments/script :: swiper-js"></th:block>    
+</body>
+</html>
