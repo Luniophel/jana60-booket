@@ -4,7 +4,7 @@
 }
 
 *{
-    font-family:'Poppins' sans-serif;
+    font-family:'Poppins', sans-serif;
     margin: 0; padding: 0;
     box-sizing: border-box;
     outline: none; border: none;
@@ -177,7 +177,7 @@ padding-top: 1rem;
 @media (max-width:768px){
 
     #menu-bars{
-     
+
         display: initial;
     }
      .header .navbar{
@@ -193,7 +193,7 @@ padding-top: 1rem;
     .fa-times{
      transform: rotate(180deg);  
      }
-            
+
      .header .navbar a{
         display: flex;
         background: #222;

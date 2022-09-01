@@ -1,0 +1,43 @@
+<html lang="en">
+<head>
+    <th:block th:replace="fragments/resources :: src-head"></th:block>
+    <link rel="stylesheet" href="/css/location-style.css" />
+    <title>Location</title>
+</head>
+<body>
+    <th:block th:replace="fragments/navbar :: navbar"></th:block> 
+    <h1>Locations</h1>
+    <form 
+    	id="location-form"
+    	th:object="${location}"
+    	th:action="@{/location/add}"
+    	method="post">
+    	
+    		<div>
+    			<input type="hidden" th:field="*{id}">
+    			<div>
+    				<label for="name">Name</label>
+    				<input id="name" th:field="*{name}" type="text" placeholder="Name...">
+    			</div>
+    			<div>
+    				<label for="address">Address</label>
+    				<input id="address" th:field="*{address}" type="text" placeholder="Address...">
+    			</div>
+    			<div>
+    				<label for="description">Description</label>
+    				<textarea id="description" th:field="*{description}" type="text" placeholder="Description..."></textarea>
+    			</div>
+    			<div>
+    				<label for="capacity">Capacity</label>
+    				<input id="capacity" th:field="*{capacity}" type="number" placeholder="Name...">
+    			</div>
+    			<div>
+    				<button type="submit">Save</button>
+    				<button type="reset">Cancel</button>
+    			</div>
+    			
+    		</div>
+    
+    </form>
+</body>
+</html>
