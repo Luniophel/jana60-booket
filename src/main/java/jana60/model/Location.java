@@ -8,6 +8,7 @@ import javax.persistence.Lob;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "location")
@@ -26,7 +27,7 @@ public class Location {
 	@Lob
 	private String description;
 	
-	@NotEmpty(message = "Please register a capacity")
+	@NotNull
 	@Min(value = 1)
 	private Integer capacity;
 

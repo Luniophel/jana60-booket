@@ -1,13 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <th:block th:replace="fragments/resources :: src-head"></th:block>
     <link rel="stylesheet" href="/css/location-style.css" />
     <title>Location</title>
 </head>
 <body>
+    <th:block th:replace="fragments/navbar :: navbar"></th:block> 
     <h1>Locations</h1>
+    <a class="btn" th:href="@{/location/add}">Add a location</a>
+    <table class="table text-white" th:if="${location.size() > 0}">
+    	<thead>
+    		<tr>
+    			<th>Name</th>
+    			<th>Address</th>
+    			<th>Description</th>
+    			<th>Capacity</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    		<tr th:each="l : ${location}">
+    			<td th:text="${l.name}"></td>
+    			<td th:text="${l.address}"></td>
+    			<td th:text="${l.description}"></td>
+    			<td th:text="${l.capacity}"></td>
+    			<td>
+    				<a th:href="@{|/location/delete/${l.id}|}"><i class="fa-solid fa-trash-can"></i></a>
+    				<a th:href="@{|/location/edit/${l.id}|}"><i class="fa-solid fa-pen-to-square"></i></a>
+    			</td>
+    		</tr>
+    	</tbody>
+    
+    </table>
+    <div class="alert alert-info my-5" th:unless="${location.size() > 0}">
+  	<h3>Sorry, we have no locations to display yet :(</h3>
+  	</div>
 </body>
 </html>
