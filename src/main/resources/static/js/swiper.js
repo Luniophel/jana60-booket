@@ -9,11 +9,8 @@ window.onscroll = () =>{
     menu.classList.remove('fa-times');
     navbar.classList.remove('active');
 }
-<<<<<<< HEAD:src/main/resources/static/js/script.js
+
 var swiper = new Swiper(".home-slider", {
-=======
-const swiper = new Swiper('.home-slider', {
->>>>>>> dev:src/main/resources/static/js/swiper.js
     effect: "coverflow",
     grabCursor: true,
     centeredSlides: true,
