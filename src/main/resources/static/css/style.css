@@ -2,20 +2,16 @@
 :root{
     --main-color:rgb(107, 205, 244);
 }
-
-<<<<<<< HEAD
-*{ 
-=======
 .swiper-font{
     font-family:'Poppins', sans-serif ;
->>>>>>> dev
     margin: 0; padding: 0;
     box-sizing: border-box;
     outline: none; border: none;
     text-decoration: none;
     text-transform: capitalize;
-    transition: .2s linear;
+    transition: .2s linear;	
 }
+
 html{
 font-size: 62.5%;
 overflow-x:hidden;
@@ -50,27 +46,18 @@ section{
 .btn:hover{
     background-color:var(--main-color) ;
 }
-<<<<<<< HEAD
-.header{
-	position: fixed;
-=======
 .header-swiper{
-    position: fixed;
->>>>>>> dev
-    top: 0; left: 0; right: 0;
-    z-index: 1000;
+	position:fixed;
+    top:0;left: 0; right: 0;
+    z-index: 100;
     background:#333;
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 10px 9%;
 }
-<<<<<<< HEAD
-.header .logo{
-	
-=======
 .header-swiper .logo{
->>>>>>> dev
+
     font-weight: bolder;
     color: #fff;
     font-size: 25px;
@@ -79,12 +66,8 @@ section{
 .header-swiper .logo span{
     color: var(--main-color);
 }
-<<<<<<< HEAD
-.header .navbar a{
-	
-=======
+
 .header-swiper .navbar-swiper a{
->>>>>>> dev
     font-size: 15px;
     color: #fff;
     margin-left: 15px;
@@ -240,4 +223,50 @@ padding-top: 1rem;
          width: 27rem;
         } 
    }
-   
+   .footer-swiper{
+	background:#111;
+	}
+	.footer-swiper .box-container{
+	text-align: center;	
+	font-family:'Poppins', sans-serif ;
+	text-transform:capitalize;
+	display:grid;
+	grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+	gap:0rem;	
+	}
+	.footer-swiper .box-container .box h3{
+	    font-size: 1.5rem;
+		padding:1rem 0;
+		color:var(--main-color);	
+	}
+	.footer-swiper .box-container .box a{
+		display:block;
+		font-size: 1rem;
+		padding:1rem 0;
+		color:#eee;
+	}
+	.footer-swiper .box-container .box a:hover{
+		padding-right:1.5rem;
+		color:var(--main-color);
+		}
+	.footer-swiper .box-container .box a i{
+		padding-right: .5rem;
+		color:var(--main-color);	
+	}
+	.footer-swiper .box-container .box a:hover i{
+		padding-right:1.5rem;
+		color:#fff;
+	}
+	.footer-swiper .copyright{
+		text-align:center;
+		border-top:.2rem solid #222;
+		color:#fff;
+		padding:1rem;
+		padding-top:1rem;
+		padding-bottom:1rem;
+		margin-top:1rem;
+		font-size:1.5rem;
+	}
+	.footer-swiper .copyright span{
+		color:var(--main-color);
+	
