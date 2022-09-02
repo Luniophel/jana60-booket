@@ -9,7 +9,8 @@ window.onscroll = () =>{
     menu.classList.remove('fa-times');
     navbar.classList.remove('active');
 }
-const swiper = new Swiper('.home-slider', {
+
+const swiper = new Swiper(".home-slider", {
     effect: "coverflow",
     grabCursor: true,
     centeredSlides: true,
@@ -23,7 +24,7 @@ const swiper = new Swiper('.home-slider', {
     },
    loop:true,
    autoplay:{
-    delay:3000,
-    disableOnInteraction:false,
+   delay:3000,
+   disableOnInteraction:false,
     }
   });
