@@ -227,11 +227,11 @@ padding-top: 1rem;
 	background:#111;
 	}
 	.footer-swiper .box-container{
-	text-align: center;	
+	text-align:center;	
 	font-family:'Poppins', sans-serif ;
 	text-transform:capitalize;
 	display:grid;
-	grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
 	gap:0rem;	
 	}
 	.footer-swiper .box-container .box h3{

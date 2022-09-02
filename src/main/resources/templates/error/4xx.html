@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
      <th:block th:replace="fragments/resources :: src-head"></th:block>
-<title>404 Error page</title>
-<th:block th:replace="fragments/navbar :: navbar"></th:block> 
+<title>Error page</title>
 <style>
         body{
 	         display:flex;
@@ -28,7 +27,7 @@
              h1{
 	            font-size:1em;
 	            font-weight:700;
-	            margin-top:-300px;
+	            margin-top:-440px;
 	            color:#000;
                 }
              h1 span::after{
@@ -40,17 +39,16 @@
 	            font-size:0.13em;
 	            font-weight:700;
 	            line-height:1.2;
-	            margin-top:-15px;
+	            margin-top:-20px;
 	            color:#333;
 	            font-family:sans-serif;
                 }
                 
 </style>
 </head>
-<body> 
-<th:block th:replace="fragments/navbar :: navbar"></th:block>   
+<body>
     <h1>4<span></span>4</h1>
-     <h3>OPS!PAGE NOT FOUND.</h3>    
- <th:block th:replace="fragments/script :: swiper-js"></th:block>    
+     <h3>OPS!PAGE NOT FOUND.</h3>   
+ <th:block th:replace="fragments/script :: swiper-js"></th:block>  
 </body>
 </html>
