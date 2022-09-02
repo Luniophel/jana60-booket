@@ -22,7 +22,7 @@
                 <th>Data inizio</th>
                 <th>Data fine</th>
                 <th>Stato pubblicato</th>
-                <th>Stato annullato</th>
+                <th>Stato di visibilitá</th>
             </tr>
         </thead>
         <tbody>
@@ -41,8 +41,8 @@
                         <th>Nome</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr th:each="list : ${listCategories}">
+                <tbody th:each="e : ${eventInfo}">
+                    <tr th:each="list : ${e.categories}">
                         <td th:text="${list.name}"></td>
                     </tr>
                 </tbody>
