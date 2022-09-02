@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -32,9 +33,6 @@ public class Events {
 	@Column(nullable = false)
 	private String description;
 	
-	@Column(nullable = true)
-	private String poster;
-	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Column(nullable = false)
 	private LocalDate startDate;
@@ -55,6 +53,10 @@ public class Events {
 	@ManyToOne
 	@JoinColumn(name = "location_id")
 	private Location eventLocation;
+	
+	@OneToMany
+	@JoinColumn(name = "event_id")
+	List <Image> eventImage;
 	
 
 	public LocalDate getStartDate() {
@@ -87,14 +89,6 @@ public class Events {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public String getPoster() {
-		return poster;
-	}
-
-	public void setPoster(String poster) {
-		this.poster = poster;
 	}
 	
 	public Boolean getPublishedStatus() {

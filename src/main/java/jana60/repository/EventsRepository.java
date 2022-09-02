@@ -4,6 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 
 import jana60.model.Events;
 
-public interface RepoEvents extends CrudRepository<Events, Integer>{
+public interface EventsRepository extends CrudRepository<Events, Integer>{
 
 }
