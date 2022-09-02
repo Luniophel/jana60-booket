@@ -6,34 +6,34 @@
 </head>
 <body>
     <th:block th:replace="fragments/navbar :: navbar"></th:block> 
-    <h1>Locations</h1>
+    <h1>New Location <i class="fa-solid fa-location-dot"></i></h1>
     <form 
     	id="location-form"
     	th:object="${location}"
     	th:action="@{/location/add}"
     	method="post">
     	
-    		<div>
+    		<div class="form">
     			<input type="hidden" th:field="*{id}">
-    			<div>
+    			<div class="form-items">
     				<label for="name">Name</label>
     				<input id="name" th:field="*{name}" type="text" placeholder="Name...">
     			</div>
-    			<div>
+    			<div class="form-items">
     				<label for="address">Address</label>
     				<input id="address" th:field="*{address}" type="text" placeholder="Address...">
     			</div>
-    			<div>
+    			<div class="form-items">
     				<label for="description">Description</label>
     				<textarea id="description" th:field="*{description}" type="text" placeholder="Description..."></textarea>
     			</div>
-    			<div>
+    			<div class="form-items">
     				<label for="capacity">Capacity</label>
-    				<input id="capacity" th:field="*{capacity}" type="number" placeholder="Name...">
+    				<input id="capacity" th:field="*{capacity}" type="number" placeholder="Capacity...">
     			</div>
-    			<div>
-    				<button type="submit">Save</button>
-    				<button type="reset">Cancel</button>
+    			<div class="buttons-save-cancel">
+    				<button class="save-button" type="submit">Save</button>
+    				<button class="reset-button" type="reset">Cancel</button>
     			</div>
     			
     		</div>
