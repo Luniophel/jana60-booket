@@ -1,37 +1,40 @@
 package jana60.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
-@Table (name = "categories")
-public class Category 
-{
-	
+@Table(name = "location")
+public class Location {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@NotBlank(message = "Il nome della categoria non può essere vuoto")
+	@NotEmpty(message = "Location must have a name")
 	private String name;
+	
+	@NotEmpty(message = "Location must have an address")
+	private String address;
 	
 	@Lob
 	private String description;
 	
-	@ManyToMany(mappedBy="categories")
-	List<Events> events;
-	
-	
-	//GETTER & SETTER
+	@NotNull
+	@Min(value = 1)
+	private Integer capacity;
 
+	
+	//getter and setter
+	
+	//id
 	public Integer getId() {
 		return id;
 	}
@@ -39,7 +42,8 @@ public class Category
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
+	
+	//name
 	public String getName() {
 		return name;
 	}
@@ -47,7 +51,17 @@ public class Category
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	//address
+	public String getAddress() {
+		return address;
+	}
 
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	//description
 	public String getDescription() {
 		return description;
 	}
@@ -55,9 +69,15 @@ public class Category
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	//capacity
+	public Integer getCapacity() {
+		return capacity;
+	}
+
+	public void setCapacity(Integer capacity) {
+		this.capacity = capacity;
+	}
+	
 	
 }
-
-
-
-

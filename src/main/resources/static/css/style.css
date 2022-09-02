@@ -3,7 +3,12 @@
     --main-color:rgb(107, 205, 244);
 }
 
+<<<<<<< HEAD
 *{ 
+=======
+.swiper-font{
+    font-family:'Poppins', sans-serif ;
+>>>>>>> dev
     margin: 0; padding: 0;
     box-sizing: border-box;
     outline: none; border: none;
@@ -45,8 +50,13 @@ section{
 .btn:hover{
     background-color:var(--main-color) ;
 }
+<<<<<<< HEAD
 .header{
 	position: fixed;
+=======
+.header-swiper{
+    position: fixed;
+>>>>>>> dev
     top: 0; left: 0; right: 0;
     z-index: 1000;
     background:#333;
@@ -55,23 +65,31 @@ section{
     justify-content: space-between;
     padding: 10px 9%;
 }
+<<<<<<< HEAD
 .header .logo{
 	
+=======
+.header-swiper .logo{
+>>>>>>> dev
     font-weight: bolder;
     color: #fff;
     font-size: 25px;
 
 }
-.header .logo span{
+.header-swiper .logo span{
     color: var(--main-color);
 }
+<<<<<<< HEAD
 .header .navbar a{
 	
+=======
+.header-swiper .navbar-swiper a{
+>>>>>>> dev
     font-size: 15px;
     color: #fff;
     margin-left: 15px;
 } 
-.header .navbar a:hover{
+.header-swiper .navbar-swiper a:hover{
     color:var(--main-color);
 }
 #menu-bars{
@@ -174,7 +192,7 @@ padding-top: 1rem;
     html{
         font-size: 55%;
         }
-   .header{
+   .header-swiper{
     padding:1.5rem 2rem;
    }
     section{
@@ -185,24 +203,24 @@ padding-top: 1rem;
 @media (max-width:768px){
 
     #menu-bars{
-     
+
         display: initial;
     }
-     .header .navbar{
+     .header-swiper .navbar-swiper{
         position: absolute;
         top: 100%; left: 0; right: 0;
         border-top: .1rem solid #222;
         background: #333;
         clip-path: polygon(0 0,100% 0,100% 0, 0 0);
      }
-     .header .navbar.active{
+     .header-swiper .navbar-swiper.active{
         clip-path: polygon(0 0, 100% 0,100% 100%, 0 100%);
      }
     .fa-times{
      transform: rotate(180deg);  
      }
             
-     .header .navbar a{
+     .header-swiper .navbar-swiper a{
         display: flex;
         background: #222;
         border-radius: .5rem;
