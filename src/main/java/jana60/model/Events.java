@@ -8,7 +8,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -49,6 +51,10 @@ public class Events {
 	
 	@ManyToMany
 	List<Category> categories;
+	
+	@ManyToOne
+	@JoinColumn(name = "location_id")
+	private Location eventLocation;
 	
 
 	public LocalDate getStartDate() {
@@ -114,6 +120,15 @@ public class Events {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public List<Category> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<Category> categories) {
+		this.categories = categories;
+	}
+	
 	
 	
 	

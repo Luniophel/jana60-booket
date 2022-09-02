@@ -1,10 +1,14 @@
 package jana60.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -30,6 +34,10 @@ public class Location {
 	@NotNull
 	@Min(value = 1)
 	private Integer capacity;
+	
+	@OneToMany
+	@JoinColumn(name = "location_id")
+	public List<Events> event;
 
 	
 	//getter and setter
