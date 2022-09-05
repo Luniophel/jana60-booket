@@ -19,8 +19,6 @@ h1{
 }
 
 
-
-
 /* new */
 
 h1 i{
@@ -97,8 +95,6 @@ h1 i{
 }
 
 
-
-
 /* location */
 .button {
 	background-color: gray;
@@ -122,4 +118,38 @@ h1 i{
 	text-decoration: none;
 	color: white;
 	font-size: 18px;
+}
+
+.location-table{
+	color: white;
+	width: 100%;
+}
+
+.location-table thead{
+	font-size: 18px;
+	border-bottom: 1px solid white;
+}
+
+.location-table tbody{
+	font-size: 15px;
+	
+}
+
+.location-table td, th{
+	padding: 10px 25px;
+}
+
+.location-table .delete-button{
+	color: white;
+}
+
+.location-table .delete-button:hover{
+	color: rgb(255, 60, 60);
+}
+
+.location-table .edit-button{
+	color: white;
+}
+.location-table .edit-button:hover{
+	color: rgb(107, 205, 244);
 }
