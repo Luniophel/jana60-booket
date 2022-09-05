@@ -3,6 +3,7 @@
 	<head>
 	
 	    <th:block th:replace="fragments/resources :: src-head"></th:block>
+	    <link rel="stylesheet" href="/css/location-style.css" />
 	    <title>Categories</title>
 	    
 	</head>
@@ -21,6 +22,30 @@
 	<section class="container">
 		<div class="row">
 			<div class="col-8">
+				<form
+				id = "formCategory"
+				th:object="${category}"
+				th:action="@{/addCategory}"
+				method="POST"
+				>
+				
+					<div class="form">
+						<input type="hidden" th:field="*{id}">
+						<div class="form-items">
+		    				<label for="name">Name</label>
+		    				<input id="name" th:field="*{name}" type="text" placeholder="Name...">
+	    				</div>
+	    				<div class="form-items">
+		    				<label for="description">Description</label>
+		    				<textarea id="description" th:field="*{description}" type="text" placeholder="Description..."></textarea>
+    					</div>
+    					<div class="buttons-save-cancel">
+		    				<button class="save-button" type="submit">Save</button>
+		    				<button class="reset-button" type="reset">Cancel</button>
+    					</div>
+					</div>
+					
+				</form>
 			</div>
 		</div>
 	</section>

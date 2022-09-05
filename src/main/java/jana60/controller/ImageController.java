@@ -2,6 +2,7 @@ package jana60.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -16,9 +17,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jana60.model.Image;
 import jana60.model.ImageForm;
+import jana60.repository.ImageRepository;
 import jana60.service.ImageService;
 
 @Controller
@@ -28,7 +31,10 @@ public class ImageController
 	
 	@Autowired
 	private ImageService service;
+	@Autowired
+	private ImageRepository imageRepo;
 	
+	//Richiesta per caricare sul Model le immagini dal Database
 	@GetMapping("/{eventId}")
 	public String imgEvent(@PathVariable("eventId") Integer eventId, Model model)
 	{
@@ -39,7 +45,8 @@ public class ImageController
 		model.addAttribute("listImage",listImage); 
 		return "/images/images";
 	}
-		
+	
+	//Richiesta per aggiungere immagini al Database
 	@PostMapping("/save")
 	public String SaveImage(@ModelAttribute("imageForm") ImageForm imageForm)
 	{
@@ -54,6 +61,23 @@ public class ImageController
 		}
 	}
 	
+	//Richiesta per rimuovere immagini dal Database
+	@GetMapping("/{eventId}/{imageId}/remove")
+	public String delete (@PathVariable("eventId")Integer eventId, @PathVariable("imageId") Integer imageId, RedirectAttributes ra)
+	{
+		Optional<Image> result = imageRepo.findById(imageId);
+		if (result.isPresent())
+		{
+			imageRepo.deleteById(imageId);
+			ra.addFlashAttribute("successMessage", "L'immagine è stata rimossa con successo");
+			return "redirect:/images/" + eventId;
+		}
+		else
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "L'immagine con ID: " + imageId + " non è presente./n Se l'errore persiste contattare l'assistenza.");
+		
+	}
+	
+	//Richiesta per decodificare immagini in arrivo dal Database (da byte[] a jpg)
 	@RequestMapping(value = "/{imageId}/content", produces = MediaType.IMAGE_JPEG_VALUE)
     public ResponseEntity<byte[]> getImageContent(@PathVariable("imageId") Integer imageId) {
       // recupero il content dal database

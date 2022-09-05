@@ -52,6 +52,16 @@
 			      <img th:src="@{|/images/${img.id}/content|}" class="img-fluid image-controller" alt="PLACEHOLDER">
 			      <!-- Inizio Footer -->
 			      <div class="bg-dark text-center rounded-bottom py-2">
+			      		<!-- INIZIO TASTO RIMUOVI -->
+			      		<a 
+				    		class="btn btn-warning p-1 text-light col-3" 
+				    		th:href="@{|/images/${img.imageEvent.id}/${img.id}/remove|}" 
+				    		title="Rimuovi"
+				    		onclick="return confirm('Sei sicuro?')"
+				    	>
+			    			<i class="fa-solid fa-trash-can"></i></a>
+			    		</a>
+			      		<!-- FINE TASTO RIMUOVI   -->
 			      </div>
 			      <!-- Fine Footer   -->
 		    </div>
