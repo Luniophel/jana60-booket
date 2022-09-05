@@ -8,7 +8,9 @@
 <body>
     <th:block th:replace="fragments/navbar :: navbar"></th:block> 
     <h1>Locations</h1>
-    <a class="btn" th:href="@{/location/add}">Add a location</a>
+    <div class="button">
+    	<a th:href="@{/location/add}">Add a location</a>
+    </div>
     <table class="table text-white" th:if="${location.size() > 0}">
     	<thead>
     		<tr>
@@ -33,7 +35,9 @@
     
     </table>
     <div class="alert alert-info my-5" th:unless="${location.size() > 0}">
-  	<h3>Sorry, we have no locations to display yet :(</h3>
+  		<h3>Sorry, we have no locations to display yet :(</h3>
   	</div>
+  	
+  	<th:block th:replace="fragments/script :: swiper-js"></th:block>
 </body>
 </html>
