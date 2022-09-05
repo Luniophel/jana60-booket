@@ -122,6 +122,22 @@ public class Events {
 	public void setCategories(List<Category> categories) {
 		this.categories = categories;
 	}
+
+	public Location getEventLocation() {
+		return eventLocation;
+	}
+
+	public void setEventLocation(Location eventLocation) {
+		this.eventLocation = eventLocation;
+	}
+
+	public List<Image> getEventImage() {
+		return eventImage;
+	}
+
+	public void setEventImage(List<Image> eventImage) {
+		this.eventImage = eventImage;
+	}
 	
 	
 	

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="it">
+	<head>
+	
+	    <th:block th:replace="fragments/resources :: src-head"></th:block>
+	    <title>Categories</title>
+	    
+	</head>
+	<body>
+	<!-- NAVBAR -->
+	<th:block th:replace="fragments/navbar :: navbar"></th:block>	    
+	    
+	<!-- INIZIO SEZIONE EDITOR DELLA LISTA IMMAGINI -->
+	<section class="home">
+		<div class="content">
+		    <h3>Perché non caricare un' <span>immagine</span>? Hai un'intera <span>Galleria </span>a tua disposizione!</h3>
+		</div>
+	</section>
+	<!-- FINE SEZIONE EDITOR DELLA LISTA IMMAGINI   -->
+	<!-- INIZIO SEZIONE FORM IMMAGINI-->   
+	<div class="container col-6">
+	  <form 
+	    id="form-img" 
+	    th:object="${imageForm}"
+	    th:action="@{/images/save}" 
+	    method="POST"
+	    enctype="multipart/form-data"
+	    >
+	    
+	    <input type="hidden" th:field="*{imageEvent}">
+	    
+	    <div class="mb-3 d-flex">
+	      <label for="contentMultipart" class="form-label"></label>
+	      <input class="form-control" type="file" id="contentMultipart" th:field="*{contentMultipart}">
+	      <button class="btn btn-warning" type="submit">Save</button>
+	    </div>
+	  </form>
+	</div>
+	<!-- FINE SEZIONE FORM IMMAGINI  -->
+	<!-- INIZIO LISTA IMMAGINI -->
+	
+	<!-- __Aggiungere un th:if per far apparire il messaggio soltanto se la lista è vuota__
+	  <div class="container col-6 py-5">
+	      <h1 class="text-center">La lista è vuota.</h1>
+	  </div>
+	-->
+	
+	<div class="row">
+	  <div class="col-4" th:each="img : ${listImage}">
+		    <!-- Inizio Card -->
+		    <div class="my-5 mx-2">
+			      <img th:src="@{|/images/${img.id}/content|}" class="img-fluid image-controller" alt="PLACEHOLDER">
+			      <!-- Inizio Footer -->
+			      <div class="bg-dark text-center rounded-bottom py-2">
+			      </div>
+			      <!-- Fine Footer   -->
+		    </div>
+		    <!-- Fine Card   -->
+	  </div>
+	</div>
+	<!-- FINE LISTA IMMAGINI   -->
+	
+	<th:block th:replace="fragments/script :: swiper-js"></th:block>
+	</body>
+</html>

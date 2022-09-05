@@ -26,14 +26,30 @@
                 <td th:text="${e.name}"></td>
                 <td th:text="${e.startDate}"></td>
                 <td th:text="${e.endDate}"></td>
-                  <td><a class="btn btn-primary" th:href="@{|/editEvent/${e.id}|}" title="Edit">
+                <!-- INIZIO BOTTONI LISTA EVENTI -->
+	                <!-- INIZIO BTN MODIFICA -->
+	                <td>
+	                <a class="btn btn-primary" th:href="@{|/editEvent/${e.id}|}" title="Edit">
+		  				<i class="fa-solid fa-pen-to-square"></i>
+		  			</a> 
+		  			</td>
+		  			<!-- FINE BTN MODIFICA   -->
+		  			<!-- INIZIO BTN INFO -->
+                    <td>
+                    <a class="btn btn-warning" th:href="@{|/events/${e.id}|}" title="info">
 	  				<i class="fa-solid fa-pen-to-square"></i>
-	  			</a> 
-	  			</td>
-                  <td><a class="btn btn-warning" th:href="@{|/events/${e.id}|}" title="info">
+	  				</a> 
+	  				</td>
+	  				<!-- FINE BTN INFO   -->
+	  				<!-- INIZIO BTN IMG -->
+                    <td>
+                    <a class="btn btn-success" th:href="@{|/images/${e.id}|}" title="info">
 	  				<i class="fa-solid fa-pen-to-square"></i>
-	  			</a> 
-	  			</td>	  			
+	  				</a> 
+	  				</td>
+	  				<!-- FINE BTN IMG   -->
+	  			<!-- FINE BOTTONI LISTA EVENTI   -->
+	  			
             </tr>
         </tbody>
     </table>
