@@ -26,8 +26,39 @@
 		    </div>
 		</div>
 	</section>
-	
-	<th:block th:replace="fragments/script :: swiper-js"></th:block>
-	<th:block th:replace="fragments/footer :: footer"></th:block>
-	</body>
-</html>
+	<br>
+	<!-- about section start-->
+	<section class="about" id="about">
+	<h1 class="heading"><span>about</span> us </h1> 
+	<div class="row">
+	<div class="image">
+	    <img src="images/about.jfif" alt="">
+	    </div>
+	    <div class="content">
+	        <h3>we will help you have a great time!</h3>
+	        <p>lorem ipsum dolor sit amet consectetur adipisicing elit.Ullam labore fugiat ut esse perferendis perspiciatis provident dolores fuga in ficilis, Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem quos beatae similique tempora explicabo doloribus, natus alias rem, fuga dolor sapiente repudiandae rerum voluptatibus dicta. Doloremque perferendis iure nemo facilis?</p>
+	        <p>lorem ipsum dolor sit amet consectetur adipisicing elit.Ullam labore fugiat ut esse perferendis perspiciatis provident dolores fuga in ficilis, Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem quos beatae similique tempora explicabo doloribus, natus alias rem, fuga dolor sapiente repudiandae rerum voluptatibus dicta. Doloremque perferendis iure nemo facilis?</p>
+	        <a htrf="#" class="btn">contact us</a>
+	    </div>
+	</div>
+	</section>
+    <!-- about section end-->
+	<!--theme toggler-->
+	<div class="theme-toggler">
+	<div class="toggle-btn">
+	    <i class="fas fa-cog"></i>
+	</div>
+	   <h3>Choose Color</h3>
+	   <div class="buttons">
+	       <div class="theme-btn" style="background-color:var(--main-color);"></div>
+	       <div class="theme-btn" style="background-color:#f7b731;"></div>
+	       <div class="theme-btn" style="background-color:#ff0033;"></div>
+	       <div class="theme-btn" style="background-color:#20bf6b;"></div>
+	       <div class="theme-btn" style="background-color:#fa8231;"></div>
+	       <div class="theme-btn" style="background-color:deeppink;"></div>
+	   </div>
+	</div>
+<th:block th:replace="fragments/script :: swiper-js"></th:block>
+<th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+</html>	
