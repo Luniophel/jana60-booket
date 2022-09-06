@@ -8,8 +8,10 @@
 <body>
     <th:block th:replace="fragments/navbar :: navbar"></th:block> 
     <h1>Locations</h1>
-    <a class="btn" th:href="@{/location/add}">Add a location</a>
-    <table class="table text-white" th:if="${location.size() > 0}">
+    <div class="button">
+    	<a th:href="@{/location/add}">Add a location</a>
+    </div>
+    <table class="location-table" th:if="${location.size() > 0}">
     	<thead>
     		<tr>
     			<th>Name</th>
@@ -25,15 +27,17 @@
     			<td th:text="${l.description}"></td>
     			<td th:text="${l.capacity}"></td>
     			<td>
-    				<a th:href="@{|/location/delete/${l.id}|}"><i class="fa-solid fa-trash-can"></i></a>
-    				<a th:href="@{|/location/edit/${l.id}|}"><i class="fa-solid fa-pen-to-square"></i></a>
+    				<a class="delete-button" th:href="@{|/location/delete/${l.id}|}"><i class="fa-solid fa-trash-can"></i></a>
+    				<a class="edit-button" th:href="@{|/location/edit/${l.id}|}"><i class="fa-solid fa-pen-to-square"></i></a>
     			</td>
     		</tr>
     	</tbody>
     
     </table>
     <div class="alert alert-info my-5" th:unless="${location.size() > 0}">
-  	<h3>Sorry, we have no locations to display yet :(</h3>
+  		<h3>Sorry, we have no locations to display yet :(</h3>
   	</div>
+  	
+  	<th:block th:replace="fragments/script :: swiper-js"></th:block>
 </body>
 </html>

@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,11 +42,29 @@ public class LocationController {
 	
 	@PostMapping("/add")
 	public String saveLocation(@Valid @ModelAttribute("location") Location formLocation, BindingResult br, Model model) {
-		if(br.hasErrors()){
-			model.addAttribute("location", locationRepo.findAll());
+		boolean hasErrors= br.hasErrors();
+		boolean validateName = true;
+		if(formLocation.getId() != null) {
+			Location locationBeforeUpdate = locationRepo.findById(formLocation.getId()).get();
+			if(formLocation.getName().equals(formLocation.getName())) {
+				validateName = false;
+			}
+		}
+		if(validateName && locationRepo.countByName(formLocation.getName()) > 0) {
+			br.addError(new FieldError("location", "name", "There cannot be two locations with the same name"));
+			hasErrors = true;
+		}
+		
+		if(hasErrors) {
 			return "/location/new";
 		} else {
-			locationRepo.save(formLocation);
+			
+			try {
+				locationRepo.save(formLocation);
+			} catch (Exception e) {
+				model.addAttribute("errorMessage", "Unable to save the location");
+				return "/location/new";
+			}
 			return "redirect:/location";
 		}
 	}

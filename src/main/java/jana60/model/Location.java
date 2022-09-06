@@ -31,7 +31,7 @@ public class Location {
 	@Lob
 	private String description;
 	
-	@NotNull
+	@NotNull(message = "Location must have a capacity")
 	@Min(value = 1)
 	private Integer capacity;
 	

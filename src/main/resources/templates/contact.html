@@ -1,0 +1,47 @@
+	<!DOCTYPE html>
+    <html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+	<th:block th:replace="fragments/resources :: src-head"></th:block>
+	 <link href="/css/style.css" rel="stylesheet">
+	<title>Contact</title>
+	</head>
+	<body>
+	    <th:block th:replace="fragments/navbar :: navbar"></th:block> 
+	<!-- contact section start-->
+	<section class="contact" id="contact">
+	<h1 class="heading"> <span>contact</span> us </h1>
+	<form action="" name="modulo">
+	  <div class="inputBox">
+	        <input type="text" name="name" placeholder="Name">
+	   </div>
+	   <div class="inputBox">
+	        <input type="text" name="object" placeholder="object">
+	    </div> 
+	    <textarea name="message" placeholder="Your Message" id="" cols="30" rows="10"></textarea>
+	    <input type="submit" value="Send" class="btn" onclick="Email()">
+	  </form>
+	</section>
+	<script>
+    function Email() {
+    let name = document.modulo.name.value;
+    let object = document.modulo.object.value;
+    let message = document.modulo.message.value;
+    if ((name=="") || (name=="undefined")) {
+      alert("Please insert your name");
+      document.modulo.name.focus();
+    }  else if ((object=="") || (object=="undefined")) {
+      alert("Please insert your object")
+      document.modulo.object.focus();
+    } else if ((message=="") || (message=="undefined")) {
+      alert("Please type a message")
+      document.modulo.message.focus();
+    } else {
+      location.href = "mailto:booket2022@gmail.com"+ "?Subject=" + name + " " + object  + "&Body=" + message;
+    }
+  }
+  </script>
+	<!-- contact section end-->
+<th:block th:replace="fragments/script :: swiper-js"></th:block>
+<th:block th:replace="fragments/footer :: footer"></th:block>
+</body>
+</html>	
