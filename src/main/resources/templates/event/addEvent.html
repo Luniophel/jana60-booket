@@ -78,31 +78,15 @@
         </div>
     
     </fieldset>
-    <!--<div>
-  		<label for="location" th:each="e : ${listLocation}">Choose a car:</label>
-  			<select name="name" id="location">
-      			<option th:field="*{location}" th:value="${e.id}" th:text="${e.name}"></option>
-  			</select>
-  			<br><br>
-	</div> -->
-  <div>
-    <table>
-        <thead>
-            <tr>
-              <th>nome citta</th>
-              <th>provincia</th>
-              <th>regione</th>
-            </tr>
-        </thead>
-        <tbody>
-          <tr th:each="e : ${listLocation}">
-            <td th:text="${e.region.district.city.name}"></td>
-            <td th:text="${e.region.district.name}"></td>
-            <td th:text="${e.region.name}"></td>
-          </tr>
-        </tbody>
-    </table>
-  </div>
+    <div class="col-4">
+			<h4>Location:</h4>
+				<div class="form-check" th:each="i : ${listLocation}">
+				  <input class="form-check-input" type="checkbox" th:field="*{eventLocation}" th:id="|${i.id}|" th:value="${i.id}">
+					  <label class="form-check-label" th:for="|${i.id}|" th:text="${i.name}"></label>
+	</div>
+				
+	</div>
+
     <div class="col-4">
 			<h4>Categorie</h4>
 				<div class="form-check" th:each="i : ${categoriesList}">

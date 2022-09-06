@@ -38,12 +38,7 @@ public class Location {
 	@OneToMany
 	@JoinColumn(name = "location_id")
 	public List<Events> event;
-	
-	@OneToMany
-	@JoinColumn(name = "location_region_id")
-	public List<Region> region;
-
-	
+		
 	//getter and setter
 	
 	//id
