@@ -38,6 +38,10 @@ public class Location {
 	@OneToMany
 	@JoinColumn(name = "location_id")
 	public List<Events> event;
+	
+	@OneToMany
+	@JoinColumn(name = "location_region_id")
+	public List<Region> region;
 
 	
 	//getter and setter
@@ -86,6 +90,13 @@ public class Location {
 	public void setCapacity(Integer capacity) {
 		this.capacity = capacity;
 	}
-	
+
+	public List<Events> getEvent() {
+		return event;
+	}
+
+	public void setEvent(List<Events> event) {
+		this.event = event;
+	}
 	
 }

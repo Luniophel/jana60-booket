@@ -28,6 +28,7 @@ import jana60.model.ImageForm;
 import jana60.repository.CategoryRepository;
 import jana60.repository.EventsRepository;
 import jana60.repository.ImageRepository;
+import jana60.repository.LocationRepository;
 import jana60.service.ImageService;
 
 @Controller
@@ -39,6 +40,8 @@ public class EventsController {
 	private CategoryRepository repoCategory;
 	@Autowired
 	private ImageRepository repoImg;
+	@Autowired
+	private LocationRepository repoLoc;
 	@Autowired
 	private ImageService service;
 	
@@ -62,7 +65,7 @@ public class EventsController {
 	public String eventForm(Model model) {
 		model.addAttribute("event", new Events());
 		model.addAttribute("categoriesList", repoCategory.findAll());
-		
+		model.addAttribute("listLocation", repoLoc.findAll());		
 		return "/event/addEvent";
 	}
 	
@@ -81,6 +84,7 @@ public class EventsController {
 		Optional<Events> result = repo.findById(eventId);
 		model.addAttribute("event", result.get());
 		model.addAttribute("categoriesList", repoCategory.findAll());
+		model.addAttribute("listLocation", repoLoc.findAll());
 		// Image event
 				List<Image> listImage = service.getImageByeventId(eventId);
 				ImageForm imageform = service.creatImageForm(eventId);
