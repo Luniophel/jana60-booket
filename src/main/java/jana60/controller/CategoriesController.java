@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import jana60.model.Category;
 import jana60.repository.CategoryRepository;
 
 @Controller
@@ -19,10 +20,11 @@ public class CategoriesController
 	@GetMapping
 	public String CategoriesList (Model model)
 	{
-		
 		model.addAttribute("categoriesList", repo.findAll());
+		model.addAttribute("category", new Category());
 		return "/categories/categories";
-		
 	}
+	
+	
 	
 }

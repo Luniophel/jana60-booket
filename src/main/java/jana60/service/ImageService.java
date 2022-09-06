@@ -14,38 +14,49 @@ import jana60.repository.ImageRepository;
 
 @Service
 public class ImageService {
-	@Autowired
-	private EventsRepository repo;
-	@Autowired
-	private ImageRepository repoImg;
 	
-	public ImageForm creatImageForm(Integer eventId){
-		Events event = repo.findById(eventId).get();
+	
+	@Autowired
+	private ImageRepository imagesRepo;
+	@Autowired
+	private EventsRepository eventsRepo;
+
+	//Creazione Lista di IMG per Evento con ID SPECIFICO
+	public List<Image> getImageByeventId(Integer eventId)
+	{
+		Events event = eventsRepo.findById(eventId).get();
+		return imagesRepo.findByimageEvent(event);		
+	}
+	
+	//Creazione del Form con l'immagine salvata in byte[]
+	public ImageForm createImageForm(Integer eventId)
+	{
+		Events event = eventsRepo.findById(eventId).get();
 		ImageForm imageForm = new ImageForm();
 		imageForm.setImageEvent(event);
 		return imageForm;
 	}
 	
-	public Image imageSerial (ImageForm imageForm) throws IOException {
+	//Serializzazione dell'immagine in byte[]
+	public Image imageSerial (ImageForm imageForm) throws IOException 
+	{
 		Image imagetoSave = new Image();
 		imagetoSave.setImageEvent(imageForm.getImageEvent());
-		if(imageForm.getContentMultipart() != null) {
+		
+		if(imageForm.getContentMultipart() != null) 
+		{
 			byte[] contentSerial = imageForm.getContentMultipart().getBytes();
 			imagetoSave.setContent(contentSerial);
 		}
-		return repoImg.save(imagetoSave);
+		return imagesRepo.save(imagetoSave);
 		
 	}
 	
+	//Chiama il content dell'immagine
 	public byte[] getImageContent(Integer Id) {
-		Image image = repoImg.findById(Id).get();
+		Image image = imagesRepo.findById(Id).get();
 		return image.getContent();		
 	}
 	
-	public List<Image> getImageByeventId(Integer eventId){
-		Events event = repo.findById(eventId).get();
-		return repoImg.findByimageEvent(event);
-				
-	}
 	
 }
