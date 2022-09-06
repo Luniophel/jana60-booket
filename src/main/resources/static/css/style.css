@@ -87,6 +87,39 @@ section{
 .header-swiper .navbar-swiper a:hover{
     color:var(--main-color);
 }
+.search-form{
+	margin-top:7px;
+	float:right;
+	margin-right:30px;
+	margin-bottom:7px;
+	
+}
+input[type=text]{
+	padding:7px;
+	border:none;
+	font-size:10px;
+	font-family:'Poppins', sans-serif ;
+    border-radius:5px;
+    padding-top:7px;
+   
+}
+
+button{
+	float:right;
+	padding: .8rem 3rem;
+    font-size: 10px;
+    border-radius: .5rem;
+    border:none;
+    background:#555 ;
+    color: #fff;
+    cursor: pointer;font-weight: 600;
+    position:relative;
+    font-family:'Poppins', sans-serif ;
+    margin-left:5px
+}
+button:hover{
+	  background-color:var(--main-color) ;
+}
 #menu-bars{
     font-size: 3rem;
     color: #fff;
