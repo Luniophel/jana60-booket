@@ -1,5 +1,7 @@
 package jana60.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import jana60.model.Category;
 import jana60.model.Events;
+import jana60.model.Location;
 import jana60.repository.CategoryRepository;
 import jana60.repository.EventsRepository;
 import jana60.repository.LocationRepository;
@@ -59,8 +63,23 @@ public class EventsController
 	}
 	
 	@PostMapping("/addEvent")
-	public String save(@Valid @ModelAttribute("event") Events formEvent, BindingResult br) 
-	{
+	public String save(@Valid @ModelAttribute("event") Events formEvent, BindingResult br, @ModelAttribute("listLocation") Location location) 
+	{	
+		LocalDate today = LocalDate.now();
+		LocalDate pastDate = LocalDate.from(formEvent.getStartDate());
+		boolean isAfter = today.isAfter(pastDate);	
+		if(isAfter) {
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			br.addError(new FieldError("event", "startDate", formEvent.getStartDate(), false, null, null, "la data deve essere futura a " + formEvent.getStartDate().format(formatter) ));
+		}
+		List<Events> listEventLocation = repo.findAllByEventLocation(formEvent.getEventLocation());
+		for (int i = 0; i < listEventLocation.size(); i++) {
+			if (listEventLocation.get(i).getStartDate().isBefore(formEvent.getStartDate()) || listEventLocation.get(i).getEndDate().isAfter(formEvent.getEndDate())) {
+				//br.addError(new FieldError("event", "startDate", formEvent.getStartDate(), false, null, null, "la data e la location sono stati giá prenotati" ));
+			}
+			
+		}
+		
 		if (br.hasErrors()) 
 		{
 			return "/";
