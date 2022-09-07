@@ -33,15 +33,10 @@ public class EventsController
 	@Autowired
 	private LocationRepository repoLoc;
 	
-	@GetMapping("/advanced_search")
-	public String advancedSearch() {
-		return "/event/search";
-	}
-	
 	@GetMapping("/search")
 	public String search(@RequestParam(name = "queryName") String queryName, Model model) {
 		List<Events> listEvents = repo.findByNameContainingIgnoreCase(queryName);
-		model.addAttribute("event", listEvents);
+		model.addAttribute("listEvents", listEvents);
 		return "/event/events";
 	}
 	
