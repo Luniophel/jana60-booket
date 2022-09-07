@@ -20,7 +20,7 @@ import jana60.model.Category;
 import jana60.model.Events;
 import jana60.repository.CategoryRepository;
 import jana60.repository.EventsRepository;
-
+import jana60.repository.LocationRepository;
 @Controller
 @RequestMapping("/")
 public class EventsController 
@@ -30,6 +30,8 @@ public class EventsController
 	private EventsRepository repo;
 	@Autowired
 	private CategoryRepository repoCategory;
+	@Autowired
+	private LocationRepository repoLoc;
 	
 	@GetMapping("/advanced_search")
 	public String advancedSearch() {
@@ -66,6 +68,7 @@ public class EventsController
 	{
 		model.addAttribute("event", new Events());
 		model.addAttribute("categoriesList", repoCategory.findAll());
+		model.addAttribute("listLocation", repoLoc.findAll());		
 		return "/event/addEvent";
 	}
 	
@@ -89,6 +92,7 @@ public class EventsController
 		Optional<Events> result = repo.findById(eventId);
 		model.addAttribute("event", result.get());
 		model.addAttribute("categoriesList", repoCategory.findAll());
+		model.addAttribute("listLocation", repoLoc.findAll());
 		return "/event/editEvent";
 		
 	}

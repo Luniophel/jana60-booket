@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <title>Document</title>
+    <th:block th:replace="fragments/resources :: src-head"></th:block>
+    <link rel="stylesheet" href="/css/events-style.css" />
+</head>
+<body>
+    <th:block th:replace="fragments/navbar :: navbar"></th:block>   
+    <title>Add Events</title>
 </head>
 <body>
     <h1>Crea il tuo fantastico evento sponsorizzato da noi:</h1>
@@ -54,7 +54,7 @@
         </div>
       </div>
       <fieldset>
-        <legend>Inserisci lo stato di publicazione:</legend>
+        <legend class="text">Inserisci lo stato di publicazione:</legend>
     
         <div>
           <input type="radio" id="publishedStatus" name="publishedStatus" value="true"
@@ -69,7 +69,7 @@
     </fieldset>
 
     <fieldset>
-        <legend>Inserisci lo stato di visibilitá:</legend>
+        <legend class=text>Inserisci lo stato di visibilitá:</legend>
     
         <div>
           <input type="radio" id="visible" name="visible" value="false"
@@ -78,17 +78,32 @@
         </div>
     
     </fieldset>
-        <div class="col-4">
-				<h4>Categorie</h4>
-				<div class="form-check" th:each="i : ${categoriesList}">
-				  <input class="form-check-input" type="checkbox" th:field="*{categories}" th:id="|${i.id}|" th:value="${i.id}">
-				  <label class="form-check-label" th:for="|${i.id}|" th:text="${i.name}"></label>
-				</div>
+    <div class="col-4">
+			<h4>Location:</h4>
+				<div class="form-check" th:each="i : ${listLocation}">
+				  <input class="form-check-input" type="checkbox" th:field="*{eventLocation}" th:id="|${i.id}|" th:value="${i.id}">
+					  <label class="form-check-label" th:for="|${i.id}|" th:text="${i.name}"></label>
+	</div>
 				
 	</div>
+
+    <div class="col-4">
+			<h4>Categorie</h4>
+				<div class="form-check" th:each="i : ${categoriesList}">
+				  <input class="form-check-input" type="checkbox" th:field="*{categories}" th:id="|${i.id}|" th:value="${i.id}">
+					  <label class="form-check-label" th:for="|${i.id}|" th:text="${i.name}"></label>
+	</div>
+				
+	</div>
+
+
+				
+	</div>
+	
+	
 	  <div class="mb-3 ml-5">
-  	<button type="submit" class="btn btn-primary">Save</button>
-  	<a class="btn btn-danger" href="">Cancel</a>
+  	<button type="submit" class="btn">Save</button>
+  	<a class="btn btn-red" href="">Cancel</a>
   </div>
 </body>
 </html>

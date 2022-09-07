@@ -21,11 +21,11 @@
 	<!-- INIZIO SEZIONE FORM AGGIUNGI/MODIFICA CATEGORIE -->
 	<section class="container">
 		<div class="row">
-			<div class="col-8">
+			<div class="col-12">
 				<form
 				id = "formCategory"
 				th:object="${category}"
-				th:action="@{/addCategory}"
+				th:action="@{/categories/addCategory}"
 				method="POST"
 				>
 				

@@ -1,27 +1,28 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
 <head>
     <th:block th:replace="fragments/resources :: src-head"></th:block>
-    <title>Document</title>
+    <link rel="stylesheet" href="/css/events-style.css" />
 </head>
 <body>
-	<th:block th:replace="fragments/navbar :: navbar"></th:block>
-	<h1>
-	    Lista di tutti gli eventi attivi:
-	</h1>
-	<h2>
-	    Per aggiungere gli eventi <a href="/addEvent">clicca qua</a>
-	</h2>
+    <th:block th:replace="fragments/navbar :: navbar"></th:block>   
+    <title>Events</title>
+<h1>
+    List of active events:
+<h2>
+    To add an event click <a href="/addEvent" class="btn">here</a>
+</h2>
+
     <table class="table">
         <thead>
             <tr>
-                <th>Nome</th>
-                <th>Data inizio</th>
-                <th>Data fine</th>
+                <th>Name</th>
+                <th>Start date</th>
+                <th>End date</th>
             </tr>
         </thead>
         <tbody>
-            <tr th:each="e : ${listEvents}">
+            <tr class="list-events"th:each="e : ${listEvents}">
                 <td th:text="${e.name}"></td>
                 <td th:text="${e.startDate}"></td>
                 <td th:text="${e.endDate}"></td>
@@ -55,4 +56,5 @@
     
     <th:block th:replace="fragments/script :: swiper-js"></th:block>
 	</body>
+
 </html>
