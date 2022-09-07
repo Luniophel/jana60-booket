@@ -1,5 +1,7 @@
 package jana60.controller;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -70,9 +73,17 @@ public class EventsController
 	@PostMapping("/addEvent")
 	public String save(@Valid @ModelAttribute("event") Events formEvent, BindingResult br) 
 	{
+		LocalDate today = LocalDate.now();
+		LocalDate pastDate = LocalDate.from(formEvent.getStartDate());
+		boolean isAfter = today.isAfter(pastDate);	
+		if(isAfter) 
+		{
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			br.addError(new FieldError("event", "startDate", formEvent.getStartDate(), false, null, null, "la data deve essere futura a " + formEvent.getStartDate().format(formatter) ));
+		}
 		if (br.hasErrors()) 
 		{
-			return "/";
+			return "/event/addEvent";
 		} 
 		else 
 		{
