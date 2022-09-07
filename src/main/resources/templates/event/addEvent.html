@@ -9,9 +9,7 @@
     <title>Add Events</title>
 </head>
 <body>
-    <h1>Crea il tuo fantastico evento sponsorizzato da noi:</h1>
-
-
+    <h1>Create your amazing event, sponsored by us:</h1>
     <hr/>
 	<form
    id = "formEvent"
@@ -54,27 +52,26 @@
         </div>
       </div>
       <fieldset>
-        <legend class="text">Inserisci lo stato di publicazione:</legend>
-    
+        <legend class="text">Insert publication status:</legend>
         <div>
           <input type="radio" id="publishedStatus" name="publishedStatus" value="true"
                  checked>
-          <label for="activeted">Attivo</label>
+          <label for="activeted">Active</label>
         </div>
     
         <div>
           <input type="radio"  id="publishedStatus" name="publishedStatus" value="false"> 
-          <label for="notActived">Disattivo</label>
+          <label for="notActived">Inactive</label>
         </div>
     </fieldset>
 
     <fieldset>
-        <legend class=text>Inserisci lo stato di visibilitá:</legend>
+        <legend class=text>Insert visibility  status:</legend>
     
         <div>
-          <input type="radio" id="visible" name="visible" value="false"
+          <input class="status" type="radio" id="visible" name="visible" value="false"
                  checked>
-          <label for="activeted">Non Visibile</label>
+          <label for="activeted">Not visible</label>
         </div>
     
     </fieldset>
@@ -88,7 +85,7 @@
 	</div>
 
     <div class="col-4">
-			<h4>Categorie</h4>
+			<h4>Categories</h4>
 				<div class="form-check" th:each="i : ${categoriesList}">
 				  <input class="form-check-input" type="checkbox" th:field="*{categories}" th:id="|${i.id}|" th:value="${i.id}">
 					  <label class="form-check-label" th:for="|${i.id}|" th:text="${i.name}"></label>
