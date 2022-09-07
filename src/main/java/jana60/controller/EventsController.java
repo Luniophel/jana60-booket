@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import jana60.model.Category;
 import jana60.model.Events;
 import jana60.repository.CategoryRepository;
@@ -28,6 +30,18 @@ public class EventsController
 	private EventsRepository repo;
 	@Autowired
 	private CategoryRepository repoCategory;
+	
+	@GetMapping("/advanced_search")
+	public String advancedSearch() {
+		return "/event/search";
+	}
+	
+	@GetMapping("/search")
+	public String search(@RequestParam(name = "queryName") String queryName, Model model) {
+		List<Events> listEvents = repo.findByNameContainingIgnoreCase(queryName);
+		model.addAttribute("event", listEvents);
+		return "/event/events";
+	}
 	
 	@GetMapping("/events")
 	public String event(Model model) 
