@@ -36,9 +36,26 @@ public class EventsController
 	@Autowired
 	private LocationRepository repoLoc;
 	
+	 @GetMapping("/advanced_search")
+	  public String advancedSearch() {
+		  return "/event/search";
+	  }
+	
 	@GetMapping("/search")
-	public String search(@RequestParam(name = "queryName") String queryName, Model model) {
-		List<Events> listEvents = repo.findByNameContainingIgnoreCase(queryName);
+	public String search(@RequestParam(name = "queryName") String queryName, 
+			@RequestParam(name = "queryLocation", required = false) String queryLocation, 
+			@RequestParam(name = "queryCategory", required = false) String queryCategory, 
+			Model model) {
+		if(queryName != null && queryName.isEmpty()) {
+			queryName = null;
+		}
+		if(queryLocation != null && queryLocation.isEmpty()) {
+			queryLocation = null;
+		}
+		if(queryCategory != null && queryCategory.isEmpty()) {
+			queryCategory = null;
+		}
+		List<Events> listEvents = repo.findByNameContainingOrEventLocationNameContainingOrCategoriesNameContainingIgnoreCase(queryName, queryLocation, queryCategory);
 		model.addAttribute("listEvents", listEvents);
 		return "/event/events";
 	}

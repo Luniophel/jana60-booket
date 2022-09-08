@@ -104,22 +104,7 @@ input[type=text]{
    
 }
 
-button{
-	float:right;
-	padding: .8rem 3rem;
-    font-size: 10px;
-    border-radius: .5rem;
-    border:none;
-    background:#555 ;
-    color: #fff;
-    cursor: pointer;font-weight: 600;
-    position:relative;
-    font-family:'Poppins', sans-serif ;
-    margin-left:5px
-}
-button:hover{
-	  background-color:var(--main-color) ;
-}
+
 #menu-bars{
     font-size: 3rem;
     color: #fff;
