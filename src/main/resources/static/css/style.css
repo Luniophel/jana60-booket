@@ -46,7 +46,7 @@ section{
 .btn{
     margin-top: 2rem;
     display: inline-block;
-    padding: .8rem 3rem;
+    padding: .6rem 3rem;
     font-size: 1.7rem;
     border-radius: .5rem;
     background:#555 ;
@@ -88,37 +88,28 @@ section{
     color:var(--main-color);
 }
 .search-form{
-	margin-top:7px;
+	margin-top:10px;
+	padding: .6rem .3rem;
 	float:right;
 	margin-right:30px;
 	margin-bottom:7px;
+	color:black;
 	
 }
 input[type=text]{
 	padding:7px;
 	border:none;
-	font-size:10px;
+	font-size:15px;
 	font-family:'Poppins', sans-serif ;
     border-radius:5px;
     padding-top:7px;
    
 }
-
-button{
-	float:right;
-	padding: .8rem 3rem;
-    font-size: 10px;
-    border-radius: .5rem;
-    border:none;
-    background:#555 ;
-    color: #fff;
-    cursor: pointer;font-weight: 600;
-    position:relative;
-    font-family:'Poppins', sans-serif ;
-    margin-left:5px
-}
-button:hover{
-	  background-color:var(--main-color) ;
+ .btn-search{
+	margin-top:20px;
+	font-size:15px;
+	margin-bottom:24px;
+	margin-left:3px;
 }
 #menu-bars{
     font-size: 3rem;

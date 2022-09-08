@@ -1,3 +1,8 @@
+
+.search-form{
+color:black;
+}
+
 *{  
 	font-family: "Poppins", sans-serif;
 	color:#fff;
@@ -27,11 +32,14 @@ h4{
 	font-size:20px;
 	font-weight:700;
 }
-.btn{
-	margin-left:5px;
+.btn-here{
+	margin-left:10px;
 	margin-bottom:15px;
 }
-
+.btn-red{
+	margin-left:5px;
+	padding:6px 18px;
+}
  .btn-red:hover{
 	background-color:red;
 }
@@ -61,11 +69,21 @@ input .status{
 	font-weight:600;
 }
 .col-4 cat{
-	margin-top:500px;
-	text-align:left;
 	font-weight:600;
 }
 .status{
-	align-items: left;
+	text-align: left;
+	font-size: 15px;
+	margin-top:4px;
 }
-	
+.status checked{
+	color:aqua;
+}
+.form-check{
+	color:var(--main-color);
+	font-size: 15px;
+}
+.error{
+	font-size:15px;
+	color:red;
+}
