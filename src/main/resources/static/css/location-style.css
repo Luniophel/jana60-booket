@@ -7,21 +7,21 @@
 
 body{
 	background-color: #222;
-	margin: 100px;
 }
 
-h1{
+.location-title{
 	color: rgb(107, 205, 244);
 	text-align: center;
 	font-size: 40px;
 	text-transform: uppercase;
 	font-weight: 700;
+	margin-top: 100px;
 }
 
 
 /* new */
 
-h1 i{
+.location-title i{
 	color: white;
 	margin: 0px 5px;
 }
@@ -156,4 +156,18 @@ h1 i{
 }
 .location-table .edit-button:hover{
 	color: rgb(107, 205, 244);
+}
+
+.no-locations{
+	background-color: white;
+	width: 80%;
+	margin: auto;
+	border-radius: 20px;
+}
+.no-locations h3{
+	margin: 100px auto;
+	color: #333;
+	font-size: 30px;
+	text-align: center;
+	padding: 10px 0px;
 }
