@@ -34,7 +34,6 @@ section{
 }
 .heading{
 	text-align:center;
-	padding-bottom: 2rem;
 	color:#fff;
 	text-transform:uppercase;
 	font-size:4rem;
@@ -48,7 +47,7 @@ section{
     display: inline-block;
     padding: .6rem 3rem;
     font-size: 1.7rem;
-    border-radius: .5rem;
+    border-radius: 20px;
     background:#555 ;
     color: #fff;
     cursor: pointer;font-weight: 600;
@@ -78,23 +77,23 @@ section{
 .header-swiper .logo span{
     color: var(--main-color);
 }
+.navbar-swiper{
+	padding-left:180px;
+}
 
 .header-swiper .navbar-swiper a{
+	
     font-size: 15px;
     color: #fff;
-    margin-left: 15px;
+    margin-left: 25px;
 } 
 .header-swiper .navbar-swiper a:hover{
     color:var(--main-color);
 }
 .search-form{
 	margin-top:10px;
-	padding: .6rem .3rem;
-	float:right;
-	margin-right:30px;
 	margin-bottom:7px;
 	color:black;
-	
 }
 input[type=text]{
 	padding:7px;
@@ -119,13 +118,12 @@ input[type=text]{
 }
 .home .content{
 text-align: center;
-padding-top: 6rem;
+padding-top:50px;
 margin:2rem auto;
 max-width:70rem ;
 
 }
 .home .content h3{
-	
     color: #fff;
     font-size: 4.5rem;
     text-transform: uppercase;
@@ -140,7 +138,7 @@ overflow:hidden;
 border-radius: 1rem;
 height: 50rem;
 width: 35rem;
-padding-top: 1rem;
+margin-top:50px;
 }
 .home .home-slider .swiper-slide img{
     height: 100%;
