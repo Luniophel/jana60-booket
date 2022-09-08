@@ -1,16 +1,17 @@
+
+.search-form{
+color:black;
+}
+
 *{  
 	font-family: "Poppins", sans-serif;
-	
+	color:#fff;
 }
 
 body{
 	background-color: #222;
 	margin: 100px;
 }
-.search-form{
-
-}
-
 
 h1{
 	color: rgb(107, 205, 244);
@@ -32,8 +33,12 @@ h4{
 	font-weight:700;
 }
 .btn-here{
-	margin-left:5px;
+	margin-left:10px;
 	margin-bottom:15px;
+}
+.btn-red{
+	margin-left:5px;
+	padding:6px 18px;
 }
  .btn-red:hover{
 	background-color:red;
@@ -82,4 +87,3 @@ input .status{
 	font-size:15px;
 	color:red;
 }
-	

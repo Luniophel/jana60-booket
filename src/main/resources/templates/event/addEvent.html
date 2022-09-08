@@ -23,7 +23,7 @@
       <input type="text" id="name" class="form-control" th:field="*{name}"  placeholder="Nome Evento" th:errorClass="is-invalid">
       <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
         <ul>
-          <li th:each="err : ${#fields.errors('name')}" th:text="${err}">
+          <li class="error" th:each="err : ${#fields.errors('name')}" th:text="${err}">
         </ul>
       </div>
     </div>
@@ -31,7 +31,7 @@
       <input type="text" id="description" class="form-control" th:field="*{description}" placeholder="Descrizione" th:errorClass="is-invalid">
       <div th:if="${#fields.hasErrors('description')}" class="invalid-feedback">
         <ul>
-          <li th:each="err : ${#fields.errors('description')}" th:text="${err}">
+          <li class="error" th:each="err : ${#fields.errors('description')}" th:text="${err}">
         </ul>
       </div>
     </div>
@@ -69,7 +69,7 @@
         <legend class=text>Insert visibility  status:</legend>
     
         <div class="status">
-          <input class="checked" type="radio" id="visible" name="visible" value="false"/>
+          <input type="radio" id="visible" name="visible" value="false"/>
           <label for="activeted">Not visible</label>
         </div>
     
