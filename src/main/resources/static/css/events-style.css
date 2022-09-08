@@ -1,6 +1,8 @@
+
+
 *{  
 	font-family: "Poppins", sans-serif;
-	color:#fff;
+	
 }
 
 body{
@@ -19,7 +21,7 @@ h2{
 	color:#fff;
 
 }
-h4{
+h4{ color:#fff;
 	font-size:30px;
 }
 .table th{
@@ -27,11 +29,14 @@ h4{
 	font-size:20px;
 	font-weight:700;
 }
-.btn{
-	margin-left:5px;
+.btn-here{
+	margin-left:10px;
 	margin-bottom:15px;
 }
-
+.btn-red{
+	margin-left:5px;
+	padding:6px 18px;
+}
  .btn-red:hover{
 	background-color:red;
 }
@@ -47,25 +52,37 @@ h4{
 	color:#fff;
 }
 .text{
+	color:#fff;
 	margin-top: 30px;
 	font-size:30px;
 	text-align: left;
 	font-weight: 600;
 }
 input .status{
+	color:#fff;
 	text-align: left;
 }
 .col-4{
+	color:#fff;
 	margin-top:30px;
 	text-align:left;
 	font-weight:600;
 }
 .col-4 cat{
-	margin-top:500px;
-	text-align:left;
+	color:#fff;
 	font-weight:600;
 }
 .status{
-	align-items: left;
+	color:#fff;
+	text-align: left;
+	font-size: 15px;
+	margin-top:4px;
 }
-	
+.form-check{
+	color:var(--main-color);
+	font-size: 15px;
+}
+.error{
+	font-size:15px;
+	color:red;
+}
