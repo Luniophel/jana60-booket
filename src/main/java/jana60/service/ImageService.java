@@ -28,6 +28,13 @@ public class ImageService {
 		return imagesRepo.findByimageEvent(event);		
 	}
 	
+	//Pick dell'Immagine poster
+	public List<Image> getPosterByeventId(Integer eventId)
+	{
+		Events event = eventsRepo.findById(eventId).get();
+		return imagesRepo.findByPosterAndImageEvent(true, event);		
+	}
+	
 	//Creazione del Form con l'immagine salvata in byte[]
 	public ImageForm createImageForm(Integer eventId)
 	{
