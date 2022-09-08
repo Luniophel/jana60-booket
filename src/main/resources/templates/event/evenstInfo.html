@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <title>Document</title>
+    <th:block th:replace="fragments/resources :: src-head"></th:block>
+    <link rel="stylesheet" href="/css/events-style.css" />
+</head>
+<body>
+    <th:block th:replace="fragments/navbar :: navbar"></th:block>   
+    <title>Events Info</title>
 </head>
 <h1>
-    Descrizione dell evento con id <spanh1 th:text="${eventInfo.id}"></spanh1> 
+    Event's description with id <spanh1 th:text="${eventInfo.id}"></spanh1> 
 <h2>
-    Per aggiungere gli eventi <a href="/addEvent">clicca qua</a>
+    To add an event click <a href="/addEvent" class="btn">here</a>
 </h2>
 <body>
     <table class="table">
         <thead>
             <tr>
-                <th>Nome</th>
-                <th>Descrizione</th>
-                <th>Data inizio</th>
-                <th>Data fine</th>
-                <th>Stato pubblicato</th>
-                <th>Stato di visibilitá</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Start date</th>
+                <th>End date</th>
+                <th>Publication status</th>
+                <th>Visibility status</th>
             </tr>
         </thead>
         <tbody>
@@ -38,7 +38,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Nome</th>
+                        <th>Name</th>
                     </tr>
                 </thead>
                 <tbody th:each="e : ${eventInfo}">

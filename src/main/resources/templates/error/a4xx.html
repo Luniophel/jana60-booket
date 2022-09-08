@@ -5,7 +5,7 @@
      <th:block th:replace="fragments/resources :: src-head"></th:block>
 <title>Error page</title>
 <style>
-           body{
+         body{
 	         display:flex;
 	         padding-top:60px;
 	         flex-direction:column;
@@ -15,7 +15,7 @@
 	         font-family:sans-serif;
 	         text-align:center;
 	         color:white;
-	         background-image:url("images/error.jpg");
+	         background-image:url("img/error.jpg");
 	         background-size:cover;
 	         background-position:top;
 	         overflow:hidden;
@@ -44,10 +44,12 @@
                 
 </style>
 </head>
-<body>  
+<body>
+<th:block th:replace="fragments/navbar :: navbar"></th:block> 
     <h1><span></span></h1>
-     <h3>OPS!INTERNAL SERVER ERROR.</h3> 
-  <a class="btn" href="/">Back to Home</a>     
+     <h3>OPS!PAGE NOT FOUND.</h3> 
+<a class="btn" href="/">Back to Home</a>
+</div>  
  <th:block th:replace="fragments/script :: swiper-js"></th:block>  
 </body>
 </html>

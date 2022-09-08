@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import jana60.model.Category;
 import jana60.model.Events;
 import jana60.model.Location;
@@ -34,6 +36,13 @@ public class EventsController
 	private CategoryRepository repoCategory;
 	@Autowired
 	private LocationRepository repoLoc;
+	
+	@GetMapping("/search")
+	public String search(@RequestParam(name = "queryName") String queryName, Model model) {
+		List<Events> listEvents = repo.findByNameContainingIgnoreCase(queryName);
+		model.addAttribute("listEvents", listEvents);
+		return "/event/events";
+	}
 	
 	@GetMapping("/events")
 	public String event(Model model) 
@@ -73,16 +82,16 @@ public class EventsController
 			br.addError(new FieldError("event", "startDate", formEvent.getStartDate(), false, null, null, "la data deve essere futura a " + formEvent.getStartDate().format(formatter) ));
 		}
 		List<Events> listEventLocation = repo.findAllByEventLocation(formEvent.getEventLocation());
-		for (int i = 0; i < listEventLocation.size(); i++) {
+		for (int i = 0; i < listEventLocation.size(); i++) 
+		{
 			if (listEventLocation.get(i).getStartDate().isBefore(formEvent.getStartDate()) || listEventLocation.get(i).getEndDate().isAfter(formEvent.getEndDate())) {
 				//br.addError(new FieldError("event", "startDate", formEvent.getStartDate(), false, null, null, "la data e la location sono stati giá prenotati" ));
 			}
 			
 		}
-		
 		if (br.hasErrors()) 
 		{
-			return "/";
+			return "/event/addEvent";
 		} 
 		else 
 		{
