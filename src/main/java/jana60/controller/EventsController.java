@@ -71,7 +71,7 @@ public class EventsController
 	}
 	
 	@PostMapping("/addEvent")
-	public String save(@Valid @ModelAttribute("event") Events formEvent, BindingResult br) 
+	public String save(@Valid @ModelAttribute("event") Events formEvent, BindingResult br, Model model) 
 	{
 		LocalDate today = LocalDate.now();
 		LocalDate pastDate = LocalDate.from(formEvent.getStartDate());
@@ -91,13 +91,15 @@ public class EventsController
 		
 		List<Events> listEventLocation = repo.findAllByEventLocation(formEvent.getEventLocation());
 		for (int i = 0; i < listEventLocation.size(); i++) {
-			if (listEventLocation.get(i).getStartDate().isAfter(formEvent.getStartDate()) || listEventLocation.get(i).getEndDate().isBefore(formEvent.getEndDate())) {
+			if (listEventLocation.get(i).getStartDate().isEqual(formEvent.getStartDate()) || listEventLocation.get(i).getEndDate().isEqual(formEvent.getEndDate())) {
 				br.addError(new FieldError("event", "startDate", formEvent.getStartDate(), false, null, null, "la data e la location sono stati giá prenotati" ));
 			}
 			
 		}
 		if (br.hasErrors()) 
 		{
+			model.addAttribute("listLocation", repoLoc.findAll());
+			model.addAttribute("categoriesList", repoCategory.findAll());
 			return "/event/addEvent";
 		} 
 		else 
