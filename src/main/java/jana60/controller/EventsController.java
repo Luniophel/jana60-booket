@@ -21,8 +21,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jana60.model.Category;
 import jana60.model.Events;
+import jana60.model.Image;
+import jana60.model.Location;
 import jana60.repository.CategoryRepository;
 import jana60.repository.EventsRepository;
+import jana60.repository.ImageRepository;
 import jana60.repository.LocationRepository;
 @Controller
 @RequestMapping("/")
@@ -35,10 +38,29 @@ public class EventsController
 	private CategoryRepository repoCategory;
 	@Autowired
 	private LocationRepository repoLoc;
+	@Autowired
+	private ImageRepository repoImg;
+	
+	 @GetMapping("/advanced_search")
+	  public String advancedSearch() {
+		  return "/event/search";
+	  }
 	
 	@GetMapping("/search")
-	public String search(@RequestParam(name = "queryName") String queryName, Model model) {
-		List<Events> listEvents = repo.findByNameContainingIgnoreCase(queryName);
+	public String search(@RequestParam(name = "queryName") String queryName, 
+			@RequestParam(name = "queryLocation", required = false) String queryLocation, 
+			@RequestParam(name = "queryCategory", required = false) String queryCategory, 
+			Model model) {
+		if(queryName != null && queryName.isEmpty()) {
+			queryName = null;
+		}
+		if(queryLocation != null && queryLocation.isEmpty()) {
+			queryLocation = null;
+		}
+		if(queryCategory != null && queryCategory.isEmpty()) {
+			queryCategory = null;
+		}
+		List<Events> listEvents = repo.findByNameContainingOrEventLocationNameContainingOrCategoriesNameContainingIgnoreCase(queryName, queryLocation, queryCategory);
 		model.addAttribute("listEvents", listEvents);
 		return "/event/events";
 	}
@@ -71,18 +93,39 @@ public class EventsController
 	}
 	
 	@PostMapping("/addEvent")
-	public String save(@Valid @ModelAttribute("event") Events formEvent, BindingResult br) 
+	public String save(@Valid @ModelAttribute("event") Events formEvent, BindingResult br, Model model) 
 	{
 		LocalDate today = LocalDate.now();
 		LocalDate pastDate = LocalDate.from(formEvent.getStartDate());
 		boolean isAfter = today.isAfter(pastDate);	
-		if(isAfter) 
-		{
+		if(isAfter) {
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			br.addError(new FieldError("event", "startDate", formEvent.getStartDate(), false, null, null, "la data deve essere futura a " + formEvent.getStartDate().format(formatter) ));
 		}
+		LocalDate endDate = LocalDate.from(formEvent.getEndDate());
+		boolean isBefore = endDate.isBefore(pastDate);
+		if(isBefore) 
+		{
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			br.addError(new FieldError("event", "endDate", formEvent.getStartDate(), false, null, null, "la data deve essere futura a " + formEvent.getStartDate().format(formatter) ));
+		}
+		
+		List<Events> listEventLocation = repo.findAllByEventLocation(formEvent.getEventLocation());
+		for (int i = 0; i < listEventLocation.size(); i++) {
+			if (listEventLocation.get(i).getStartDate().isEqual(formEvent.getStartDate()) || listEventLocation.get(i).getEndDate().isEqual(formEvent.getEndDate())) {
+				br.addError(new FieldError("event", "startDate", formEvent.getStartDate(), false, null, null, "la data e la location sono stati giá prenotati" ));
+			}
+		Image img = (Image) repoImg.findAll();
+		if( !(img.isPoster()) && formEvent.getEventLocation().getId()<= 1) {
+			formEvent.setVisible(false);
+			br.addError(new FieldError("event", "location", formEvent.getStartDate(), false, null, null, "per rendere l'evento visibile devi poter mettere la location e l immagine" ));
+		}
+				
+		}
 		if (br.hasErrors()) 
 		{
+			model.addAttribute("listLocation", repoLoc.findAll());
+			model.addAttribute("categoriesList", repoCategory.findAll());
 			return "/event/addEvent";
 		} 
 		else 
