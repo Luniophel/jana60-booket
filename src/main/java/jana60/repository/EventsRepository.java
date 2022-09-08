@@ -7,6 +7,6 @@ import jana60.model.Location;
 
 public interface EventsRepository extends CrudRepository<Events, Integer>
 {
-	public List<Events> findAllByEventLocation (Location id); 
-	public List<Events> findByNameContainingIgnoreCase(String queryName);
+	public List<Events> findAllByEventLocation (Location id);
+	public List<Events> findByNameContainingOrEventLocationNameContainingOrCategoriesNameContainingIgnoreCase(String queryName, String queryLocation, String queryCategory);
 }

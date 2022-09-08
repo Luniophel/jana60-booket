@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+     <th:block th:replace="fragments/resources :: src-head"></th:block>
+     <link rel="stylesheet" href="/css/search.css"></link>
+    <title>Events</title> 
+  </head>
+  <body>
+  <nav th:replace="fragments/navbar :: navbar"></nav>
+  <div class="form-search">
+  	<form action="/search">
+    	<input class="form-name" type="text" name="queryName" placeholder="Name...">
+    	<input class="form-location" type="text" name="queryLocation" placeholder="Location...">
+    	<input class="form-category" type="text" name="queryCategory" placeholder="Category...">
+    	<button class="button-search">Search</button>
+    </form>
+  </div>  
+<th:block th:replace="fragments/script :: swiper-js"></th:block>
+  </body>
+</html>
