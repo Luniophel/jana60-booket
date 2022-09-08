@@ -21,9 +21,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import jana60.model.Category;
 import jana60.model.Events;
+import jana60.model.Image;
 import jana60.model.Location;
 import jana60.repository.CategoryRepository;
 import jana60.repository.EventsRepository;
+import jana60.repository.ImageRepository;
 import jana60.repository.LocationRepository;
 @Controller
 @RequestMapping("/")
@@ -36,6 +38,8 @@ public class EventsController
 	private CategoryRepository repoCategory;
 	@Autowired
 	private LocationRepository repoLoc;
+	@Autowired
+	private ImageRepository repoImg;
 	
 	 @GetMapping("/advanced_search")
 	  public String advancedSearch() {
@@ -111,7 +115,12 @@ public class EventsController
 			if (listEventLocation.get(i).getStartDate().isEqual(formEvent.getStartDate()) || listEventLocation.get(i).getEndDate().isEqual(formEvent.getEndDate())) {
 				br.addError(new FieldError("event", "startDate", formEvent.getStartDate(), false, null, null, "la data e la location sono stati giá prenotati" ));
 			}
-			
+		Image img = (Image) repoImg.findAll();
+		if( !(img.isPoster()) && formEvent.getEventLocation().getId()<= 1) {
+			formEvent.setVisible(false);
+			br.addError(new FieldError("event", "location", formEvent.getStartDate(), false, null, null, "per rendere l'evento visibile devi poter mettere la location e l immagine" ));
+		}
+				
 		}
 		if (br.hasErrors()) 
 		{
