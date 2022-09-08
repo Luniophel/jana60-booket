@@ -39,10 +39,12 @@ public class ImageController
 	public String imgEvent(@PathVariable("eventId") Integer eventId, Model model)
 	{
 		List<Image> listImage = service.getImageByeventId(eventId);
+		List<Image> poster = service.getPosterByeventId(eventId);
 		ImageForm imageform = service.createImageForm(eventId);
 		
+		model.addAttribute("listImage",listImage);
 		model.addAttribute("imageForm",imageform);
-		model.addAttribute("listImage",listImage); 
+		model.addAttribute("poster", poster);
 		return "/images/images";
 	}
 	
@@ -75,6 +77,22 @@ public class ImageController
 		else
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "L'immagine con ID: " + imageId + " non è presente./n Se l'errore persiste contattare l'assistenza.");
 		
+	}
+	
+	//Richiesta per rendere poster un'immagine dal Database
+	@GetMapping("/{eventId}/{imageId}/setPoster")
+	public String selectPoster (@PathVariable("eventId")Integer eventId, @PathVariable("imageId") Integer imageId, RedirectAttributes ra)
+	{
+		Optional<Image> result = imageRepo.findById(imageId);
+		if (result.isPresent())
+		{
+			Image updatedImg = result.get();
+			updatedImg.setPoster(true);
+			imageRepo.save(updatedImg);
+			ra.addFlashAttribute("successMessage", "L'immagine è stata inserita come poster");
+			return "redirect:/images/" + eventId;
+		}
+		return "";
 	}
 	
 	//Richiesta per decodificare immagini in arrivo dal Database (da byte[] a jpg)

@@ -9,4 +9,6 @@ import jana60.model.Image;
 
 public interface ImageRepository extends CrudRepository<Image, Integer> {
 	public List<Image> findByimageEvent(Events event);
+	
+	public List<Image> findByPosterAndImageEvent(boolean value, Events event);
 }
