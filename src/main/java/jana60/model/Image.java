@@ -22,11 +22,14 @@ public class Image {
 	@Lob
 	private byte[] content;
 	
+	@Column(columnDefinition = "boolean default false")
+	private boolean poster;
+	
 	@ManyToOne
 	@JoinColumn(name = "event_id")
 	private Events imageEvent;
-	
 
+	
 	public Integer getId() {
 		return id;
 	}
@@ -49,6 +52,14 @@ public class Image {
 
 	public void setImageEvent(Events imageEvent) {
 		this.imageEvent = imageEvent;
+	}
+
+	public boolean isPoster() {
+		return poster;
+	}
+
+	public void setPoster(boolean poster) {
+		this.poster = poster;
 	}
 
 	
