@@ -89,8 +89,8 @@ public class EventsController
 	}
 	
 	@PostMapping("/addEvent")
-	public String save(@Valid @ModelAttribute("event") Events formEvent, BindingResult br, @ModelAttribute("listLocation") Location location) 
-	{	
+	public String save(@Valid @ModelAttribute("event") Events formEvent, BindingResult br, Model model) 
+	{
 		LocalDate today = LocalDate.now();
 		LocalDate pastDate = LocalDate.from(formEvent.getStartDate());
 		boolean isAfter = today.isAfter(pastDate);	
@@ -98,16 +98,25 @@ public class EventsController
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			br.addError(new FieldError("event", "startDate", formEvent.getStartDate(), false, null, null, "la data deve essere futura a " + formEvent.getStartDate().format(formatter) ));
 		}
-		List<Events> listEventLocation = repo.findAllByEventLocation(formEvent.getEventLocation());
-		for (int i = 0; i < listEventLocation.size(); i++) 
+		LocalDate endDate = LocalDate.from(formEvent.getEndDate());
+		boolean isBefore = endDate.isBefore(pastDate);
+		if(isBefore) 
 		{
-			if (listEventLocation.get(i).getStartDate().isBefore(formEvent.getStartDate()) || listEventLocation.get(i).getEndDate().isAfter(formEvent.getEndDate())) {
-				//br.addError(new FieldError("event", "startDate", formEvent.getStartDate(), false, null, null, "la data e la location sono stati giá prenotati" ));
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			br.addError(new FieldError("event", "endDate", formEvent.getStartDate(), false, null, null, "la data deve essere futura a " + formEvent.getStartDate().format(formatter) ));
+		}
+		
+		List<Events> listEventLocation = repo.findAllByEventLocation(formEvent.getEventLocation());
+		for (int i = 0; i < listEventLocation.size(); i++) {
+			if (listEventLocation.get(i).getStartDate().isEqual(formEvent.getStartDate()) || listEventLocation.get(i).getEndDate().isEqual(formEvent.getEndDate())) {
+				br.addError(new FieldError("event", "startDate", formEvent.getStartDate(), false, null, null, "la data e la location sono stati giá prenotati" ));
 			}
 			
 		}
 		if (br.hasErrors()) 
 		{
+			model.addAttribute("listLocation", repoLoc.findAll());
+			model.addAttribute("categoriesList", repoCategory.findAll());
 			return "/event/addEvent";
 		} 
 		else 
