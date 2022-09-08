@@ -39,6 +39,24 @@
 	<!-- FINE SEZIONE FORM IMMAGINI  -->
 	<!-- INIZIO LISTA IMMAGINI -->
 	
+		<!-- IMMAGINE POSTER -->
+		<div class="row">
+	  <div class="col-4" th:each="ps : ${poster}">
+		    <!-- Inizio Card -->
+		    <div class="bg-dark text-center rounded-bottom py-2">
+			</div>
+		    <div class="my-5 mx-2">
+			      <img th:src="@{|/images/${ps.id}/content|}" class="img-fluid image-controller" alt="PLACEHOLDER">
+			      <!-- Inizio Footer -->
+			      <div class="bg-dark text-center rounded-bottom py-2">
+			      </div>
+			      <!-- Fine Footer   -->
+		    </div>
+		    <!-- Fine Card   -->
+	  </div>
+	</div>
+		<!-- IMMAGINE POSTER -->
+	
 	<!-- __Aggiungere un th:if per far apparire il messaggio soltanto se la lista è vuota__
 	  <div class="container col-6 py-5">
 	      <h1 class="text-center">La lista è vuota.</h1>
@@ -62,6 +80,16 @@
 			    			<i class="fa-solid fa-trash-can"></i></a>
 			    		</a>
 			      		<!-- FINE TASTO RIMUOVI   -->
+			      		<!-- INIZIO TASTO SETPOSTER -->
+			      		<a 
+				    		class="btn btn-warning p-1 text-light col-3" 
+				    		th:href="@{|/images/${img.imageEvent.id}/${img.id}/setPoster|}" 
+				    		title="Seleziona"
+				    		onclick="return confirm('Vuoi usare questa immagine come Poster?')"
+				    	>
+			    			<i class="fa-solid fa-star"></i></a>
+			    		</a>
+			      		<!-- FINE TASTO SETPOSTER   -->
 			      </div>
 			      <!-- Fine Footer   -->
 		    </div>
