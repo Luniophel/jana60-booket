@@ -81,6 +81,21 @@ public class EventsController
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 			br.addError(new FieldError("event", "startDate", formEvent.getStartDate(), false, null, null, "la data deve essere futura a " + formEvent.getStartDate().format(formatter) ));
 		}
+		LocalDate endDate = LocalDate.from(formEvent.getEndDate());
+		boolean isBefore = endDate.isBefore(pastDate);
+		if(isBefore) 
+		{
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			br.addError(new FieldError("event", "endDate", formEvent.getStartDate(), false, null, null, "la data deve essere futura a " + formEvent.getStartDate().format(formatter) ));
+		}
+		
+		List<Events> listEventLocation = repo.findAllByEventLocation(formEvent.getEventLocation());
+		for (int i = 0; i < listEventLocation.size(); i++) {
+			if (listEventLocation.get(i).getStartDate().isAfter(formEvent.getStartDate()) || listEventLocation.get(i).getEndDate().isBefore(formEvent.getEndDate())) {
+				br.addError(new FieldError("event", "startDate", formEvent.getStartDate(), false, null, null, "la data e la location sono stati giá prenotati" ));
+			}
+			
+		}
 		if (br.hasErrors()) 
 		{
 			return "/event/addEvent";
