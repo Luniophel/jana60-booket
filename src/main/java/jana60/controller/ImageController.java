@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
-import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -13,8 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -86,14 +83,12 @@ public class ImageController
 	//Richiesta per rendere poster un'immagine dal Database
 	@GetMapping("/{eventId}/{imageId}/setPoster")
 	public String selectPoster 
-		(
-			@Valid @ModelAttribute("")
-			@PathVariable("eventId")Integer eventId, 
-			@PathVariable("imageId") Integer imageId,
-			RedirectAttributes ra, 
-			BindingResult br,
-			Model model
-		)
+	(
+		@PathVariable("eventId")Integer eventId, 
+		@PathVariable("imageId") Integer imageId,
+		RedirectAttributes ra, 
+		Model model
+	)
 	{
 		//Richiesta dell'immagine per verificarne la presenza senza errori
 		Optional<Image> result = imageRepo.findById(imageId);
@@ -101,14 +96,26 @@ public class ImageController
 		{
 			Image updatedImg = result.get();
 			model.addAttribute("image", updatedImg);
+			
 			//Se l'immagine selezionata è già settata come Poster
 			if (updatedImg.isPoster()==true)
 			{
-				br.addError(new FieldError("image", "poster","L'immagine selezionata è già settata come poster." ));
 				return "redirect:/images/" + eventId;
 			}
-			//Se esistono già immagini settate come Poster
-				
+			
+			//Se esistono già immagini settate come Poster, le resetta tutte a false e imposta quella selezionata come nuovo poster
+			if (imageRepo.countByPosterTrue() != 0)
+			{
+//				List<Image> imgToSetFalse = imageRepo.findByPosterAndImageEvent(true, eventId);
+//				Iterator<Image> iter = imgToSetFalse.iterator();
+//				while(iter.hasNext())
+//				{
+//					Image curImage = iter.next();
+//					curImage.setPoster(false);
+//					imageRepo.save(curImage);
+//				}				
+			}
+			
 			//Se non esistono immagini settate come Poster
 			updatedImg.setPoster(true);
 			imageRepo.save(updatedImg);
