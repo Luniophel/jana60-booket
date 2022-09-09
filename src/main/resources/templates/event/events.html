@@ -24,16 +24,21 @@
 				  	</a>
 	            </div>
 	        </div>
-	        <div>
-            	<img th:src="@{|/images/${e.eventImage.id}/content|}">
+	    	<div class="img-container">
+            	<img class="card-img" th:src="@{|/images/${e.eventImage.get(0).id}/content|}">
 	        </div>
-            <h3>Start date</h3>
-            <div class="">
-            	<p th:text="${e.startDate}"></p>
-            </div>
-            <h3>End date</h3>
-            <div class="">
-            	<p th:text="${e.endDate}"></p>
+	        <div class="tags">
+	        	<p th:each="c : ${e.categories}" th:text="${c.name}"></p>
+	        </div>
+	        <div class="dates">
+		        <div class="start-date">
+	            	<h3>Start date</h3>
+	            	<p th:text="${e.startDate}"></p>
+	            </div>
+	            <div class="end-date">
+	            	<h3>End date</h3>
+	            	<p th:text="${e.endDate}"></p>
+	            </div>
             </div>
             <div class="buttons">
             	<div class="edit-button">
