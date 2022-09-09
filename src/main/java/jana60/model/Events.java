@@ -1,6 +1,6 @@
 package jana60.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -33,13 +33,13 @@ public class Events {
 	@Column(nullable = false)
 	private String description;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 	@Column(nullable = false)
-	private LocalDate startDate;
+	private LocalDateTime startDate;
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
 	@Column(nullable = false)
-	private LocalDate endDate;
+	private LocalDateTime endDate;
 	
 	@Column(nullable = false)
 	private Boolean publishedStatus;
@@ -57,21 +57,20 @@ public class Events {
 	@OneToMany
 	@JoinColumn(name = "event_id")
 	List <Image> eventImage;
-	
 
-	public LocalDate getStartDate() {
+	public LocalDateTime getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(LocalDate startDate) {
+	public void setStartDate(LocalDateTime startDate) {
 		this.startDate = startDate;
 	}
 
-	public LocalDate getEndDate() {
+	public LocalDateTime getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(LocalDate endDate) {
+	public void setEndDate(LocalDateTime endDate) {
 		this.endDate = endDate;
 	}
 
