@@ -57,6 +57,10 @@ public class Events {
 	@OneToMany
 	@JoinColumn(name = "event_id")
 	List <Image> eventImage;
+	
+	@OneToMany
+	@JoinColumn(name = "event_booket")
+	List<Booking> eventBooket;
 
 	public LocalDateTime getStartDate() {
 		return startDate;
@@ -136,6 +140,16 @@ public class Events {
 
 	public void setEventImage(List<Image> eventImage) {
 		this.eventImage = eventImage;
+		
+		
+	}
+
+	public List<Booking> getEventBooket() {
+		return eventBooket;
+	}
+
+	public void setEventBooket(List<Booking> eventBooket) {
+		this.eventBooket = eventBooket;
 	}
 	
 	

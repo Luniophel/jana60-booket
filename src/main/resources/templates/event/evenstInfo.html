@@ -49,5 +49,17 @@
             </table>
     </table>
     <img>
+    <form
+    id = "formBooking"
+  	th:object="${booking}"
+  	th:action="@{redirect:/eventInfo}"
+  	method="POST"
+   	class=" m-auto"
+    >
+    	<div class="col-4 form-check" >
+			<label for="quantity"></label>
+ 				<input type="number" id="quantity" name="quantity" min="1" th:value="${numberBooket}">
+ 				  <input type="submit">			
+	</div>
 </body>
 </html>
