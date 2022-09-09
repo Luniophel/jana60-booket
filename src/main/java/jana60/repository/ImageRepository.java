@@ -19,4 +19,7 @@ public interface ImageRepository extends CrudRepository<Image, Integer> {
 	 */
 	public int countByPosterTrue();
 	
+//	 @Modifying
+//	 @Query("UPDATE Image img SET img.poster = :name, u.surname = :surname  WHERE u.id = :userId")
+//	 void updateImagePosterFalse(@Param("userId") int userId, @Param("name") String name, @Param("surname") String surname);
 }
