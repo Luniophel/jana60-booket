@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -11,6 +13,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -81,18 +85,42 @@ public class ImageController
 	
 	//Richiesta per rendere poster un'immagine dal Database
 	@GetMapping("/{eventId}/{imageId}/setPoster")
-	public String selectPoster (@PathVariable("eventId")Integer eventId, @PathVariable("imageId") Integer imageId, RedirectAttributes ra)
+	public String selectPoster 
+		(
+			@Valid @ModelAttribute("")
+			@PathVariable("eventId")Integer eventId, 
+			@PathVariable("imageId") Integer imageId,
+			RedirectAttributes ra, 
+			BindingResult br,
+			Model model
+		)
 	{
+		//Richiesta dell'immagine per verificarne la presenza senza errori
 		Optional<Image> result = imageRepo.findById(imageId);
 		if (result.isPresent())
 		{
 			Image updatedImg = result.get();
+			model.addAttribute("image", updatedImg);
+			//Se l'immagine selezionata è già settata come Poster
+			if (updatedImg.isPoster()==true)
+			{
+				br.addError(new FieldError("image", "poster","L'immagine selezionata è già settata come poster." ));
+				return "redirect:/images/" + eventId;
+			}
+			//Se esistono già immagini settate come Poster
+				
+			//Se non esistono immagini settate come Poster
 			updatedImg.setPoster(true);
 			imageRepo.save(updatedImg);
 			ra.addFlashAttribute("successMessage", "L'immagine è stata inserita come poster");
 			return "redirect:/images/" + eventId;
 		}
-		return "";
+		//Se la richiesta fallisce
+		else
+		{
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Image with id " + imageId + " doesn't exist");
+		}
+		
 	}
 	
 	//Richiesta per decodificare immagini in arrivo dal Database (da byte[] a jpg)
