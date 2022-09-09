@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -12,6 +13,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -59,17 +62,27 @@ public class ImageController
 	
 	//__AGGIUNGI IMMAGINI A DATABASE__
 	@PostMapping("/save")
-	public String SaveImage(@ModelAttribute("imageForm") ImageForm imageForm)
+	public String SaveImage(@Valid @ModelAttribute("imageForm") ImageForm imageForm, BindingResult br, Model model)
 	{
 		try
 		{
+			if (imageForm.getContentMultipart().isEmpty())
+			{
+				//Modelli per la view con errori
+				List<Image> listImage = service.getImageByeventId(imageForm.getImageEvent().getId());
+				model.addAttribute("listImage",listImage);
+				List<Image> poster = service.getPosterByeventId(imageForm.getImageEvent().getId());
+				model.addAttribute("poster", poster);
+		
+				br.addError(new FieldError("imageForm", "contentMultipart", "Please, select an image to upload"));
+				return "/images/images";
+			}
 			Image saveImage = service.imageSerial(imageForm);
 			//Se non ci sono poster attuali, imposta la prima immagine come poster
 			if(imageRepo.countByPosterTrue()==0)
 			{
 				saveImage.setPoster(true);
 				imageRepo.save(saveImage);
-				
 			}
 			return "redirect:/images/" + saveImage.getImageEvent().getId();
 		}
@@ -92,21 +105,29 @@ public class ImageController
 			//Se, rimuovendo l'immagine, non ci sono più poster, imposta la prima della lista
 			if(imageRepo.countByPosterTrue()==0)
 			{
+				
 				Events curEvent = eventRepo.findById(eventId).get();
+				//Se la lista di Immagini dell'evento è vuota
+				if(imageRepo.findByimageEvent(curEvent).isEmpty())
+				{
+					return "redirect:/images/" + eventId;
+				}
+				else	//Se la lista non è vuota
+				{
 				List<Image> curImageList = imageRepo.findByimageEvent(curEvent);
 				Image firstImageOfCurImageList = curImageList.get(0);
 				firstImageOfCurImageList.setPoster(true);
 				imageRepo.save(firstImageOfCurImageList);
+				}
 			}
 			
 			return "redirect:/images/" + eventId;
 		}
 		else
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "L'immagine con ID: " + imageId + " non è presente./n Se l'errore persiste contattare l'assistenza.");
-		
 	}
 	
-	//Richiesta per rendere poster un'immagine dal Database
+	//__IMPOSTA IMMAGINE COME POSTER__
 	@GetMapping("/{eventId}/{imageId}/setPoster")
 	public String selectPoster 
 	(
@@ -147,10 +168,10 @@ public class ImageController
 		else
 		{
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Image with id " + imageId + " doesn't exist");
-		}
-		
+		}	
 	}
 	
+	//__DECODER IMMAGINI__
 	//Richiesta per decodificare immagini in arrivo dal Database (da byte[] a jpg)
 	@RequestMapping(value = "/{imageId}/content", produces = MediaType.IMAGE_JPEG_VALUE)
     public ResponseEntity<byte[]> getImageContent(@PathVariable("imageId") Integer imageId) {
