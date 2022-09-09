@@ -2,6 +2,11 @@
 :root{
     --main-color:rgb(107, 205, 244);
 }
+
+*{  
+	font-family: "Poppins", sans-serif;
+	color:#fff;
+}
 .swiper-font{
     font-family:'Poppins', sans-serif ;
     margin: 0; padding: 0;
@@ -43,7 +48,6 @@ section{
 	text-transform:uppercase;
 }
 .btn{
-    margin-top: 2rem;
     display: inline-block;
     padding: .6rem 3rem;
     font-size: 1.7rem;
@@ -65,7 +69,7 @@ section{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 9%;
+    padding: 20px;
 }
 .header-swiper .logo{
 
@@ -91,6 +95,7 @@ section{
     color:var(--main-color);
 }
 .search-form{
+	position:flex;
 	margin-top:10px;
 	margin-bottom:7px;
 	color:black;
@@ -105,12 +110,6 @@ input[type=text]{
    
 }
 
- .btn-search{
-	margin-top:20px;
-	font-size:15px;
-	margin-bottom:24px;
-	margin-left:3px;
-}
 #menu-bars{
     font-size: 3rem;
     color: #fff;
@@ -197,22 +196,22 @@ margin-top:50px;
 .contact form .inputBox input,
 .contact form textarea{
 	width:100%;
-	background:#333;
-	border-radius: .5rem;
+	background:#fff;
+	border-radius: 20px;
 	padding:1rem;
 	margin:.7rem 0;
 	font-size:1.5rem;
-	color:#fff;
+	font-weight:400;
+	color:#333;
 	text-transform: none;
 }
 .contact form .inputBox input::placeholder,
 .contact form textarea::placeholder{
-	color:#eee;
 	text-transform: capitalize;
 }
 .contact form .inputBox input:focus,
 .contact form textarea:focus{
-    background:#444;
+    background-color:#fff;
 }
 .contact form .inputBox input{
 	width:49%;
@@ -220,6 +219,9 @@ margin-top:50px;
 .contact form textarea{
 	resize:none;
 }
+.contact form .inputBox input{
+		width:100%;
+	}
 .theme-toggler{
 	position:fixed;
 	top:10rem;right:-20rem;
@@ -358,12 +360,12 @@ margin-top:50px;
 	background:#111;
 	}
 	.footer-swiper .box-container{
-	text-align:center;	
+	text-align:center;
 	font-family:'Poppins', sans-serif ;
 	text-transform:capitalize;
 	display:grid;
 	grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-	gap:0rem;	
+	gap:5rem;	
 	}
 	.footer-swiper .box-container .box h3{
 	    font-size: 1.5rem;
@@ -400,8 +402,5 @@ margin-top:50px;
 	}
 	.footer-swiper .copyright span{
 		color:var(--main-color);
-	}
-	.contact form .inputBox input{
-		width:100%;
 	}
 	
