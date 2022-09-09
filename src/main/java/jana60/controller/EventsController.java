@@ -1,6 +1,6 @@
 package jana60.controller;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import jana60.model.Category;
 import jana60.model.Events;
 import jana60.model.Image;
-import jana60.model.Location;
 import jana60.repository.CategoryRepository;
 import jana60.repository.EventsRepository;
 import jana60.repository.ImageRepository;
@@ -94,19 +93,23 @@ public class EventsController
 	
 	@PostMapping("/addEvent")
 	public String save(@Valid @ModelAttribute("event") Events formEvent, BindingResult br, Model model) 
-	{
-		LocalDate today = LocalDate.now();
-		LocalDate pastDate = LocalDate.from(formEvent.getStartDate());
-		boolean isAfter = today.isAfter(pastDate);	
+	{	
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH/mm");
+		formEvent.getStartDate().format(formatter);
+		formEvent.getEndDate().format(formatter);
+		
+		LocalDateTime today = LocalDateTime.now();
+		LocalDateTime pastDate = LocalDateTime.from(formEvent.getStartDate());
+		boolean isAfter = today.isAfter(pastDate);
 		if(isAfter) {
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			
 			br.addError(new FieldError("event", "startDate", formEvent.getStartDate(), false, null, null, "la data deve essere futura a " + formEvent.getStartDate().format(formatter) ));
 		}
-		LocalDate endDate = LocalDate.from(formEvent.getEndDate());
+		LocalDateTime endDate = LocalDateTime.from(formEvent.getEndDate());
 		boolean isBefore = endDate.isBefore(pastDate);
 		if(isBefore) 
 		{
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			
 			br.addError(new FieldError("event", "endDate", formEvent.getStartDate(), false, null, null, "la data deve essere futura a " + formEvent.getStartDate().format(formatter) ));
 		}
 		
@@ -115,13 +118,8 @@ public class EventsController
 			if (listEventLocation.get(i).getStartDate().isEqual(formEvent.getStartDate()) || listEventLocation.get(i).getEndDate().isEqual(formEvent.getEndDate())) {
 				br.addError(new FieldError("event", "startDate", formEvent.getStartDate(), false, null, null, "la data e la location sono stati giá prenotati" ));
 			}
-		Image img = (Image) repoImg.findAll();
-		if( !(img.isPoster()) && formEvent.getEventLocation().getId()<= 1) {
-			formEvent.setVisible(false);
-			br.addError(new FieldError("event", "location", formEvent.getStartDate(), false, null, null, "per rendere l'evento visibile devi poter mettere la location e l immagine" ));
-		}
+			}
 				
-		}
 		if (br.hasErrors()) 
 		{
 			model.addAttribute("listLocation", repoLoc.findAll());
@@ -149,6 +147,11 @@ public class EventsController
 	@PostMapping("/editEvent/{id}")
 	public String edit(@Valid @ModelAttribute("event") Events formEvent,@PathVariable("id") Integer eventId,  BindingResult br) 
 	{
+		Image img = repoImg.findByPosterAndImageEvent(true, formEvent).get(formEvent.getId());
+		if( !(img.isPoster()) && formEvent.getEventLocation().getId()<= 1) {
+			formEvent.setVisible(false);
+			br.addError(new FieldError("event", "location", formEvent.getStartDate(), false, null, null, "per rendere l'evento visibile devi poter mettere la location e l immagine" ));
+		}
 		if (br.hasErrors()) 
 		{
 			return "/";
