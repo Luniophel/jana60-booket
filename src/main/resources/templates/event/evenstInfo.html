@@ -8,8 +8,8 @@
     <th:block th:replace="fragments/navbar :: navbar"></th:block>   
     <title>Events Info</title>
 </head>
-<h1>
-    Event's description with id <spanh1 th:text="${eventInfo.id}"></spanh1> 
+<h1 class="heading">
+    <span>Event's description</span> with id <spanh1 th:text="${eventInfo.id}"></spanh1> 
 <h2>
     To add an event click <a href="/addEvent" class="btn btn-here">here</a>
 </h2>
