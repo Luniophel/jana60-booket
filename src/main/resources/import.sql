@@ -6,3 +6,4 @@ INSERT INTO categories (name, description) VALUES ('test03', 'Lorem ipsum dolor 
 
 INSERT INTO location (id, name, description, address, capacity) VALUES (1, 'Location non selezionata', 'Questa location non é selezionata, per selezionare una location non presente nel DataBase per favre vai nella sezione Location e aggiungila', 'via Sconosciuto', '1000');
 
+INSERT INTO image (poster, id) VALUES (FALSE, 0);

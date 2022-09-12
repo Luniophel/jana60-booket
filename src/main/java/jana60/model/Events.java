@@ -1,6 +1,7 @@
 package jana60.model;
 
 import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -157,8 +158,36 @@ public class Events {
 //	public Image showPoster()
 //	{
 //		List<Image> imageList = this.eventImage;
-//		if (imageList.isEmpty())
-//			
-//	}
+//		Iterator<Image> iterator = imageList.iterator();
+//		boolean found = false;
+//		while(found){
+//			boolean isPoster = iterator.next().isPoster();
+//			if(isPoster) {
+//				found = true;
+//				return iterator.next();
+//			}
+//		}
+//		return imageList.get(0);
+//		}
+			
 	
-}
+	public Image showPoster() {
+		List<Image> imageList = this.eventImage;
+		if(imageList.isEmpty()) {
+		for(int i = 0; i<= imageList.size(); i++){
+			if(imageList.get(i).isPoster()) {
+				return imageList.get(i);
+			} 
+		}
+			return imageList.get(0);
+		
+		} else {
+			return null;
+		}
+	}
+	
+	
+	}
+			
+	
+

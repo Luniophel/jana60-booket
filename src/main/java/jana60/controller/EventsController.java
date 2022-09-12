@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import antlr.debug.Event;
 import jana60.model.Booking;
 import jana60.model.Category;
 import jana60.model.Events;
@@ -73,6 +74,14 @@ public class EventsController
 	{
 		List<Events> listEvents = (List<Events>) repo.findAll();
 		model.addAttribute("listEvents", listEvents);
+		Image poster = null;
+		if(listEvents.isEmpty()) {
+			return "/event/events";
+		} 
+		for(int i = 0; i <= listEvents.size(); i++) {
+			poster = listEvents.get(i).showPoster();
+			model.addAttribute("poster", poster);
+		}
 		return "/event/events";
 	}
 
