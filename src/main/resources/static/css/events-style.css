@@ -109,6 +109,14 @@ h1{
 	text-transform: uppercase;
 	font-weight: 700;
 }
+h2{
+	color:#fff;
+	margin-top: 10px;
+	font-size:30px;
+	text-align: left;
+	font-weight: 600;
+}
+
 
 .card-event h3{ color:#fff;
 	font-size:20px;
