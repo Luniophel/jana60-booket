@@ -15,6 +15,7 @@ body{
 
 .tags{
 	display: flex;
+	margin-bottom: 10px;
 }
 
 .tags p{
@@ -28,6 +29,7 @@ body{
 .card-img{
 	border-radius: 5px;
 	width: 400px;
+	height: 300px;
 	margin-bottom: 10px;
 }
 
@@ -50,18 +52,18 @@ body{
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin: 10px 0px;
+	margin: 20px 0px 10px 0px;
 }
 
 .edit-button a{
-	border: 3px solid rgb(255, 128, 0);
+	border: 3px solid rgb(0, 128, 255);
 	padding: 5px 20px;
 	margin: 0px 10px;
 	font-size: 15px;
 	border-radius: 20px;
 }
  .edit-button i{
-	color:rgb(255, 128, 0);
+	color:rgb(0, 128, 255);
 }
 .info-button{
 	margin: 10px 0px;
@@ -93,12 +95,35 @@ body{
 	justify-content: center;
 	align-items: center;
 	margin: 50px auto;
+	flex-wrap: wrap;
+}
+
+.canceled .cancel{
+	font-size: 50px;
+	position: absolute;
+	bottom: 10px;
+	display: none;
+	
+}
+
+.canceled{
+	opacity: 0.5;
+}
+
+.canceled:hover{
+	opacity: 0.2;
+}
+
+.canceled:hover .cancel{
+	display:contents;
+	opacity: 1;
 }
 
 .card-event{
 	border: 2px solid white;
 	padding: 10px 10px 10px 10px;
 	border-radius: 10px;
+	margin: 5px;
 }
 
 h1{ margin-top:100px;

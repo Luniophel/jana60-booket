@@ -1,18 +1,17 @@
 .form-search{
 	display:flex;
-	width: 60%;
-	margin: 50px auto;
+	margin-top: 30px;
 	align-items: center;
 	justify-content: center;
 	flex-wrap: wrap;
-	padding: 50px;
+	
 }
 .form-search input{
 	border-radius: 20px;
-	width: 100%;
-	margin-bottom: 20px;
+	margin: 10px;
 	border: 2px solid white;
 	font-size: 15px;
+	color: black;
 }
 .button-search{
 	width: 100px;
