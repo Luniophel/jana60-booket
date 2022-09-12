@@ -126,9 +126,18 @@ public class ImageController
 				{
 				List<Image> curImageList = imageRepo.findByimageEvent(curEvent);
 				Iterator<Image> iter = curImageList.iterator();
-				Image curImg = iter.next();
-				curImg.setPoster(true);
-				imageRepo.save(curImg);
+				//Se c'è già un poster
+				while(iter.hasNext())
+				{
+					Image curImg = iter.next();
+					if(curImg.isPoster())
+						return "redirect:/images/" + eventId;
+				}
+				//Se non c'è ancora un poster
+				Iterator<Image> iter2 = curImageList.iterator();
+				Image firstImg =  iter2.next();
+				firstImg.setPoster(true);
+				imageRepo.save(firstImg);
 				}
 			}
 			
