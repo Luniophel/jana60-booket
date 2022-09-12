@@ -92,7 +92,7 @@ public class EventsController
 	{
 		if ((formBooking.getNumberBooket() - formEvent.getEventLocation().getCapacity()) <= 0)
 		{
-			br.addError(new FieldError("booking", "quantity", formBooking.getNumberBooket(), false, null, null, "Posti per " + formEvent.getEventLocation().getName() + " finiti"));
+			br.addError(new FieldError("booking", "quantity", formBooking.getNumberBooket(), false, null, null, "Places for " + formEvent.getEventLocation().getName() + " not available"));
 		}
 		else 
 		{	
@@ -127,20 +127,20 @@ public class EventsController
 		boolean isAfter = today.isAfter(pastDate);
 		if(isAfter) {
 			
-			br.addError(new FieldError("event", "startDate", formEvent.getStartDate(), false, null, null, "la data deve essere futura a " + formEvent.getStartDate().format(formatter) ));
+			br.addError(new FieldError("event", "startDate", formEvent.getStartDate(), false, null, null, "the date must be following the " + formEvent.getStartDate().format(formatter) ));
 		}
 		LocalDateTime endDate = LocalDateTime.from(formEvent.getEndDate());
 		boolean isBefore = endDate.isBefore(pastDate);
 		if(isBefore) 
 		{
 			
-			br.addError(new FieldError("event", "endDate", formEvent.getStartDate(), false, null, null, "la data deve essere futura a " + formEvent.getStartDate().format(formatter) ));
+			br.addError(new FieldError("event", "endDate", formEvent.getStartDate(), false, null, null, "the date must be following the " + formEvent.getStartDate().format(formatter) ));
 		}
 		
 		List<Events> listEventLocation = repo.findAllByEventLocation(formEvent.getEventLocation());
 		for (int i = 0; i < listEventLocation.size(); i++) {
 			if (listEventLocation.get(i).getStartDate().isEqual(formEvent.getStartDate()) || listEventLocation.get(i).getEndDate().isEqual(formEvent.getEndDate())) {
-				br.addError(new FieldError("event", "startDate", formEvent.getStartDate(), false, null, null, "la data e la location sono stati giá prenotati" ));
+				br.addError(new FieldError("event", "startDate", formEvent.getStartDate(), false, null, null, "Date and Location have already been booked" ));
 			}
 			}
 				
@@ -174,7 +174,7 @@ public class EventsController
 		Image img = repoImg.findByPosterAndImageEvent(true, formEvent).get(formEvent.getId());
 		if( !(img.isPoster()) && formEvent.getEventLocation().getId()<= 1) {
 			formEvent.setVisible(false);
-			br.addError(new FieldError("event", "location", formEvent.getStartDate(), false, null, null, "per rendere l'evento visibile devi poter mettere la location e l immagine" ));
+			br.addError(new FieldError("event", "location", formEvent.getStartDate(), false, null, null, "to make the event visible, you must insert the location and the image" ));
 		}
 		if (br.hasErrors()) 
 		{
