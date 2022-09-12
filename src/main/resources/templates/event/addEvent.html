@@ -9,7 +9,7 @@
     <title>Add Events</title>
 </head>
 <body>
-    <h1>Create your amazing event, sponsored by us:</h1>
+    <h1 class="heading">Create your amazing event <span>sponsored by us: </span></h1>
     <hr/>
 	<form
    id = "formEvent"
@@ -105,6 +105,7 @@
   	<button type="submit" class="btn">Save</button>
   	<a class="btn btn-red" href="">Cancel</a>
   </div>
+  <th:block th:replace="fragments/themeToggler :: themeToggler"></th:block>
  <th:block th:replace="fragments/script :: swiper-js"></th:block>
 <th:block th:replace="fragments/footer :: footer"></th:block>
 </body>
