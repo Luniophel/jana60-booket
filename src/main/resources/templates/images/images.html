@@ -26,21 +26,32 @@
 	    method="POST"
 	    enctype="multipart/form-data"
 	    >
-	    
+	
 	    <input type="hidden" th:field="*{imageEvent}">
-	    
+	<!-- INIZIO FORM UPLOAD IMMAGINI -->
 	    <div class="mb-3 d-flex">
 	      <label for="contentMultipart" class="form-label"></label>
 	      <input class="form-control" type="file" id="contentMultipart" th:field="*{contentMultipart}">
 	      <button class="btn" type="submit">Save</button>
 	    </div>
+	<!-- FINE FORM UPLOAD IMMAGINI -->  
+  	<!-- INIZIO SEZIONE ERRORI  -->
+
+		<div>
+		<li 
+			 class="text-danger fs-4"
+	         th:each="err : ${#fields.allErrors()}" 
+	         th:text="${err}">
+		</li>
+		</div>
+		
+	<!-- INIZIO SEZIONE ERRORI  -->
 	  </form>
 	</div>
 	<!-- FINE SEZIONE FORM IMMAGINI  -->
-	<!-- INIZIO LISTA IMMAGINI -->
 	
-		<!-- IMMAGINE POSTER -->
-		<div class="row">
+	<!-- IMMAGINE POSTER -->
+	<div class="row">
 	  <div class="col-4" th:each="ps : ${poster}">
 		    <!-- Inizio Card -->
 		    <div class="bg-dark text-center rounded-bottom py-2">

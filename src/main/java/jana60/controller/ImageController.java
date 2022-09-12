@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -11,6 +13,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,8 +23,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import jana60.model.Events;
 import jana60.model.Image;
 import jana60.model.ImageForm;
+import jana60.repository.EventsRepository;
 import jana60.repository.ImageRepository;
 import jana60.service.ImageService;
 
@@ -33,28 +39,51 @@ public class ImageController
 	private ImageService service;
 	@Autowired
 	private ImageRepository imageRepo;
+	@Autowired
+	private EventsRepository eventRepo;
 	
-	//Richiesta per caricare sul Model le immagini dal Database
+	//__RICHIAMA IMMAGINI DA DATABASE A MODEL PER ID EVENTO__
 	@GetMapping("/{eventId}")
 	public String imgEvent(@PathVariable("eventId") Integer eventId, Model model)
 	{
 		List<Image> listImage = service.getImageByeventId(eventId);
-		List<Image> poster = service.getPosterByeventId(eventId);
-		ImageForm imageform = service.createImageForm(eventId);
-		
 		model.addAttribute("listImage",listImage);
-		model.addAttribute("imageForm",imageform);
+
+		List<Image> poster = service.getPosterByeventId(eventId);
 		model.addAttribute("poster", poster);
+
+		ImageForm imageform = service.createImageForm(eventId);
+		model.addAttribute("imageForm",imageform);
+		
+		
+		
 		return "/images/images";
 	}
 	
-	//Richiesta per aggiungere immagini al Database
+	//__AGGIUNGI IMMAGINI A DATABASE__
 	@PostMapping("/save")
-	public String SaveImage(@ModelAttribute("imageForm") ImageForm imageForm)
+	public String SaveImage(@Valid @ModelAttribute("imageForm") ImageForm imageForm, BindingResult br, Model model)
 	{
 		try
 		{
+			if (imageForm.getContentMultipart().isEmpty())
+			{
+				//Modelli per la view con errori
+				List<Image> listImage = service.getImageByeventId(imageForm.getImageEvent().getId());
+				model.addAttribute("listImage",listImage);
+				List<Image> poster = service.getPosterByeventId(imageForm.getImageEvent().getId());
+				model.addAttribute("poster", poster);
+		
+				br.addError(new FieldError("imageForm", "contentMultipart", "Please, select an image to upload"));
+				return "/images/images";
+			}
 			Image saveImage = service.imageSerial(imageForm);
+			//Se non ci sono poster attuali, imposta la prima immagine come poster
+			if(imageRepo.countByPosterTrue()==0)
+			{
+				saveImage.setPoster(true);
+				imageRepo.save(saveImage);
+			}
 			return "redirect:/images/" + saveImage.getImageEvent().getId();
 		}
 		catch(IOException e) 
@@ -63,7 +92,7 @@ public class ImageController
 		}
 	}
 	
-	//Richiesta per rimuovere immagini dal Database
+	//__RIMUOVI IMMAGINI DA DATABASE__
 	@GetMapping("/{eventId}/{imageId}/remove")
 	public String delete (@PathVariable("eventId")Integer eventId, @PathVariable("imageId") Integer imageId, RedirectAttributes ra)
 	{
@@ -72,29 +101,77 @@ public class ImageController
 		{
 			imageRepo.deleteById(imageId);
 			ra.addFlashAttribute("successMessage", "L'immagine è stata rimossa con successo");
+			
+			//Se, rimuovendo l'immagine, non ci sono più poster, imposta la prima della lista
+			if(imageRepo.countByPosterTrue()==0)
+			{
+				
+				Events curEvent = eventRepo.findById(eventId).get();
+				//Se la lista di Immagini dell'evento è vuota
+				if(imageRepo.findByimageEvent(curEvent).isEmpty())
+				{
+					return "redirect:/images/" + eventId;
+				}
+				else	//Se la lista non è vuota
+				{
+				List<Image> curImageList = imageRepo.findByimageEvent(curEvent);
+				Image firstImageOfCurImageList = curImageList.get(0);
+				firstImageOfCurImageList.setPoster(true);
+				imageRepo.save(firstImageOfCurImageList);
+				}
+			}
+			
 			return "redirect:/images/" + eventId;
 		}
 		else
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "L'immagine con ID: " + imageId + " non è presente./n Se l'errore persiste contattare l'assistenza.");
-		
 	}
 	
-	//Richiesta per rendere poster un'immagine dal Database
+	//__IMPOSTA IMMAGINE COME POSTER__
 	@GetMapping("/{eventId}/{imageId}/setPoster")
-	public String selectPoster (@PathVariable("eventId")Integer eventId, @PathVariable("imageId") Integer imageId, RedirectAttributes ra)
+	public String selectPoster 
+	(
+		@PathVariable("eventId")Integer eventId, 
+		@PathVariable("imageId") Integer imageId,
+		RedirectAttributes ra, 
+		Model model
+	)
 	{
+		//Richiesta dell'immagine per verificarne la presenza senza errori
 		Optional<Image> result = imageRepo.findById(imageId);
 		if (result.isPresent())
 		{
-			Image updatedImg = result.get();
-			updatedImg.setPoster(true);
-			imageRepo.save(updatedImg);
+			Image imgToPick = result.get();
+			model.addAttribute("image", imgToPick);
+			
+			//Se l'immagine selezionata è già settata come Poster
+			if (imgToPick.isPoster()==true)
+			{
+				return "redirect:/images/" + eventId;
+			}
+			
+			//Se esistono già immagini settate come Poster, le resetta tutte a false e imposta quella selezionata come nuovo poster
+			if (imageRepo.countByPosterTrue() != 0)
+			{
+				Events curEvent = eventRepo.findById(eventId).get();
+				List<Image> curPosterList = imageRepo.findByPosterAndImageEvent(true, curEvent);
+				curPosterList.get(0).setPoster(false);
+			}
+			
+			//Se non esistono immagini settate come Poster
+			imgToPick.setPoster(true);
+			imageRepo.save(imgToPick);
 			ra.addFlashAttribute("successMessage", "L'immagine è stata inserita come poster");
 			return "redirect:/images/" + eventId;
 		}
-		return "";
+		//Se la richiesta fallisce
+		else
+		{
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Image with id " + imageId + " doesn't exist");
+		}	
 	}
 	
+	//__DECODER IMMAGINI__
 	//Richiesta per decodificare immagini in arrivo dal Database (da byte[] a jpg)
 	@RequestMapping(value = "/{imageId}/content", produces = MediaType.IMAGE_JPEG_VALUE)
     public ResponseEntity<byte[]> getImageContent(@PathVariable("imageId") Integer imageId) {

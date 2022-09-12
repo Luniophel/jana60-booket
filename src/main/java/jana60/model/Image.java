@@ -60,11 +60,7 @@ public class Image {
 
 	public void setPoster(boolean poster) {
 		this.poster = poster;
-	}
-
-	
-	
-		
+	}	
 	
 
 }

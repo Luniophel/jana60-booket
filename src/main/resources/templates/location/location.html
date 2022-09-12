@@ -7,7 +7,7 @@
 </head>
 <body>
     <th:block th:replace="fragments/navbar :: navbar"></th:block> 
-    <h1>Locations</h1>
+    <h1 class="location-title">Locations</h1>
     <div class="button">
     	<a th:href="@{/location/add}">Add a location</a>
     </div>
@@ -34,10 +34,12 @@
     	</tbody>
     
     </table>
-    <div class="alert alert-info my-5" th:unless="${location.size() > 0}">
-  		<h3>Sorry, we have no locations to display yet :(</h3>
+    <div class="no-locations" th:unless="${location.size() > 0}">
+  		<h3>Sorry, we have no locations to display yet <i class="fa-regular fa-face-frown"></i></h3>
   	</div>
-<th:block th:replace="fragments/script :: swiper-js"></th:block>
-<th:block th:replace="fragments/footer :: footer"></th:block>
+  	
+  	<th:block th:replace="fragments/script :: swiper-js"></th:block>
+  	<th:block th:replace="fragments/footer :: footer"></th:block>
+
 </body>
 </html>

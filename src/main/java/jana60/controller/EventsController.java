@@ -1,6 +1,6 @@
 package jana60.controller;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
@@ -19,10 +19,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import jana60.model.Booking;
 import jana60.model.Category;
 import jana60.model.Events;
 import jana60.model.Image;
-import jana60.model.Location;
+import jana60.repository.BooketRepository;
 import jana60.repository.CategoryRepository;
 import jana60.repository.EventsRepository;
 import jana60.repository.ImageRepository;
@@ -40,6 +41,8 @@ public class EventsController
 	private LocationRepository repoLoc;
 	@Autowired
 	private ImageRepository repoImg;
+	@Autowired
+	private BooketRepository repoBooket;
 	
 	 @GetMapping("/advanced_search")
 	  public String advancedSearch() {
@@ -80,6 +83,26 @@ public class EventsController
 		List<Category> listCategories = (List<Category>) repoCategory.findAll();
 		model.addAttribute("eventInfo", result.get());	
 		model.addAttribute("listCategories", listCategories);
+		model.addAttribute("listBooket", repoBooket.findAll());
+		return "/event/evenstInfo";
+	}
+	
+	@PostMapping("/events/{id}")
+	public String saveEventInfo(@Valid @ModelAttribute("booking") Booking formBooking, @Valid @ModelAttribute("event") Events formEvent, BindingResult br)
+	{
+		if ((formBooking.getNumberBooket() - formEvent.getEventLocation().getCapacity()) <= 0)
+		{
+			br.addError(new FieldError("booking", "quantity", formBooking.getNumberBooket(), false, null, null, "Posti per " + formEvent.getEventLocation().getName() + " finiti"));
+		}
+		else 
+		{	
+			List<Booking> listBooking = repoBooket.findAllByid(formEvent.getEventLocation().getId());
+			for (int i = 0, booketNumber = 0; i < listBooking.size(); i++) {
+				booketNumber += listBooking.get(i).getNumberBooket();
+				formBooking.setBooketAvailable(booketNumber);
+			}
+			repoBooket.save(formBooking);
+		}
 		return "/event/evenstInfo";
 	}
 	
@@ -88,25 +111,29 @@ public class EventsController
 	{
 		model.addAttribute("event", new Events());
 		model.addAttribute("categoriesList", repoCategory.findAll());
-		model.addAttribute("listLocation", repoLoc.findAll());		
+		model.addAttribute("listLocation", repoLoc.findAll());	
 		return "/event/addEvent";
 	}
 	
 	@PostMapping("/addEvent")
 	public String save(@Valid @ModelAttribute("event") Events formEvent, BindingResult br, Model model) 
-	{
-		LocalDate today = LocalDate.now();
-		LocalDate pastDate = LocalDate.from(formEvent.getStartDate());
-		boolean isAfter = today.isAfter(pastDate);	
+	{	
+		formEvent.getEventLocation().getCapacity();
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH/mm");
+		formEvent.getStartDate().format(formatter);
+		formEvent.getEndDate().format(formatter);
+		LocalDateTime today = LocalDateTime.now();
+		LocalDateTime pastDate = LocalDateTime.from(formEvent.getStartDate());
+		boolean isAfter = today.isAfter(pastDate);
 		if(isAfter) {
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			
 			br.addError(new FieldError("event", "startDate", formEvent.getStartDate(), false, null, null, "la data deve essere futura a " + formEvent.getStartDate().format(formatter) ));
 		}
-		LocalDate endDate = LocalDate.from(formEvent.getEndDate());
+		LocalDateTime endDate = LocalDateTime.from(formEvent.getEndDate());
 		boolean isBefore = endDate.isBefore(pastDate);
 		if(isBefore) 
 		{
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			
 			br.addError(new FieldError("event", "endDate", formEvent.getStartDate(), false, null, null, "la data deve essere futura a " + formEvent.getStartDate().format(formatter) ));
 		}
 		
@@ -115,13 +142,8 @@ public class EventsController
 			if (listEventLocation.get(i).getStartDate().isEqual(formEvent.getStartDate()) || listEventLocation.get(i).getEndDate().isEqual(formEvent.getEndDate())) {
 				br.addError(new FieldError("event", "startDate", formEvent.getStartDate(), false, null, null, "la data e la location sono stati giá prenotati" ));
 			}
-		Image img = (Image) repoImg.findAll();
-		if( !(img.isPoster()) && formEvent.getEventLocation().getId()<= 1) {
-			formEvent.setVisible(false);
-			br.addError(new FieldError("event", "location", formEvent.getStartDate(), false, null, null, "per rendere l'evento visibile devi poter mettere la location e l immagine" ));
-		}
+			}
 				
-		}
 		if (br.hasErrors()) 
 		{
 			model.addAttribute("listLocation", repoLoc.findAll());
@@ -149,6 +171,11 @@ public class EventsController
 	@PostMapping("/editEvent/{id}")
 	public String edit(@Valid @ModelAttribute("event") Events formEvent,@PathVariable("id") Integer eventId,  BindingResult br) 
 	{
+		Image img = repoImg.findByPosterAndImageEvent(true, formEvent).get(formEvent.getId());
+		if( !(img.isPoster()) && formEvent.getEventLocation().getId()<= 1) {
+			formEvent.setVisible(false);
+			br.addError(new FieldError("event", "location", formEvent.getStartDate(), false, null, null, "per rendere l'evento visibile devi poter mettere la location e l immagine" ));
+		}
 		if (br.hasErrors()) 
 		{
 			return "/";
