@@ -25,8 +25,8 @@
 	            </div>
 	        </div>
 	    	<div class="img-container">
-	    		
-            	<img class="card-img" th:if="${e.eventImage.countByPosterTrue == 0}" th:src="@{|/images/${e.eventImage.get(0).id}/content|}">
+	    	
+            	<img class="card-img" th:if="${e.eventImage.isEmpty() == false}" th:src="@{|/images/${e.getPosterImg.id}/content|}">
 	        </div>
 	        <div class="tags">
 	        	<p th:each="c : ${e.categories}" th:text="${c.name}"></p>

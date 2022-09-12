@@ -1,6 +1,7 @@
 package jana60.model;
 
 import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -151,14 +152,17 @@ public class Events {
 	public void setEventBooket(List<Booking> eventBooket) {
 		this.eventBooket = eventBooket;
 	}
-
 	
-	//METHODS
-//	public Image showPoster()
-//	{
-//		List<Image> imageList = this.eventImage;
-//		if (imageList.isEmpty())
-//			
-//	}
+	public Image getPosterImg() {
+		List<Image> imgList = getEventImage();
+		Iterator<Image> iter = imgList.iterator();
+		while(iter.hasNext())
+		{
+			Image curImg = iter.next();
+			if(curImg.isPoster())
+				return curImg;
+		}
+		return imgList.get(0);	
+	}
 	
 }

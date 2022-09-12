@@ -62,5 +62,4 @@ public class Image {
 		this.poster = poster;
 	}	
 	
-
 }
