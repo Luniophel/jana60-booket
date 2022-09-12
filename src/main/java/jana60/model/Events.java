@@ -151,11 +151,14 @@ public class Events {
 	public void setEventBooket(List<Booking> eventBooket) {
 		this.eventBooket = eventBooket;
 	}
+
 	
-	
-	
-	
-	
-	
+	//METHODS
+//	public Image showPoster()
+//	{
+//		List<Image> imageList = this.eventImage;
+//		if (imageList.isEmpty())
+//			
+//	}
 	
 }
