@@ -79,7 +79,7 @@
 			<h4>Location:</h4>
 				<div class="form-check" th:each="i : ${listLocation}">
 				  <input class="form-check-input" type="checkbox" th:field="*{eventLocation}" th:id="|${i.id}|" th:value="${i.id}">
-					  <label class="form-check-label" th:for="|${i.id}|" th:text="${i.name}"></label>
+				  <label class="form-check-label" th:for="|${i.id}|" th:text="${i.name}"></label>
 	</div>
 				
 	</div>
