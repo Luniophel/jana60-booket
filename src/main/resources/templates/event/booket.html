@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <th:block th:replace="fragments/resources :: src-head"></th:block>
+    <link rel="stylesheet" href="/css/events-style.css" />
+        <th:block th:replace="fragments/navbar :: navbar"></th:block>   
+    <title>Events Info</title>
+</head>
+<body>
+    To add an event click <a href="/addEvent" class="btn btn-here">here</a>
+</h2>
+<form
+    id = "formBooking"
+  	th:object="${booking}"
+  	th:action="@{/booket}"
+  	method="POST"
+   	class=" m-auto"
+    >
+    	<div class="col-4 form-check" >
+			<label for="quantity"></label>
+			<input type="hidden" th:field="*{eventBooket}">
+ 				<input type="number" id="quantity" name="quantity" min="1" th:field="*{numberBooket}">		
+	</div>
+	  	<button type="submit" class="btn">Save</button>

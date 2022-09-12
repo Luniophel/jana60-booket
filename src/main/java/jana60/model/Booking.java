@@ -1,5 +1,6 @@
 package jana60.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,6 +18,7 @@ public class Booking {
 	
 	private Integer numberBooket;
 	
+	@Column(nullable = true)
 	public Integer booketAvailable;
 	
 	@ManyToOne

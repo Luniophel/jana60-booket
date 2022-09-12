@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
+import javax.swing.text.html.FormSubmitEvent;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,23 +88,43 @@ public class EventsController
 		return "/event/evenstInfo";
 	}
 	
-	@PostMapping("/events/{id}")
-	public String saveEventInfo(@Valid @ModelAttribute("booking") Booking formBooking, @Valid @ModelAttribute("event") Events formEvent, BindingResult br)
+	@GetMapping("/booket/{id}")
+	public String saveEventInfo(@PathVariable("id") Integer eventId,  Model model)
 	{
-		if ((formBooking.getNumberBooket() - formEvent.getEventLocation().getCapacity()) <= 0)
+		Optional<Events> result = repo.findById(eventId);
+		if (result.isPresent())
 		{
-			br.addError(new FieldError("booking", "quantity", formBooking.getNumberBooket(), false, null, null, "Posti per " + formEvent.getEventLocation().getName() + " finiti"));
+		Booking booking = new Booking();
+		booking.setEventBooket(result.get());
+		model.addAttribute("booking", booking);
 		}
-		else 
-		{	
-			List<Booking> listBooking = repoBooket.findAllByid(formEvent.getEventLocation().getId());
-			for (int i = 0, booketNumber = 0; i < listBooking.size(); i++) {
-				booketNumber += listBooking.get(i).getNumberBooket();
-				formBooking.setBooketAvailable(booketNumber);
-			}
+		
+		//model.addAttribute("listCapacity", formEvent.getEventLocation().getCapacity());
+		return "/event/booket";	
+	}
+	
+	@PostMapping("/booket")
+	public String saveEventInfo(@Valid @ModelAttribute("booking") Booking formBooking, BindingResult br)
+	{
+		if ((formBooking.getEventBooket().getEventLocation().getCapacity() - formBooking.getNumberBooket() <= 0))
+		{
+			br.addError(new FieldError("booking", "quantity", formBooking.getNumberBooket(), false, null, null, "Posti per " + formBooking.getEventBooket().getEventLocation().getName() + " finiti"));
+		}
+	
+		//formBooking.setBooketAvailable(formBooking.getEventBooket().getEventLocation().getCapacity() - formBooking.getNumberBooket());
+		//CREARE NUOVA COLONNA "PRENOTAZIONI DISPONIBIL;I" IN LOCATION E MODIFICARE LA RIGA DI SOTTO CON findAllByLocation IN REPOSITORY
+			List<Booking> listBooking = repoBooket.findAllByid(formBooking.getEventBooket().getEventLocation().getId());
+			for (int i = 0; i < listBooking.size(); i++) {
+				formBooking.setBooketAvailable(formBooking.getEventBooket().getEventLocation().getCapacity() - listBooking.get(i).getNumberBooket());
+				}
+		if (br.hasErrors()) 
+		{
+			return "/events";
+		}
+		else {
 			repoBooket.save(formBooking);
 		}
-		return "/event/evenstInfo";
+		return "redirect:/events";
 	}
 	
 	@GetMapping("/addEvent")

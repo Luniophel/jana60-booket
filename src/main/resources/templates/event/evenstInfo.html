@@ -14,6 +14,7 @@
     To add an event click <a href="/addEvent" class="btn btn-here">here</a>
 </h2>
 <body>
+	<input="hidden" th:field="*{eventInfo.id}">
     <table class="table">
         <thead>
             <tr>
@@ -49,17 +50,8 @@
             </table>
     </table>
     <img>
-    <form
-    id = "formBooking"
-  	th:object="${booking}"
-  	th:action="@{redirect:/eventInfo}"
-  	method="POST"
-   	class=" m-auto"
-    >
-    	<div class="col-4 form-check" >
-			<label for="quantity"></label>
- 				<input type="number" id="quantity" name="quantity" min="1" th:value="${numberBooket}">
- 				  <input type="submit">			
-	</div>
+    	<h2>
+   			 To add booket <a th:href="@{|/booket/${eventInfo.id}|}" class="btn btn-here">here</a>
+		</h2>
 </body>
 </html>
