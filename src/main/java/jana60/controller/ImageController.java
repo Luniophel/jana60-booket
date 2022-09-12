@@ -1,6 +1,7 @@
 package jana60.controller;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -68,22 +69,31 @@ public class ImageController
 		{
 			if (imageForm.getContentMultipart().isEmpty())
 			{
+				int eventId = imageForm.getImageEvent().getId();
 				//Modelli per la view con errori
-				List<Image> listImage = service.getImageByeventId(imageForm.getImageEvent().getId());
+				List<Image> listImage = service.getImageByeventId(eventId);
 				model.addAttribute("listImage",listImage);
-				List<Image> poster = service.getPosterByeventId(imageForm.getImageEvent().getId());
+				List<Image> poster = service.getPosterByeventId(eventId);
 				model.addAttribute("poster", poster);
 		
 				br.addError(new FieldError("imageForm", "contentMultipart", "Please, select an image to upload"));
 				return "/images/images";
 			}
 			Image saveImage = service.imageSerial(imageForm);
+			//Chiamata della lista 
+			List<Image> imgList = imageForm.getImageEvent().getEventImage();
 			//Se non ci sono poster attuali, imposta la prima immagine come poster
-			if(imageRepo.countByPosterTrue()==0)
+			Iterator<Image> iter = imgList.iterator();
+			while(iter.hasNext())
 			{
-				saveImage.setPoster(true);
-				imageRepo.save(saveImage);
+				//Resetto l'immagine poster precedente
+				Image curImg = iter.next();
+				if(curImg.isPoster())
+					return "redirect:/images/" + saveImage.getImageEvent().getId();
 			}
+			//Se l'immagine poster non viene trovata, viene settata quella appena caricata
+			saveImage.setPoster(true);
+			imageRepo.save(saveImage);
 			return "redirect:/images/" + saveImage.getImageEvent().getId();
 		}
 		catch(IOException e) 
@@ -150,12 +160,15 @@ public class ImageController
 				return "redirect:/images/" + eventId;
 			}
 			
-			//Se esistono già immagini settate come Poster, le resetta tutte a false e imposta quella selezionata come nuovo poster
-			if (imageRepo.countByPosterTrue() != 0)
+			//Richiesta della Lista di immagini per l'ID dell'evento
+			List<Image> imgList = eventRepo.findById(eventId).get().getEventImage();
+			Iterator<Image> iter = imgList.iterator();
+			while(iter.hasNext())
 			{
-				Events curEvent = eventRepo.findById(eventId).get();
-				List<Image> curPosterList = imageRepo.findByPosterAndImageEvent(true, curEvent);
-				curPosterList.get(0).setPoster(false);
+				//Resetto l'immagine poster precedente
+				Image curImg = iter.next();
+				if(curImg.isPoster())
+					curImg.setPoster(false);
 			}
 			
 			//Se non esistono immagini settate come Poster
