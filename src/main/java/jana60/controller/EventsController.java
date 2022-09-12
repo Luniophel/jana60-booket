@@ -74,14 +74,6 @@ public class EventsController
 	{
 		List<Events> listEvents = (List<Events>) repo.findAll();
 		model.addAttribute("listEvents", listEvents);
-		Image poster = null;
-		if(listEvents.isEmpty()) {
-			return "/event/events";
-		} 
-		for(int i = 0; i <= listEvents.size(); i++) {
-			poster = listEvents.get(i).showPoster();
-			model.addAttribute("poster", poster);
-		}
 		return "/event/events";
 	}
 

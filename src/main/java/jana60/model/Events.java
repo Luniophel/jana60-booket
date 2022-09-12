@@ -152,39 +152,20 @@ public class Events {
 	public void setEventBooket(List<Booking> eventBooket) {
 		this.eventBooket = eventBooket;
 	}
+	
 
-	
-	//METHODS
-//	public Image showPoster()
-//	{
-//		List<Image> imageList = this.eventImage;
-//		Iterator<Image> iterator = imageList.iterator();
-//		boolean found = false;
-//		while(found){
-//			boolean isPoster = iterator.next().isPoster();
-//			if(isPoster) {
-//				found = true;
-//				return iterator.next();
-//			}
-//		}
-//		return imageList.get(0);
-//		}
-			
-	
-	public Image showPoster() {
-		List<Image> imageList = this.eventImage;
-		if(imageList.isEmpty()) {
-		for(int i = 0; i<= imageList.size(); i++){
-			if(imageList.get(i).isPoster()) {
-				return imageList.get(i);
-			} 
+	public Image getPosterImg() {
+		List<Image> imgList = getEventImage();
+		Iterator<Image> iter = imgList.iterator();
+		while(iter.hasNext())
+		{
+			Image curImg = iter.next();
+			if(curImg.isPoster())
+				return curImg;
 		}
-			return imageList.get(0);
-		
-		} else {
-			return null;
-		}
+		return imgList.get(0);	
 	}
+
 	
 	
 	}
