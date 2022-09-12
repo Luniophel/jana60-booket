@@ -25,7 +25,7 @@
 	            </div>
 	        </div>
 	    	<div class="img-container">
-            	<img class="card-img" th:src="@{|/images/${e.eventImage.get(0).id}/content|}">
+            	<img class="card-img" th:src="@{|/images/${e.eventImage}/content|}">
 	        </div>
 	        <div class="tags">
 	        	<p th:each="c : ${e.categories}" th:text="${c.name}"></p>
