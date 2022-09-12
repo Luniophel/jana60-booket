@@ -1,6 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;900&display=swap');
+
 :root{
     --main-color:rgb(107, 205, 244);
+}
+
+*{  
+	font-family: "Poppins", sans-serif;
+	color:#fff;
+	
 }
 .swiper-font{
     font-family:'Poppins', sans-serif ;
@@ -19,17 +26,22 @@ scroll-behavior: smooth;
 }
 
 html::-webkit-scrollbar{
-    width: 5px;
+	 width:100%;
+ 
 
 }
 html::-webkit-scrollbar-track{
     background: #111;
+    border-radius: 5rem;
+ 
 }
 body{
     background: #222;
+      
 }
 section{
     padding:2rem 9%;
+    width:100%;
 
 }
 .heading{
@@ -43,7 +55,6 @@ section{
 	text-transform:uppercase;
 }
 .btn{
-    margin-top: 2rem;
     display: inline-block;
     padding: .6rem 3rem;
     font-size: 1.7rem;
@@ -58,14 +69,14 @@ section{
 }
 .header-swiper{
     position:fixed;
-    top:0;left: 0; right: 0;
+    top:0; left: 0; right: 0;
     height:50px;
-    z-index: 1000;
+    z-index: 10000;
     background:#111;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 9%;
+    padding:1.5rem 9%;
 }
 .header-swiper .logo{
 
@@ -85,7 +96,7 @@ section{
 	
     font-size: 15px;
     color: #fff;
-    margin-left: 25px;
+    margin-right : 25px;
 } 
 .header-swiper .navbar-swiper a:hover{
     color:var(--main-color);
@@ -106,12 +117,14 @@ input[type=text]{
     padding-top:7px;
    
 }
+
  .btn-search{
 	margin-top:20px;
 	font-size:15px;
 	margin-bottom:24px;
 	margin-left:3px;
 }
+
 #menu-bars{
     font-size: 3rem;
     color: #fff;
@@ -233,7 +246,7 @@ margin-top:50px;
 	text-align:center;
 }
 .theme-toggler.active{
-	right:0;
+	right:0; 
 	}
 .theme-toggler h3{
 	color:#fff;
@@ -246,6 +259,7 @@ margin-top:50px;
 	flex-wrap:wrap;
 	gap:1rem;
 	padding:1rem;
+	
 	}
 .theme-toggler .buttons .theme-btn{
 	height:5rem;

@@ -1,11 +1,18 @@
 package jana60.model;
 
+
+
+import javax.persistence.Column;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class ImageForm {
 
 	private Integer id;
 	
+	@NotNull
+	@Column(nullable = false)
 	private MultipartFile contentMultipart;
 	
 	private Events imageEvent;

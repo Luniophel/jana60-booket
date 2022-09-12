@@ -10,52 +10,55 @@
 <h1>
     List of active events:
 </h1>
-<h2>
+<h2 class="call-to-action">
     To add an event click <a href="/addEvent" class="btn btn-here">here</a>
 </h2>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Start date</th>
-                <th>End date</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr class="list-events"th:each="e : ${listEvents}">
-                <td th:text="${e.name}"></td>
-                <td th:text="${e.startDate}"></td>
-                <td th:text="${e.endDate}"></td>
-                <!-- INIZIO BOTTONI LISTA EVENTI -->
-	                <!-- INIZIO BTN MODIFICA -->
-	                <td>
-		                <a class="btn btn-primary" th:href="@{|/editEvent/${e.id}|}" title="Edit">
-			  				<i class="fa-solid fa-pen-to-square"></i>
-			  			</a> 
-		  			</td>
-		  			<!-- FINE BTN MODIFICA   -->
-		  			<!-- INIZIO BTN INFO -->
-                    <td>
-	                    <a class="btn btn-warning" th:href="@{|/events/${e.id}|}" title="info">
-		  					<i class="fa-solid fa-pen-to-square"></i>
-		  				</a> 
-	  				</td>
-	  				<!-- FINE BTN INFO   -->
-	  				<!-- INIZIO BTN IMG -->
-                    <td>
-	                    <a class="btn btn-success" th:href="@{|/images/${e.id}|}" title="info">
-		  					<i class="fa-solid fa-pen-to-square"></i>
-		  				</a> 
-	  				</td>
-	  				<!-- FINE BTN IMG   -->
-	  			<!-- FINE BOTTONI LISTA EVENTI   -->
-            </tr>
-        </tbody>
-    </table>
+    <div class="container-card">
+        <div class="card-event" th:each="e : ${listEvents}">
+	        <div class="title-block">
+	            <h2 th:text="${e.name}"></h2>
+	            <div class="info-button" >
+					<a th:href="@{|/events/${e.id}|}" title="Info">
+				  		<i class="fa-solid fa-info"></i>
+				  	</a>
+	            </div>
+	        </div>
+	    	<div class="img-container">
+	    		
+            	<img class="card-img" th:if="${e.eventImage.countByPosterTrue == 0}" th:src="@{|/images/${e.eventImage.get(0).id}/content|}">
+	        </div>
+	        <div class="tags">
+	        	<p th:each="c : ${e.categories}" th:text="${c.name}"></p>
+	        </div>
+	        <div class="dates">
+		        <div class="start-date">
+	            	<h3>Start date</h3>
+	            	<p th:text="${e.startDate}"></p>
+	            </div>
+	            <div class="end-date">
+	            	<h3>End date</h3>
+	            	<p th:text="${e.endDate}"></p>
+	            </div>
+            </div>
+            <div class="buttons">
+            	<div class="edit-button">
+	            	<a class="" th:href="@{|/editEvent/${e.id}|}" title="Edit">
+				  		<i class="fa-solid fa-pen-to-square"></i>
+				  	</a>
+            	</div>
+            	<div class="images-button">
+			  		<a th:href="@{|/images/${e.id}|}" title="Add image">
+			  			<i class="fa-regular fa-images"></i>
+			  		</a> 
+            	</div>
+            </div>
+        </div>
+    </div>
     
     <th:block th:replace="fragments/script :: swiper-js"></th:block>
     <th:block th:replace="fragments/footer :: footer"></th:block>
+
 	</body>
 
 </html>
