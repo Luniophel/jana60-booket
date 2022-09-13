@@ -6,7 +6,7 @@
     <!-- INIZIO Navbar-->
     <th:block th:fragment="navbar" class="navbar-swiper">
 	    <header class="header-swiper">
-	        <a href="#" class="logo swiper-font"><span>BOOK</span>ET</a>
+	        <a href="#" class="logo swiper-font">BOOK<span>ET</span></a>
 	        <nav class="navbar-swiper">
 
 	            <a class="swiper-font" href="/">Home</a>
@@ -17,10 +17,12 @@
 
 	        </nav>
 	    	<div id="menu-bars" class="fas fa-bars"></div>
-		    <form class="d-flex align-items-center" action="/search">
+		    <form class="search d-flex align-items-center" action="/search">
 	        	<input  type="text" placeholder="Search" name="queryName">
-	        	<div class="btn mx-1">Search</div>
+	        	<div class="btn btn-search">
+	        	<i class="fa-solid fa-magnifying-glass"></i>
 	       	</form>
+	       	</div>
 	    </header>
     </th:block>
     <!-- FINE Navbar-->

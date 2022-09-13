@@ -125,9 +125,19 @@ public class ImageController
 				else	//Se la lista non è vuota
 				{
 				List<Image> curImageList = imageRepo.findByimageEvent(curEvent);
-				Image firstImageOfCurImageList = curImageList.get(0);
-				firstImageOfCurImageList.setPoster(true);
-				imageRepo.save(firstImageOfCurImageList);
+				Iterator<Image> iter = curImageList.iterator();
+				//Se c'è già un poster
+				while(iter.hasNext())
+				{
+					Image curImg = iter.next();
+					if(curImg.isPoster())
+						return "redirect:/images/" + eventId;
+				}
+				//Se non c'è ancora un poster
+				Iterator<Image> iter2 = curImageList.iterator();
+				Image firstImg =  iter2.next();
+				firstImg.setPoster(true);
+				imageRepo.save(firstImg);
 				}
 			}
 			

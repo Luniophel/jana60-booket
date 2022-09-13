@@ -9,8 +9,8 @@
 <body>
     <th:block th:replace="fragments/navbar :: navbar"></th:block>   
     <title>Events</title>
-<h1>
-    List of active events:
+<h1 class="heading">
+    List of <span>active events:</span>
 </h1>
 <h2 class="call-to-action">
     To add an event click <a href="/addEvent" class="btn btn-here">here</a>
@@ -68,10 +68,8 @@
             </div>
         </div>
     </div>
-    
+    <th:block th:replace="fragments/themeToggler :: themeToggler"></th:block>
     <th:block th:replace="fragments/script :: swiper-js"></th:block>
     <th:block th:replace="fragments/footer :: footer"></th:block>
-
 	</body>
-
 </html>

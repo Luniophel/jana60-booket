@@ -42,22 +42,7 @@
 	</div>
 	</section>
     <!-- about section end-->
-	<!--theme toggler-->
-	<div class="theme-toggler">
-	<div class="toggle-btn">
-	    <i class="fas fa-cog"></i>
-	</div>
-	   <h3>Choose Color</h3>
-	   <div class="buttons">
-
-	       <div class="theme-btn" data-color="rgb(107, 205, 244);" style="background:rgb(107, 205, 244);"></div>
-	       <div class="theme-btn" data-color="#f7b731" style="background: #f7b731;"></div>
-	       <div class="theme-btn" data-color="#ff0033" style="background: #ff0033;"></div>
-	       <div class="theme-btn" data-color="#20bf6b" style="background: #20bf6b;"></div>
-	       <div class="theme-btn" data-color="#fa6790" style="background: #fa6790;"></div>
-	       <div class="theme-btn" data-color="#2980b9" style="background: #2980b9;"></div>
-	   </div>
-	</div>
+<th:block th:replace="fragments/themeToggler :: themeToggler"></th:block>	
 <th:block th:replace="fragments/script :: swiper-js"></th:block>
 <th:block th:replace="fragments/footer :: footer"></th:block>
 </body>
