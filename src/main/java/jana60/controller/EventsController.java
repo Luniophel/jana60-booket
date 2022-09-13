@@ -2,6 +2,7 @@ package jana60.controller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -110,13 +111,14 @@ public class EventsController
 		{
 			br.addError(new FieldError("booking", "quantity", formBooking.getNumberBooket(), false, null, null, "Posti per " + formBooking.getEventBooket().getEventLocation().getName() + " finiti"));
 		}
-	
-		//formBooking.setBooketAvailable(formBooking.getEventBooket().getEventLocation().getCapacity() - formBooking.getNumberBooket());
-		//CREARE NUOVA COLONNA "PRENOTAZIONI DISPONIBIL;I" IN LOCATION E MODIFICARE LA RIGA DI SOTTO CON findAllByLocation IN REPOSITORY
-			List<Booking> listBooking = repoBooket.findAllByid(formBooking.getEventBooket().getEventLocation().getId());
-			for (int i = 0; i < listBooking.size(); i++) {
-				formBooking.setBooketAvailable(formBooking.getEventBooket().getEventLocation().getCapacity() - listBooking.get(i).getNumberBooket());
-				}
+			//Porblema nel repofindall
+			List<Booking> listBooking = repoBooket.findAllById(formBooking.getEventBooket().getEventLocation().getId());
+			Iterator<Booking> iter = listBooking.iterator();
+			while(iter.hasNext())
+			 {
+				Booking curBooking = iter.next();
+				formBooking.getEventBooket().getEventLocation().setBooketAvailable(formBooking.getEventBooket().getEventLocation().getCapacity() - curBooking.getNumberBooket());
+			 }
 		if (br.hasErrors()) 
 		{
 			return "/events";

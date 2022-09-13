@@ -44,8 +44,10 @@ public class LocationController {
 	public String saveLocation(@Valid @ModelAttribute("location") Location formLocation, BindingResult br, Model model) {
 		boolean hasErrors= br.hasErrors();
 		boolean validateName = true;
+		boolean isEdit = false;
 		if(formLocation.getId() != null) {
 			Location locationBeforeUpdate = locationRepo.findById(formLocation.getId()).get();
+			isEdit = true;
 			if(formLocation.getName().equals(formLocation.getName())) {
 				validateName = false;
 			}
@@ -60,6 +62,9 @@ public class LocationController {
 		} else {
 			
 			try {
+				if(isEdit == false) {
+					formLocation.setBooketAvailable(formLocation.getCapacity());
+				}
 				locationRepo.save(formLocation);
 			} catch (Exception e) {
 				model.addAttribute("errorMessage", "Unable to save the location");
