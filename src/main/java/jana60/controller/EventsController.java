@@ -109,19 +109,16 @@ public class EventsController
 	
 	@PostMapping("/booket")
 	public String saveEventInfo(@Valid @ModelAttribute("booking") Booking formBooking, BindingResult br)
-	{
-		if ((formBooking.getEventBooket().getEventLocation().getCapacity() - formBooking.getNumberBooket() <= 0))
+	{	
+		if ((formBooking.getEventBooket().getEventLocation().getCapacity() - formBooking.getNumberBooket() <= 0) && (formBooking.getEventBooket().getEventLocation().getBooketAvailable() - formBooking.getNumberBooket() <= 0))
 		{
 			br.addError(new FieldError("booking", "quantity", formBooking.getNumberBooket(), false, null, null, "Posti per " + formBooking.getEventBooket().getEventLocation().getName() + " finiti"));
 		}
-			//Porblema nel repofindall
-			List<Booking> listBooking = repoBooket.findAllById(formBooking.getEventBooket().getEventLocation().getId());
-			Iterator<Booking> iter = listBooking.iterator();
-			while(iter.hasNext())
-			 {
-				Booking curBooking = iter.next();
-				formBooking.getEventBooket().getEventLocation().setBooketAvailable(formBooking.getEventBooket().getEventLocation().getCapacity() - curBooking.getNumberBooket());
+		else {
+				formBooking.getEventBooket().getEventLocation().setBooketAvailable(formBooking.getEventBooket().getEventLocation().getBooketAvailable() - formBooking.getNumberBooket());
 			 }
+
+			
 		if (br.hasErrors()) 
 		{
 			return "/events";

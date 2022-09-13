@@ -39,7 +39,7 @@ public class Location {
 	@OneToMany
 	@JoinColumn(name = "location_id")
 	public List<Events> event;
-		
+			
 	@Column(nullable = true)
 	public Integer booketAvailable;
 		
@@ -104,6 +104,5 @@ public class Location {
 
 	public void setBooketAvailable(Integer booketAvailable) {
 		this.booketAvailable = booketAvailable;
-	}
-	
+	}	
 }
