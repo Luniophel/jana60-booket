@@ -17,12 +17,10 @@ public class Booking {
 	
 	private Integer numberBooket;
 	
-	public Integer booketAvailable;
-	
 	@ManyToOne
 	@JoinColumn (name = "event_booket")
 	private Events eventBooket;
-
+	
 	public Integer getId() {
 		return id;
 	}
@@ -46,15 +44,5 @@ public class Booking {
 	public void setEventBooket(Events eventBooket) {
 		this.eventBooket = eventBooket;
 	}
-
-	public Integer getBooketAvailable() {
-		return booketAvailable;
-	}
-
-	public void setBooketAvailable(Integer booketAvailable) {
-		this.booketAvailable = booketAvailable;
-	}
 	
-	
-
 }
