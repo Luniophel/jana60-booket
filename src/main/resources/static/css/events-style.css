@@ -44,13 +44,14 @@ h1{ margin-top:100px;
 	margin: 5px;
 }
 
-.card-event h3{ 
-	color:#fff;
-	font-size:20px;
+.card-event h4{ 
+	color:darkgrey;
+	font-size: 14px;
+	font-weight: 200;
 }
 
 .card-event h2{
-	color:#fff;
+	color:rgb(107, 205, 244);
 	font-size:30px;
 	font-weight:700;
 }
@@ -77,11 +78,11 @@ h1{ margin-top:100px;
 .title-block{
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 }
 
 .info-button{
 	margin: 10px 0px;
-	
 	justify-content: end;
 }
 
@@ -99,6 +100,7 @@ h1{ margin-top:100px;
 	margin-bottom: 10px;
 }
 
+
 .tags{
 	display: flex;
 	margin-bottom: 10px;
@@ -113,14 +115,23 @@ h1{ margin-top:100px;
 	border-radius: 10px;
 }
 
+.location{
+	font-size: 20px;
+	font-weight: 600;
+	text-align: center;
+	margin: 20px;
+}
+
 .dates{
 	display: flex;
-	justify-content: space-evenly;
-	margin-bottom: 10px;
+	justify-content:space-around;
 }
 
 .dates p{
-	font-size: 13px;
+	font-size: 18px;
+	font-weight: 600;
+	margin-bottom: 20px;
+
 }
 
 .buttons{
@@ -148,20 +159,6 @@ h1{ margin-top:100px;
 	margin: 0px 10px;
 	font-size: 15px;
 	border-radius: 20px;
-}
-
-.card-event{
-	border: 2px solid white;
-	padding: 10px 10px 10px 10px;
-	border-radius: 10px;
-}
-
-h1{ 
-	color: rgb(107, 205, 244);
-	text-align: center;
-	font-size: 40px;
-	text-transform: uppercase;
-	font-weight: 700;
 }
 
 h2{

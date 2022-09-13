@@ -79,7 +79,6 @@ section{
     padding:1.5rem 9%;
 }
 .header-swiper .logo{
-
     font-weight: bolder;
     color: #fff;
     font-size: 25px;
@@ -190,6 +189,7 @@ margin-top:50px;
 .about .row .content{
     flex:1 1 45rem;
 }
+
 .about .row .content h3{
 	font-size:3.5rem;
 	color:#fff;
