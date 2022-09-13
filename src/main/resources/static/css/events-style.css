@@ -186,6 +186,7 @@ input .status{
 	color:red;
 }
 .form-control{
+	position:flex;
 	width: 300px;
 	height: 50px;
 	margin: 5px;
