@@ -153,6 +153,7 @@ public class Events {
 		this.eventBooket = eventBooket;
 	}
 	
+
 	public Image getPosterImg() {
 		List<Image> imgList = getEventImage();
 		Iterator<Image> iter = imgList.iterator();
@@ -164,5 +165,10 @@ public class Events {
 		}
 		return imgList.get(0);	
 	}
+
 	
-}
+	
+	}
+			
+	
+

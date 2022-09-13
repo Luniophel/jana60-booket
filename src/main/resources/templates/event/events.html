@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <th:block th:replace="fragments/resources :: src-head"></th:block>
+    
     <link rel="stylesheet" href="/css/events-style.css" />
+    <link rel="stylesheet" href="/css/search.css"></link>
 </head>
 <body>
     <th:block th:replace="fragments/navbar :: navbar"></th:block>   
@@ -13,9 +15,19 @@
 <h2 class="call-to-action">
     To add an event click <a href="/addEvent" class="btn btn-here">here</a>
 </h2>
-
+	<div class="form-search">
+	  	<form action="/search">
+	    	<input class="form-name" type="text" name="queryName" placeholder="Name...">
+	    	<input class="form-location" type="text" name="queryLocation" placeholder="Location...">
+	    	<input class="form-category" type="text" name="queryCategory" placeholder="Category...">
+	    	<button class="button-search">Sort</button>
+	    </form>
+  	</div>
     <div class="container-card">
         <div class="card-event" th:each="e : ${listEvents}">
+        	<div class="canceled">
+        		<p class="cancel">Canceled</p>
+        	</div>
 	        <div class="title-block">
 	            <h2 th:text="${e.name}"></h2>
 	            <div class="info-button" >
@@ -25,8 +37,9 @@
 	            </div>
 	        </div>
 	    	<div class="img-container">
-	    	
+
             	<img class="card-img" th:if="${e.eventImage.isEmpty() == false}" th:src="@{|/images/${e.getPosterImg.id}/content|}">
+
 	        </div>
 	        <div class="tags">
 	        	<p th:each="c : ${e.categories}" th:text="${c.name}"></p>
