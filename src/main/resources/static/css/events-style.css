@@ -1,16 +1,101 @@
 
-
 *{  
 	font-family: "Poppins", sans-serif;
-	
 }
+
+body{
+	background-color: #222;
+}
+
+h1{ margin-top:100px;
+	color: rgb(107, 205, 244);
+	text-align: center;
+	font-size: 40px;
+	text-transform: uppercase;
+	font-weight: 700;
+}
+
+.call-to-action{
+	color:#fff;
+	font-size:30px;
+	font-weight:700;
+	text-align:center;
+}
+
+.container-card{
+	display: flex;
+	width: 80%;
+	justify-content: center;
+	align-items: center;
+	margin: 50px auto;
+	flex-wrap: wrap;
+}
+
 .container-card p{
 	margin: 0px;
 	padding: 0px;
 }
 
-body{
-	background-color: #222;
+.card-event{
+	border: 2px solid white;
+	padding: 10px 10px 10px 10px;
+	border-radius: 10px;
+	margin: 5px;
+}
+
+.card-event h3{ 
+	color:#fff;
+	font-size:20px;
+}
+
+.card-event h2{
+	color:#fff;
+	font-size:30px;
+	font-weight:700;
+}
+
+.canceled .cancel{
+	font-size: 50px;
+	position: absolute;
+	bottom: 10px;
+	display: none;
+}
+
+.canceled{
+	opacity: 0.5;
+}
+
+.canceled:hover{
+	opacity: 0.2;
+}
+
+.canceled:hover .cancel{
+	display: contents;
+}
+
+.title-block{
+	display: flex;
+	justify-content: space-between;
+}
+
+.info-button{
+	margin: 10px 0px;
+	
+	justify-content: end;
+}
+
+.info-button a{
+	border: 3px solid white;
+	padding: 5px 10px;
+	font-size: 10px;
+	border-radius: 20px;
+}
+
+.card-img{
+	border-radius: 5px;
+	width: 400px;
+	height: 300px;
+	margin-bottom: 10px;
 }
 
 .tags{
@@ -25,17 +110,6 @@ body{
 	background-color: #333;
 	margin: 0px 10px;
 	border-radius: 10px;
-}
-.card-img{
-	border-radius: 5px;
-	width: 400px;
-	height: 300px;
-	margin-bottom: 10px;
-}
-
-.title-block{
-	display:flex;
-	justify-content:space-between;
 }
 
 .dates{
@@ -62,20 +136,11 @@ body{
 	font-size: 15px;
 	border-radius: 20px;
 }
- .edit-button i{
+
+.edit-button i{
 	color:rgb(0, 128, 255);
 }
-.info-button{
-	margin: 10px 0px;
-	
-	justify-content: end;
-}
-.info-button a{
-	border: 3px solid white;
-	padding: 5px 10px;
-	font-size: 10px;
-	border-radius: 20px;
-}
+
 .images-button a{
 	border: 3px solid white;
 	padding: 5px 20px;
@@ -83,87 +148,33 @@ body{
 	font-size: 15px;
 	border-radius: 20px;
 }
-.call-to-action{
-	color:#fff;
-	font-size:30px;
-	font-weight:700;
-	text-align:center;
-}
-.container-card{
-	display: flex;
-	width: 80%;
-	justify-content: center;
-	align-items: center;
-	margin: 50px auto;
-	flex-wrap: wrap;
-}
 
-.canceled .cancel{
-	font-size: 50px;
-	position: absolute;
-	bottom: 10px;
-	display: none;
-	
-}
-
-.canceled{
-	opacity: 0.5;
-}
-
-.canceled:hover{
-	opacity: 0.2;
-}
-
-.canceled:hover .cancel{
-	display:contents;
-	opacity: 1;
-}
-
-.card-event{
-	border: 2px solid white;
-	padding: 10px 10px 10px 10px;
-	border-radius: 10px;
-	margin: 5px;
-}
-
-h1{ margin-top:100px;
-	color: rgb(107, 205, 244);
-	text-align: center;
-	font-size: 40px;
-	text-transform: uppercase;
-	font-weight: 700;
-}
-
-.card-event h3{ color:#fff;
-	font-size:20px;
-}
-.card-event h2{
-	color:#fff;
-	font-size:30px;
-	font-weight:700;
-}
 .btn-here{
 	margin-left:10px;
 	margin-bottom:15px;
 }
+
 .btn-red{
 	margin-left:5px;
 	padding:6px 18px;
 }
- .btn-red:hover{
+
+.btn-red:hover{
 	background-color:red;
 }
+
 .btn-warning:hover{
 	background-color:yellow;
-
 }
- .btn-success:hover{
+
+.btn-success:hover{
 	background-color:green;
-
 }
+
 .list-events{
 	color:#fff;
 }
+
 .text{
 	color:#fff;
 	margin-top: 30px;
@@ -171,10 +182,12 @@ h1{ margin-top:100px;
 	text-align: left;
 	font-weight: 600;
 }
+
 input .status{
 	color:#fff;
 	text-align: left;
 }
+
 .col-4{
 	color:#fff;
 	margin-top:30px;
@@ -185,16 +198,19 @@ input .status{
 	color:#fff;
 	font-weight:600;
 }
+
 .status{
 	color:#fff;
 	text-align: left;
 	font-size: 15px;
 	margin-top:4px;
 }
+
 .form-check{
 	color:var(--main-color);
 	font-size: 15px;
 }
+
 .error{
 	font-size:15px;
 	color:red;
