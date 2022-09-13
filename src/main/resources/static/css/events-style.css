@@ -3,7 +3,7 @@
 *{  
 	font-family: "Poppins", sans-serif;
 	
-}
+ }
 .container-card p{
 	margin: 0px;
 	padding: 0px;
@@ -105,9 +105,8 @@ body{
 h1{ 
 	color: rgb(107, 205, 244);
 	text-align: center;
-	font-size: 40px;
 	text-transform: uppercase;
-	font-weight: 700;
+	font-weight: 500;
 }
 h2{
 	color:#fff;
@@ -180,6 +179,7 @@ input .status{
 .form-check{
 	color:var(--main-color);
 	font-size: 15px;
+	
 }
 .error{
 	font-size:15px;
@@ -187,12 +187,12 @@ input .status{
 }
 .form-control{
 	position:flex;
-	width: 300px;
-	height: 50px;
-	margin: 5px;
+	height: 45px;
+	margin: 3px;
 	width:450px;
 	border-radius: 30px;
-	border: 2px solid white;
-	font-size: 15px;
-	padding: 5px 10px;
+	border: 5px solid white;
+	font-size: 13px;
+	text-align:left;
 }
+

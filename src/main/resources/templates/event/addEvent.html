@@ -20,7 +20,7 @@
    >
   <div class="row m-auto text-center">
     <div class="mb-3 col-3">
-      <input type="text" id="name" class="form-control" th:field="*{name}"  placeholder="Nome Evento" th:errorClass="is-invalid">
+      <input type="text" id="name" class="form-control" th:field="*{name}"  placeholder="Event's name'" th:errorClass="is-invalid">
       <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
         <ul>
           <li class="error" th:each="err : ${#fields.errors('name')}" th:text="${err}">
@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="mb-3 col-3">
-      <input type="text" id="description" class="form-control" th:field="*{description}" placeholder="Descrizione" th:errorClass="is-invalid">
+      <input type="text" id="description" class="form-control" th:field="*{description}" placeholder="Description" th:errorClass="is-invalid">
       <div th:if="${#fields.hasErrors('description')}" class="invalid-feedback">
         <ul>
           <li class="error" th:each="err : ${#fields.errors('description')}" th:text="${err}">
