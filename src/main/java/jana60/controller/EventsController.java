@@ -153,7 +153,8 @@ public class EventsController
 		formEvent.getEndDate().format(formatter);
 		LocalDateTime today = LocalDateTime.now();
 		LocalDateTime pastDate = LocalDateTime.from(formEvent.getStartDate());
-				
+		
+		
 		//Controllo per date
 		boolean isAfter = today.isAfter(pastDate);
 		if(isAfter) {
