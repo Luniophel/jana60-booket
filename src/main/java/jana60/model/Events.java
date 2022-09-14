@@ -15,7 +15,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+
 import org.springframework.format.annotation.DateTimeFormat;
+
 
 
 @Entity
@@ -42,10 +44,10 @@ public class Events {
 	@Column(nullable = false)
 	private LocalDateTime endDate;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, columnDefinition = "boolean default false")
 	private Boolean publishedStatus;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, columnDefinition = "boolean default false")
 	private Boolean visible;
 	
 	@ManyToMany
@@ -165,10 +167,7 @@ public class Events {
 		}
 		return imgList.get(0);	
 	}
-
-	
-	
-	}
+}
 			
 	
 
