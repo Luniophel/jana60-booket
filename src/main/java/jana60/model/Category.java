@@ -20,7 +20,7 @@ public class Category
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@NotBlank(message = "Il nome della categoria non può essere vuoto")
+	@NotBlank(message = "Category name required!")
 	private String name;
 	
 	@Lob

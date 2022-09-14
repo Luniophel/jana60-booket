@@ -26,11 +26,11 @@ public class Events {
 	@Column(name = "id")
 	private Integer id;
 	
-	@NotEmpty(message = "Il nome e' obbliogatorio")
+	@NotEmpty(message = "Name required!")
 	@Column(nullable = false)
 	private String name;
 	
-	@NotEmpty(message = "la descrizione e' obbliogatorio")
+	@NotEmpty(message = "Description required!")
 	@Column(nullable = false)
 	private String description;
 	

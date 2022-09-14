@@ -1,6 +1,13 @@
 
 *{  
 	font-family: "Poppins", sans-serif;
+
+	
+ }
+ 
+.container-card p{
+	margin: 0px;
+	padding: 0px;
 }
 
 body{
@@ -161,6 +168,20 @@ h1{ margin-top:100px;
 	border-radius: 20px;
 }
 
+
+.card-event{
+	border: 2px solid white;
+	padding: 10px 10px 10px 10px;
+	border-radius: 10px;
+}
+
+h1{ 
+	color: rgb(107, 205, 244);
+	text-align: center;
+	text-transform: uppercase;
+	font-weight: 500;
+}
+
 h2{
 	color:#fff;
 	margin-top: 10px;
@@ -229,6 +250,7 @@ input .status{
 .form-check{
 	color:var(--main-color);
 	font-size: 15px;
+	
 }
 
 .error{
@@ -237,12 +259,13 @@ input .status{
 }
 
 .form-control{
-	width: 300px;
-	height: 50px;
-	margin: 5px;
+	position:flex;
+	height: 45px;
+	margin: 3px;
 	width:450px;
 	border-radius: 30px;
-	border: 2px solid white;
-	font-size: 15px;
-	padding: 5px 10px;
+	border: 5px solid white;
+	font-size: 13px;
+	text-align:left;
 }
+
