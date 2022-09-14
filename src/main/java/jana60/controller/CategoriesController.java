@@ -78,9 +78,11 @@ public class CategoriesController
 		Optional<Category> result = categoryRepo.findById(categoryId);
 		if(result.isPresent()) {
 			model.addAttribute("category", result.get());
+			model.addAttribute("categoriesList", categoryRepo.findAll());
+
 			return "/categories/categories";
 		} else {
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category with id " + categoryId + " don't exist");
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Category with id " + categoryId + " doesn't exist");
 		}
 	}
 	
