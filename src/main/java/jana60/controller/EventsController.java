@@ -179,6 +179,11 @@ public class EventsController
 //INIZIO NUOVO CODICE
 		boolean dateValid = false;
 		Iterator<Events> iter = listEventLocation.iterator();
+		if(iter.hasNext()==false)
+		{
+			repo.save(formEvent);
+			return "redirect:/events";
+		}
 		while(iter.hasNext())
 		{
 			Events curEvent = iter.next();

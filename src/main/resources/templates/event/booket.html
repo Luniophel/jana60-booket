@@ -23,6 +23,7 @@
        		</li>
     	</ul>
     	<div class="col-4 form-check" >
+    	<p>Posti disponibili: <span th:text="${booking.eventBooket.eventLocation.booketAvailable}"></span></p>
 			<label class="txt" for="quantity">Enter number of people:</label>
 			<input type="hidden" th:field="*{eventBooket}">
  				<input class="form-bar" type="number" id="quantity" name="quantity" min="1" th:field="*{numberBooket}">
