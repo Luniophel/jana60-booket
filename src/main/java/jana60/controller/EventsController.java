@@ -147,6 +147,12 @@ public class EventsController
 	@PostMapping("/addEvent")
 	public String save(@Valid @ModelAttribute("event") Events formEvent, BindingResult br, Model model) 
 	{	
+		//SE NON CI SONO EVENTI
+		if(repo.findAll().iterator().hasNext()==false)
+		{
+			repo.save(formEvent);
+			return "redirect:/events";
+		}
 		formEvent.getEventLocation().getCapacity();
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH/mm");
 		formEvent.getStartDate().format(formatter);
