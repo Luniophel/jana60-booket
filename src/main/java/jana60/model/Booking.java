@@ -19,6 +19,8 @@ public class Booking {
 	
 	private Integer numberBooket;
 	
+	private String email;
+	
 	@ManyToOne
 	@JoinColumn (name = "event_booket")
 	private Events eventBooket;	
@@ -46,4 +48,14 @@ public class Booking {
 	public void setEventBooket(Events eventBooket) {
 		this.eventBooket = eventBooket;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
 }

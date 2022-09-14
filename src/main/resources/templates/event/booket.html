@@ -7,8 +7,10 @@
     <title>Events Info</title>
 </head>
 <body>
+ <h1>Events <span>Info</span></h1>
+<h3 class="call-to-action">
     To add an event click <a href="/addEvent" class="btn btn-here">here</a>
-</h2>
+</h3>
 <form
     id = "formBooking"
   	th:object="${booking}"
@@ -16,9 +18,28 @@
   	method="POST"
    	class=" m-auto"
     >
+    	<ul>
+    		<li th:each="error : ${#fields.allErrors()}" th:text="${error}">
+       		</li>
+    	</ul>
     	<div class="col-4 form-check" >
-			<label for="quantity"></label>
+			<label class="txt" for="quantity">Enter number of people:</label>
 			<input type="hidden" th:field="*{eventBooket}">
- 				<input type="number" id="quantity" name="quantity" min="1" th:field="*{numberBooket}">		
+ 				<input class="form-bar" type="number" id="quantity" name="quantity" min="1" th:field="*{numberBooket}">
+ 				<div th:if="${#fields.hasErrors('numberBooket')}">
+ 					<ul>
+ 						<li th:each="error : ${#fiels.errors('numberBooket')}" th:text="${error}"></li>
+ 					</ul>
+ 				</div>		
 	</div>
-	  	<button type="submit" class="btn">Save</button>
+	   	<div class="col-4 form-check" >
+			<label class="txt" for="email">Enter your email address:</label>
+			<input type="hidden" th:field="*{eventBooket}">
+ 				<input class="form-bar2" type="email" id="email" size="30" required name="email" th:field="*{email}">
+ 				<div th:if="${#fields.hasErrors('email')}">
+ 					<ul>
+ 						<li th:each="error : ${#fiels.errors('email')}" th:text="${error}"></li>
+ 					</ul>
+ 				</div>		
+	</div>
+	  	<button type="submit" class="btn save-info">Save</button>

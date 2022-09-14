@@ -268,4 +268,24 @@ input .status{
 	font-size: 13px;
 	text-align:left;
 }
+ .save-info{
+	margin-left:520px;
+	margin-top:50px;
+}
+ .form-check{
+	margin-left:450px;
+}
 
+.form-bar{
+	border-radius:20px;
+}
+.form-bar2{
+	border-radius:20px;
+	width:190px;
+	padding-left:5px;
+}
+.txt{
+	color:var(--main-color);
+	text-transform: uppercase;
+	text-align: center;
+}

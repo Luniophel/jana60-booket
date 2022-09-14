@@ -106,22 +106,27 @@ public class EventsController
 		//model.addAttribute("listCapacity", formEvent.getEventLocation().getCapacity());
 		return "/event/booket";	
 	}
-	
 	@PostMapping("/booket")
 	public String saveEventInfo(@Valid @ModelAttribute("booking") Booking formBooking, BindingResult br)
 	{	
-		if ((formBooking.getEventBooket().getEventLocation().getCapacity() - formBooking.getNumberBooket() <= 0) && (formBooking.getEventBooket().getEventLocation().getBooketAvailable() - formBooking.getNumberBooket() <= 0))
+		if (formBooking.getEventBooket().getEventLocation().getBooketAvailable() - formBooking.getNumberBooket() < 0)
 		{
 			br.addError(new FieldError("booking", "quantity", formBooking.getNumberBooket(), false, null, null, "Posti per " + formBooking.getEventBooket().getEventLocation().getName() + " finiti"));
 		}
 		else {
 				formBooking.getEventBooket().getEventLocation().setBooketAvailable(formBooking.getEventBooket().getEventLocation().getBooketAvailable() - formBooking.getNumberBooket());
+				if(formBooking.getEventBooket().getEventLocation().getBooketAvailable() < 0 ) {
+					br.addError(new FieldError("booking", "quantity", formBooking.getNumberBooket(), false, null, null, "Posti per " + formBooking.getEventBooket().getEventLocation().getName() + " finiti"));
+				}
 			 }
-
-			
+		if(formBooking.getEmail().isEmpty())
+		{
+			br.addError(new FieldError("booking", "email", formBooking.getEmail(), false, null, null, "email necessaria per prenotare"));
+		}
+		//SIIIIIIIIIIIIIIUUUUUUMMMMMM
 		if (br.hasErrors()) 
 		{
-			return "/events";
+			return "/event/booket";
 		}
 		else {
 			repoBooket.save(formBooking);
