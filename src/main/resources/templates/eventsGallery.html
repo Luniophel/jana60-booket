@@ -13,12 +13,6 @@
     List of <span>active events:</span>
 </h1>
 
-<div class="row justify-content-center">
-    <a href="/addEvent" class="btn btn-here col-2 mx-4">New Event</a>
-    <a href="./categories" class="btn btn-here col-2 mx-4">New Category</a>
-    <a href="./location" class="btn btn-here col-2 mx-4">New Location</a>
-</div>
-
 	<div class="form-search">
 	  	<form action="/ourEvents/search">
 	    	<input class="form-name" type="text" name="queryName" placeholder="Name...">
@@ -51,14 +45,14 @@
 	        <div class="location">
 	            <p th:each="l : ${e.eventLocation}" th:text="${l.name}"></p>
 	        </div>
-	        <div class="dates">
+	        <div class="dates row ">
 		        <div class="start-date">
 	            	<h4>Start date</h4>
-	            	<p th:text="${e.startDate}"></p>
+	            	<p th:text="${#temporals.format(e.startDate, 'dd MMMM yyyy HH:mm')}"></p>
 	            </div>
 	            <div class="end-date">
 	            	<h4>End date</h4>
-	            	<p th:text="${e.endDate}"></p>
+	            	<p th:text="${#temporals.format(e.endDate, 'dd MMMM yyyy HH:mm')}"></p>
 	            </div>
             </div>
             <div class="buttons">
