@@ -2,12 +2,15 @@ package jana60.controller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
+import javax.swing.text.html.FormSubmitEvent;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -18,7 +21,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.server.ResponseStatusException;
 
+import antlr.debug.Event;
 import jana60.model.Booking;
 import jana60.model.Category;
 import jana60.model.Events;
@@ -87,23 +92,46 @@ public class EventsController
 		return "/event/evenstInfo";
 	}
 	
-	@PostMapping("/events/{id}")
-	public String saveEventInfo(@Valid @ModelAttribute("booking") Booking formBooking, @Valid @ModelAttribute("event") Events formEvent, BindingResult br)
+	@GetMapping("/booket/{id}")
+	public String saveEventInfo(@PathVariable("id") Integer eventId,  Model model)
 	{
-		if ((formBooking.getNumberBooket() - formEvent.getEventLocation().getCapacity()) <= 0)
+		Optional<Events> result = repo.findById(eventId);
+		if (result.isPresent())
 		{
-			br.addError(new FieldError("booking", "quantity", formBooking.getNumberBooket(), false, null, null, "Places for " + formEvent.getEventLocation().getName() + " not available"));
+		Booking booking = new Booking();
+		booking.setEventBooket(result.get());
+		model.addAttribute("booking", booking);
 		}
-		else 
-		{	
-			List<Booking> listBooking = repoBooket.findAllByid(formEvent.getEventLocation().getId());
-			for (int i = 0, booketNumber = 0; i < listBooking.size(); i++) {
-				booketNumber += listBooking.get(i).getNumberBooket();
-				formBooking.setBooketAvailable(booketNumber);
-			}
+		
+		//model.addAttribute("listCapacity", formEvent.getEventLocation().getCapacity());
+		return "/event/booket";	
+	}
+	@PostMapping("/booket")
+	public String saveEventInfo(@Valid @ModelAttribute("booking") Booking formBooking, BindingResult br)
+	{	
+		if (formBooking.getEventBooket().getEventLocation().getBooketAvailable() - formBooking.getNumberBooket() < 0)
+		{
+			br.addError(new FieldError("booking", "quantity", formBooking.getNumberBooket(), false, null, null, "Posti per " + formBooking.getEventBooket().getEventLocation().getName() + " finiti"));
+		}
+		else {
+				formBooking.getEventBooket().getEventLocation().setBooketAvailable(formBooking.getEventBooket().getEventLocation().getBooketAvailable() - formBooking.getNumberBooket());
+				if(formBooking.getEventBooket().getEventLocation().getBooketAvailable() < 0 ) {
+					br.addError(new FieldError("booking", "quantity", formBooking.getNumberBooket(), false, null, null, "Posti per " + formBooking.getEventBooket().getEventLocation().getName() + " finiti"));
+				}
+			 }
+		if(formBooking.getEmail().isEmpty())
+		{
+			br.addError(new FieldError("booking", "email", formBooking.getEmail(), false, null, null, "email necessaria per prenotare"));
+		}
+		//SIIIIIIIIIIIIIIUUUUUUMMMMMM
+		if (br.hasErrors()) 
+		{
+			return "/event/booket";
+		}
+		else {
 			repoBooket.save(formBooking);
 		}
-		return "/event/evenstInfo";
+		return "redirect:/events";
 	}
 	
 	@GetMapping("/addEvent")
@@ -115,6 +143,7 @@ public class EventsController
 		return "/event/addEvent";
 	}
 	
+//___INIZIO METODO ADD___
 	@PostMapping("/addEvent")
 	public String save(@Valid @ModelAttribute("event") Events formEvent, BindingResult br, Model model) 
 	{	
@@ -124,6 +153,8 @@ public class EventsController
 		formEvent.getEndDate().format(formatter);
 		LocalDateTime today = LocalDateTime.now();
 		LocalDateTime pastDate = LocalDateTime.from(formEvent.getStartDate());
+				
+		//Controllo per date
 		boolean isAfter = today.isAfter(pastDate);
 		if(isAfter) {
 			
@@ -136,15 +167,47 @@ public class EventsController
 			
 			br.addError(new FieldError("event", "endDate", formEvent.getStartDate(), false, null, null, "the date must be following the " + formEvent.getStartDate().format(formatter) ));
 		}
-		
+
 		List<Events> listEventLocation = repo.findAllByEventLocation(formEvent.getEventLocation());
-		for (int i = 0; i < listEventLocation.size(); i++) {
-			if (listEventLocation.get(i).getStartDate().isEqual(formEvent.getStartDate()) || listEventLocation.get(i).getEndDate().isEqual(formEvent.getEndDate())) {
-				br.addError(new FieldError("event", "startDate", formEvent.getStartDate(), false, null, null, "Date and Location have already been booked" ));
+//INIZIO NUOVO CODICE
+		boolean dateValid = false;
+		Iterator<Events> iter = listEventLocation.iterator();
+		while(iter.hasNext())
+		{
+			Events curEvent = iter.next();
+			if(formEvent.getId() != curEvent.getId())
+			{
+				//CASO 1. LE DATE DEL FORMEVENT SONO PRECEDENTI ALL'EVENTO CORRENTE DELLA LISTA
+				if	(formEvent.getEndDate().isBefore(curEvent.getStartDate()))
+					dateValid = true;
+					
+				//CASO 2. LE DATE DEL FORMEVENT SONO SUCCESSIVE ALL'EVENTO CORRENTE DELLA LISTA
+				else
+				if	(formEvent.getStartDate().isAfter(curEvent.getEndDate()))
+					dateValid = true;
+
+				//CASO 3. LE DATE DEL FORMEVENT SI INTERSECANO CON QUELLE DELL'EVENTO CORRENTE DELLA LISTA
+				else
+				{
+					dateValid = false;
+					br.addError(new FieldError("event", "startDate", formEvent.getStartDate(), false, null, null, "la data e la location sono stati giá prenotati" ));
+				}
 			}
+			else 
+			{
+				//CASO ID IDENTICO. GLI ID DELL'EVENTO CORRENTE DELLA LISTA E' IDENTICO A QUELLO DEL FORMEVENT,
+				//PERTANTO QUESTO ELSE NON ESEGUE ALCUN CODICE, MA FA PROSEGUIRE L'ITERATOR
 			}
-				
-		if (br.hasErrors()) 
+		}
+//FINE NUOVO CODICE
+//INIZIO VECCHIO CODICE
+//		for (int i = 0; i < listEventLocation.size(); i++) {
+//			if (listEventLocation.get(i).getStartDate().isEqual(formEvent.getStartDate()) || listEventLocation.get(i).getEndDate().isEqual(formEvent.getEndDate())) {
+//				br.addError(new FieldError("event", "startDate", formEvent.getStartDate(), false, null, null, "la data e la location sono stati giá prenotati" ));
+//			}
+//			}
+//FINE VECCHIO CODICE				
+		if (br.hasErrors() || dateValid==false) 
 		{
 			model.addAttribute("listLocation", repoLoc.findAll());
 			model.addAttribute("categoriesList", repoCategory.findAll());
@@ -156,15 +219,23 @@ public class EventsController
 			return "redirect:/events";
 		}
 	}
+//___FINE METODO ADD___
+	
+	
 	
 	@GetMapping("/editEvent/{id}")
 	public String editForm(@PathVariable("id") Integer eventId , Model model) 
 	{
 		Optional<Events> result = repo.findById(eventId);
-		model.addAttribute("event", result.get());
-		model.addAttribute("categoriesList", repoCategory.findAll());
-		model.addAttribute("listLocation", repoLoc.findAll());
-		return "/event/editEvent";
+		if(result.isPresent())
+		{
+			model.addAttribute("event", result.get());
+			model.addAttribute("categoriesList", repoCategory.findAll());
+			model.addAttribute("listLocation", repoLoc.findAll());
+			return "/event/addEvent";
+		}
+			else			
+				throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pizza con ID" + eventId + "non presente.");
 		
 	}
 	

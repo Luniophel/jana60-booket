@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <th:block th:replace="fragments/resources :: src-head"></th:block>
@@ -55,6 +56,15 @@
     				<div th:if="${#fields.hasErrors('capacity')}" class="errors">
 	  					<ul>
 	  						<li th:each="err : ${#fields.errors('capacity')}" th:text="${err}">
+	  					</ul>
+	  				</div>
+    			</div>
+    			    			<div class="form-items">
+    				<label for="booketAvailable">booketAvailable</label>
+    				<input id="booketAvailable" th:field="*{booketAvailable}" type="number" placeholder="booketAvailable...">
+    				<div th:if="${#fields.hasErrors('booketAvailable')}" class="errors">
+	  					<ul>
+	  						<li th:each="err : ${#fields.errors('booketAvailable')}" th:text="${err}">
 	  					</ul>
 	  				</div>
     			</div>

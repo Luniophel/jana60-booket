@@ -12,11 +12,15 @@
 <h1 class="heading">
     List of <span>active events:</span>
 </h1>
-<h2 class="call-to-action">
-    To add an event click <a href="/addEvent" class="btn btn-here">here</a>
-</h2>
+
+<div class="row justify-content-center">
+    <a href="/addEvent" class="btn btn-here col-2 mx-4">New Event</a>
+    <a href="./categories" class="btn btn-here col-2 mx-4">New Category</a>
+    <a href="./location" class="btn btn-here col-2 mx-4">New Location</a>
+</div>
+
 	<div class="form-search">
-	  	<form action="/search">
+	  	<form action="/ourEvents/search">
 	    	<input class="form-name" type="text" name="queryName" placeholder="Name...">
 	    	<input class="form-location" type="text" name="queryLocation" placeholder="Location...">
 	    	<input class="form-category" type="text" name="queryCategory" placeholder="Category...">
@@ -58,16 +62,18 @@
 	            </div>
             </div>
             <div class="buttons">
-            	<div class="edit-button">
-	            	<a class="" th:href="@{|/editEvent/${e.id}|}" title="Edit">
-				  		<i class="fa-solid fa-pen-to-square"></i>
-				  	</a>
+            	<div class="images-button">
+	            	<a th:href="@{|/booket/${e.id}|}" class="btn btn-here">
+						<i class="fa-solid fa-ticket fs-1"></i>	            	
+					</a>
             	</div>
+            	<!-- PLACEHOLDER SECOND BTN
             	<div class="images-button">
 			  		<a th:href="@{|/images/${e.id}|}" title="Add image">
 			  			<i class="fa-regular fa-images"></i>
 			  		</a> 
             	</div>
+            	-->
             </div>
         </div>
     </div>

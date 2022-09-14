@@ -1,6 +1,7 @@
 package jana60.model;
 
 import java.time.LocalDateTime;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -14,7 +15,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+
 import org.springframework.format.annotation.DateTimeFormat;
+
 
 
 @Entity
@@ -41,10 +44,10 @@ public class Events {
 	@Column(nullable = false)
 	private LocalDateTime endDate;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, columnDefinition = "boolean default false")
 	private Boolean publishedStatus;
 	
-	@Column(nullable = false)
+	@Column(nullable = false, columnDefinition = "boolean default false")
 	private Boolean visible;
 	
 	@ManyToMany
@@ -151,14 +154,20 @@ public class Events {
 	public void setEventBooket(List<Booking> eventBooket) {
 		this.eventBooket = eventBooket;
 	}
+	
 
-	
-	//METHODS
-//	public Image showPoster()
-//	{
-//		List<Image> imageList = this.eventImage;
-//		if (imageList.isEmpty())
-//			
-//	}
-	
+	public Image getPosterImg() {
+		List<Image> imgList = getEventImage();
+		Iterator<Image> iter = imgList.iterator();
+		while(iter.hasNext())
+		{
+			Image curImg = iter.next();
+			if(curImg.isPoster())
+				return curImg;
+		}
+		return imgList.get(0);	
+	}
 }
+			
+	
+

@@ -1,5 +1,7 @@
 package jana60.model;
 
+
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,12 +19,12 @@ public class Booking {
 	
 	private Integer numberBooket;
 	
-	public Integer booketAvailable;
+	private String email;
 	
 	@ManyToOne
 	@JoinColumn (name = "event_booket")
-	private Events eventBooket;
-
+	private Events eventBooket;	
+	
 	public Integer getId() {
 		return id;
 	}
@@ -47,14 +49,13 @@ public class Booking {
 		this.eventBooket = eventBooket;
 	}
 
-	public Integer getBooketAvailable() {
-		return booketAvailable;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setBooketAvailable(Integer booketAvailable) {
-		this.booketAvailable = booketAvailable;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	
-
 }
