@@ -8,50 +8,26 @@
     <th:block th:replace="fragments/navbar :: navbar"></th:block>   
     <title>Events Info</title>
 </head>
-<h1 class="heading">
-    <span>Event's description</span> with id <spanh1 th:text="${eventInfo.id}"></spanh1> 
-<h2>
-    To add an event click <a href="/addEvent" class="btn btn-here">here</a>
-</h2>
 <body>
 	<input="hidden" th:field="*{eventInfo.id}">
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Start date</th>
-                <th>End date</th>
-                <th>Publication status</th>
-                <th>Visibility status</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr th:each="e : ${eventInfo}">
-                <td th:text="${e.name}"></td>
-                <td th:text="${e.description}"></td>
-                <td th:text="${e.startDate}"></td>
-                <td th:text="${e.endDate}"></td>
-                <td th:text="${e.publishedStatus}"></td>
-                <td th:text="${e.visible}"></td>
-            </tr>
-        </tbody>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                    </tr>
-                </thead>
-                <tbody th:each="e : ${eventInfo}">
-                    <tr th:each="list : ${e.categories}">
-                        <td th:text="${list.name}"></td>
-                    </tr>
-                </tbody>
-            </table>
-    </table>
-	 <h2>
-   			 To add booket <a th:href="@{|/booket/${eventInfo.id}|}" class="btn btn-here">here</a>
-	</h2>
+	
+	<div th:each="e : ${eventInfo}" class="info">
+		<h1 th:text="${e.name}"></h1>
+		<img th:if="${e.eventImage.size() == 0}" src="/img/concert-love.webp">
+		<img th:if="${e.eventImage.isEmpty() == false}" th:src="@{|/images/${e.getPosterImg.id}/content|}" >
+		<h2>What about this event?</h2>
+		<p th:text="${e.description}"></p>
+		<h2>When?</h2>
+		<div class="dates">
+			<p th:text="${#temporals.format(e.endDate, 'dd MMMM yyyy HH:mm')}"></p>
+			<p th:text="${#temporals.format(e.startDate, 'dd MMMM yyyy HH:mm')}"></p>
+		</div>
+		<div th:each="e : ${eventInfo}">
+			<p th:each="list : ${e.categories}" th:text="${list.name}"></p>
+		</div>
+	</div>
+	<a th:href="@{|/booket/${eventInfo.id}|}" class="btn btn-book">Book</a>
+	
     <th:block th:replace="fragments/themeToggler :: themeToggler"></th:block>
 	<th:block th:replace="fragments/script :: swiper-js"></th:block>
 	<th:block th:replace="fragments/footer :: footer"></th:block></body>

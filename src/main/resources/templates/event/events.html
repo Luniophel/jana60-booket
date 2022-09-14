@@ -37,7 +37,7 @@
 	            </div>
 	        </div>
 	    	<div class="img-container">
-
+				<img th:if="${e.eventImage.size() == 0}" src="/img/concert-love.webp">
             	<img class="card-img" th:if="${e.eventImage.isEmpty() == false}" th:src="@{|/images/${e.getPosterImg.id}/content|}">
 
 	        </div>
