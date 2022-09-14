@@ -158,3 +158,46 @@ body{
 	text-align: center;
 	padding: 10px 0px;
 }
+/* CATEGORIES STYLE*/
+.container-table{
+}
+.content-table{ 
+	border-collapse:collapse;
+	font-size:13px;
+	min-width:400px;
+
+		
+}
+.content-table thead th{
+	background-color:#444;
+	text-align:left;
+	font-weight:500;
+
+}
+.content-table th,
+.content-table td{
+	padding:12px 15px;
+}
+.content-table tbody tr{
+	border-bottom: 1px solid #444;
+	background-color:#111;
+		
+}
+.col-4{
+	border-top-left-radius: 20px;
+	text-transform: uppercase;
+	font-size:15px;
+	color:var(--main-color);
+}
+.col-8{
+	color:var(--main-color);
+	border-top-right-radius: 20px;
+	text-transform: uppercase;
+	font-size:15px;	
+}
+.content-table tbody td{
+	text-transform: uppercase;
+}
+.content-table tbody tr:last-of-type {
+	border-bottom:5px solid #333;
+}
