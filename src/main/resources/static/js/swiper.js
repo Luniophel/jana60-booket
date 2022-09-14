@@ -33,7 +33,7 @@ var swiper = new Swiper(".home-slider", {
       stretch: 0,
       depth: 100,
       modifier: 2,
-      slideShadows: true,
+      slideShadows: false,
     },
    loop:true,
    autoplay:{
