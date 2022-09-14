@@ -103,7 +103,6 @@ public class EventsController
 		//model.addAttribute("listCapacity", formEvent.getEventLocation().getCapacity());
 		return "/event/booket";	
 	}
-	//ALE VEDI QUA COME DEVI FARE CHE IO NON SONO CAPACE
 	@PostMapping("/booket")
 	public String saveEventInfo(@Valid @ModelAttribute("booking") Booking formBooking, BindingResult br)
 	{	
@@ -117,6 +116,10 @@ public class EventsController
 					br.addError(new FieldError("booking", "quantity", formBooking.getNumberBooket(), false, null, null, "Posti per " + formBooking.getEventBooket().getEventLocation().getName() + " finiti"));
 				}
 			 }
+		if(formBooking.getEmail().isEmpty())
+		{
+			br.addError(new FieldError("booking", "email", formBooking.getEmail(), false, null, null, "email necessaria per prenotare"));
+		}
 		//SIIIIIIIIIIIIIIUUUUUUMMMMMM
 		if (br.hasErrors()) 
 		{
