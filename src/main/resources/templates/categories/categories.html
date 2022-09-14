@@ -40,8 +40,8 @@
 		    				<textarea id="description" th:field="*{description}" type="text" placeholder="Description..."></textarea>
     					</div>
     					<div class="buttons-save-cancel">
-		    				<button class="save-button" type="submit">Save</button>
-		    				<button class="reset-button" type="reset">Cancel</button>
+		    				<button class="btn" type="submit">Save</button>
+		    				<button class="btn" type="reset">Cancel</button>
     					</div>
 					</div>
 					
@@ -52,22 +52,18 @@
 	<!-- FINE SEZIONE FORM AGGIUNGI/MODIFICA CATEGORIE   -->
 	<!-- INIZIO SEZIONE LISTA CATEGORIE -->
 	<section>
-		<div class="container">
-			<table class="table text-light" th:if="${categoriesList.size() > 0}">
-	        <thead>
-	            <tr>
-	                <th class="col-4 text-center">Name</th>
-	                <th class="col-8 text-center">Description</th>
-	            </tr>
-	        </thead>
+		<div class="container-table">
+			<table class="content-table">
+			<thead>
+	             <tr>
+	                <th class="col-4">Name</th>
+	                <th class="col-8">Description</th>
+	             </tr>
+			</thead>
 		        <tbody>
-		            <tr th:each="cl : ${categoriesList}">
-		                <td th:text="${cl.name}"></td>
-		                <td th:text="${cl.description}"></td>
-		                <td>
-		    				<a class="delete-button" th:href="@{|/categories/delete/${cl.id}|}"><i class="fa-solid fa-trash-can"></i></a>
-		    				<a class="edit-button" th:href="@{|/categories/edit/${cl.id}|}"><i class="fa-solid fa-pen-to-square"></i></a>
-    					</td>
+		            <tr class="list" th:each="cl : ${categoriesList}">
+		                <td class="name" th:text="${cl.name}"></td>
+		                <td class="description" th:text="${cl.description}"></td>
 		            </tr>
 		        </tbody>
 	   		</table>

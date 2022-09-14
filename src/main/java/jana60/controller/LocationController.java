@@ -1,5 +1,6 @@
 package jana60.controller;
 
+import java.util.Iterator;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -30,7 +31,19 @@ public class LocationController {
 	
 	@GetMapping
 	public String locationList(Model model) {
-		model.addAttribute("location", locationRepo.findAll());
+		//AGGIUNGO TUTTE LE LOCATION TRANNE QUELLA DI DEFAULT ("Non selezionata")
+		Iterable<Location> locationList = locationRepo.findAll();
+		Iterator<Location> iter = locationList.iterator();
+		while(iter.hasNext())
+		{
+			Location curLocation = iter.next();
+			if(curLocation.getId() == 1)
+			{
+				iter.remove();
+			}
+		}
+		model.addAttribute("location", locationList);
+		//FINE PROCEDURA, RESTITUISCO LISTA LOCATION SENZA ELEMENTO CON ID 1
 		return "/location/location";
 	}
 	
@@ -44,8 +57,10 @@ public class LocationController {
 	public String saveLocation(@Valid @ModelAttribute("location") Location formLocation, BindingResult br, Model model) {
 		boolean hasErrors= br.hasErrors();
 		boolean validateName = true;
+		boolean isEdit = false;
 		if(formLocation.getId() != null) {
 			Location locationBeforeUpdate = locationRepo.findById(formLocation.getId()).get();
+			isEdit = true;
 			if(formLocation.getName().equals(formLocation.getName())) {
 				validateName = false;
 			}
@@ -60,6 +75,9 @@ public class LocationController {
 		} else {
 			
 			try {
+				if(isEdit == false) {
+					formLocation.setBooketAvailable(formLocation.getCapacity());
+				}
 				locationRepo.save(formLocation);
 			} catch (Exception e) {
 				model.addAttribute("errorMessage", "Unable to save the location");

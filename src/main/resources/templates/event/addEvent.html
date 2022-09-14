@@ -24,6 +24,7 @@
       	<input type="hidden" th:field="*{id}">
 		
       <input type="text" id="name" class="form-control" th:field="*{name}"  placeholder="Nome Evento" th:errorClass="is-invalid">
+
       <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
         <ul>
           <li class="error" th:each="err : ${#fields.errors('name')}" th:text="${err}">
@@ -31,7 +32,7 @@
       </div>
     </div>
     <div class="mb-3 col-3">
-      <input type="text" id="description" class="form-control" th:field="*{description}" placeholder="Descrizione" th:errorClass="is-invalid">
+      <input type="text" id="description" class="form-control" th:field="*{description}" placeholder="Description" th:errorClass="is-invalid">
       <div th:if="${#fields.hasErrors('description')}" class="invalid-feedback">
         <ul>
           <li class="error" th:each="err : ${#fields.errors('description')}" th:text="${err}">
@@ -78,19 +79,35 @@
         </div>
     
     </fieldset>
-
+<!--
     <div class="col-4">
 			<h2>Location:</h2>
 				<div class="form-check" th:each="i : ${listLocation}">
 		
-				  <input class="form-check-input" type="radio" th:field="*{eventLocation}" th:id="|${i.id}|" th:value="${i.id}">
+				  <input class="form-check-input" type="radio" th:field="*{eventLocation}" th:id="|${i.id}|" th:value="${i.id}" th:selected="${i.id==1}">
 					  <label class="form-check-label" th:for="|${i.id}|" th:text="${i.name}"></label>
 
 	</div>
-
-    <div class="col-4">
+-->
+	<div class="col-4">
+		<h2>Location:</h2>
+		<select class="form-select text-dark"th:field="*{eventLocation}">
+			<option
+			 class="form-check-input" type="radio"
+			 th:each="i : ${listLocation}"
+			 th:value="${i.id}"
+			 th:selected="${i.id==1}"
+			 th:id="${i.id}"
+			>
+			<label class="form-check-label" th:for="|${i.id}|" th:text="${i.name}"></label>
+			</option>
+			
+		</select>
+	</div>
+	
+    <div class="col-4 cat">
 			<h2>Categories:</h2>
-				<div class="form-check" th:each="i : ${categoriesList}">
+				<div class="form-checked" th:each="i : ${categoriesList}">
 				  <input class="form-check-input" type="checkbox" th:field="*{categories}" th:id="|${i.id}|" th:value="${i.id}">
 					<label class="form-check-label" th:for="|${i.id}|" th:text="${i.name}"></label>
 	</div>
@@ -106,6 +123,7 @@
   	<button type="submit" class="btn">Save</button>
   	<a class="btn btn-red" href="">Cancel</a>
   </div>
+  <th:block th:replace="fragments/themeToggler :: themeToggler"></th:block>
  <th:block th:replace="fragments/script :: swiper-js"></th:block>
 <th:block th:replace="fragments/footer :: footer"></th:block>
 </body>

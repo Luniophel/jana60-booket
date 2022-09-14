@@ -2,6 +2,7 @@ package jana60.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -38,6 +39,9 @@ public class Location {
 	@OneToMany
 	@JoinColumn(name = "location_id")
 	public List<Events> event;
+			
+	@Column(nullable = true)
+	public Integer booketAvailable;
 		
 	//getter and setter
 	
@@ -93,5 +97,12 @@ public class Location {
 	public void setEvent(List<Events> event) {
 		this.event = event;
 	}
-	
+
+	public Integer getBooketAvailable() {
+		return booketAvailable;
+	}
+
+	public void setBooketAvailable(Integer booketAvailable) {
+		this.booketAvailable = booketAvailable;
+	}	
 }
