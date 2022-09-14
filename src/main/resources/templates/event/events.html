@@ -44,13 +44,16 @@
 	        <div class="tags">
 	        	<p th:each="c : ${e.categories}" th:text="${c.name}"></p>
 	        </div>
+	        <div class="location">
+	            <p th:each="l : ${e.eventLocation}" th:text="${l.name}"></p>
+	        </div>
 	        <div class="dates">
 		        <div class="start-date">
-	            	<h3>Start date</h3>
+	            	<h4>Start date</h4>
 	            	<p th:text="${e.startDate}"></p>
 	            </div>
 	            <div class="end-date">
-	            	<h3>End date</h3>
+	            	<h4>End date</h4>
 	            	<p th:text="${e.endDate}"></p>
 	            </div>
             </div>
