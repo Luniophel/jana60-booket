@@ -52,18 +52,18 @@
 	<!-- FINE SEZIONE FORM AGGIUNGI/MODIFICA CATEGORIE   -->
 	<!-- INIZIO SEZIONE LISTA CATEGORIE -->
 	<section>
-		<div class="container">
-			<table class="table text-light">
-	        <thead>
-	            <tr>
-	                <th class="col-4 text-center">Name</th>
-	                <th class="col-8 text-center">Description</th>
-	            </tr>
-	        </thead>
+		<div class="container-table">
+			<table class="content-table">
+			<thead>
+	             <tr>
+	                <th class="col-4">Name</th>
+	                <th class="col-8">Description</th>
+	             </tr>
+			</thead>
 		        <tbody>
-		            <tr th:each="cl : ${categoriesList}">
-		                <td th:text="${cl.name}"></td>
-		                <td th:text="${cl.description}"></td>
+		            <tr class="list" th:each="cl : ${categoriesList}">
+		                <td class="name" th:text="${cl.name}"></td>
+		                <td class="description" th:text="${cl.description}"></td>
 		            </tr>
 		        </tbody>
 	   		</table>
