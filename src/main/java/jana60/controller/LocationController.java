@@ -1,5 +1,6 @@
 package jana60.controller;
 
+import java.util.Iterator;
 import java.util.Optional;
 
 import javax.validation.Valid;
@@ -30,7 +31,19 @@ public class LocationController {
 	
 	@GetMapping
 	public String locationList(Model model) {
-		model.addAttribute("location", locationRepo.findAll());
+		//AGGIUNGO TUTTE LE LOCATION TRANNE QUELLA DI DEFAULT ("Non selezionata")
+		Iterable<Location> locationList = locationRepo.findAll();
+		Iterator<Location> iter = locationList.iterator();
+		while(iter.hasNext())
+		{
+			Location curLocation = iter.next();
+			if(curLocation.getId() == 1)
+			{
+				iter.remove();
+			}
+		}
+		model.addAttribute("location", locationList);
+		//FINE PROCEDURA, RESTITUISCO LISTA LOCATION SENZA ELEMENTO CON ID 1
 		return "/location/location";
 	}
 	
