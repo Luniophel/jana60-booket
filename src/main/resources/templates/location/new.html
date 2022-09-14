@@ -43,7 +43,7 @@
     			</div>
     			<div class="form-items">
     				<label for="description">Description</label>
-    				<textarea id="description" th:field="*{description}" type="text" placeholder="Description..."></textarea>
+    				<textarea class="text-dark" id="description" th:field="*{description}" type="text" placeholder="Description..."></textarea>
     				<div th:if="${#fields.hasErrors('description')}" class="errors">
 	  					<ul>
 	  						<li th:each="err : ${#fields.errors('description')}" th:text="${err}">
@@ -52,22 +52,25 @@
     			</div>
     			<div class="form-items">
     				<label for="capacity">Capacity</label>
-    				<input id="capacity" th:field="*{capacity}" type="number" placeholder="Capacity...">
+    				<input class="text-dark" id="capacity" th:field="*{capacity}" type="number" placeholder="Capacity...">
     				<div th:if="${#fields.hasErrors('capacity')}" class="errors">
 	  					<ul>
 	  						<li th:each="err : ${#fields.errors('capacity')}" th:text="${err}">
 	  					</ul>
 	  				</div>
     			</div>
-    			    			<div class="form-items">
+    			<!-- NON SERVE
+    			<div class="form-items">
     				<label for="booketAvailable">booketAvailable</label>
     				<input id="booketAvailable" th:field="*{booketAvailable}" type="number" placeholder="booketAvailable...">
+    				
     				<div th:if="${#fields.hasErrors('booketAvailable')}" class="errors">
 	  					<ul>
 	  						<li th:each="err : ${#fields.errors('booketAvailable')}" th:text="${err}">
 	  					</ul>
 	  				</div>
     			</div>
+    			-->
     			<div class="buttons-save-cancel">
     				<button class="btn" type="submit">Save</button>
     				<button class="btn" type="reset">Cancel</button>
