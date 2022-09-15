@@ -1,6 +1,5 @@
 package jana60.controller;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +55,7 @@ public class EventsGalleryController
 	@GetMapping
 	public String event(Model model) 
 	{
-		List<Events> listEvents = (List<Events>) repo.findByPublishedStatusTrue();
+		List<Events> listEvents = (List<Events>) repo.findAll();
 		model.addAttribute("listEvents", listEvents);
 		return "/eventsGallery";
 	}

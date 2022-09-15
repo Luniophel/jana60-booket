@@ -237,6 +237,8 @@ public class EventsController
 		} 
 		else 
 		{
+			formEvent.setVisible(false);
+			formEvent.setPublishedStatus(true);
 			repo.save(formEvent);
 			return "redirect:/events";
 		}
@@ -279,6 +281,30 @@ public class EventsController
 			return "redirect:/events";
 		}
 	}
+	
+	@GetMapping("/cancel/{id}")
+	public String cancelEvent(@PathVariable("id") Integer eventId)
+	{
+		Events curEvent = repo.findById(eventId).get();
+		if (curEvent.getVisible()==false)
+		{
+			repo.deleteById(eventId);
+			return "redirect:/events";
+		}
+		curEvent.setPublishedStatus(false);
+		repo.save(curEvent);
+		return "redirect:/events";
+	}
+	
+	@GetMapping("/publish/{id}")
+	public String publishEvent(@PathVariable("id") Integer eventId)
+	{
+		Events curEvent = repo.findById(eventId).get();
+		curEvent.setVisible(true);
+		repo.save(curEvent);
+		return "redirect:/events";
+	}
+	
 	
 }
 	

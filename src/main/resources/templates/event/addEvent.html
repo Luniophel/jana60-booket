@@ -11,7 +11,6 @@
 <body>
 <!-- TITOLO -->
 	<h1 class="heading">Create your amazing event <span>sponsored by us: </span></h1>
-	<hr/>
 <!-- TITOLO -->
 <div class="container">
 	<form
@@ -22,9 +21,11 @@
    	>
   		<!-- HIDDEN INPUT PER ID -->
 		<input type="hidden" th:field="*{id}">
+		<input type="hidden" th:field="*{eventImage}">
+		<input type="hidden" th:field="*{eventBooket}">
 		<!-- HIDDEN INPUT PER ID -->
 		
-	<div class="m-auto">
+	<div class="container">
   		<!-- INIZIO DIV NOME + DESCRIZIONE -->
 	  	<div>
 
@@ -81,29 +82,37 @@
 	    <!-- FINE DIV DATE INIZIO + FINE -->
 	</div>
 	    <!-- INIZIO VISIBILITY + PUBLICATION FORM -->
-      	<fieldset>
       	<!--
-	        <legend class="text">Insert publication status:</legend>
+      	<fieldset>
+      	
+	        <legend class="text">Is your event Active?</legend>
 	        <div class="status">
 	        <input type="radio" id="publishedStatus" name="publishedStatus" value="true" checked>
-	        <label for="activeted">Active</label>
+	        <label for="activeted">Yes, it's still active</label>
 	        </div>
 	        
 	        <div class="status">
 	        <input type="radio"  id="publishedStatus" name="publishedStatus" value="false"> 
-	        <label for="notActived">Inactive</label>
+	        <label for="notActived">No, it got cancelled</label>
 	        </divclass>
 	    	</fieldset>
-	
-	    	<fieldset>
-	        <legend class=text>Insert visibility  status:</legend>
-	    
+		
+	    <fieldset>
+	        <legend class=text>Do you want to publish it?</legend>
+	    <th:block th:if="*{id}!=null">
+	        <div class="status">
+	        <input type="radio" id="visible" name="visible" value="true">
+	        <label for="activeted">Yes, my event is ready!</label>
+	        </div>
+	     </th:block>   
+	     
 	        <div class="status">
 	        <input type="radio" id="visible" name="visible" value="false" checked>
-	        <label for="activeted">Not visible</label>
+	        <label for="notActivated">My event isn't ready yet</label>
 	        </div>
-	    -->
+	   
     	</fieldset>
+    	-->
     	<!-- FINE VISIBILITY + PUBLICATION FORM -->
 		<!-- INIZIO LOCATION + CATEGORY FORM -->
 		<div>

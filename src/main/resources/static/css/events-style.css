@@ -185,6 +185,18 @@ h1{ margin-top:100px;
 	color: var(--main-color);
 }
 
+.cancel-button a{
+	border: 3px solid red;
+	padding: 5px 20px;
+	margin: 0px 10px;
+	font-size: 15px;
+	border-radius: 20px;
+}
+
+.cancel-button i{
+	color: red
+}
+
 .images-button a{
 	padding: 10px 20px;
 	margin: 0px 10px;

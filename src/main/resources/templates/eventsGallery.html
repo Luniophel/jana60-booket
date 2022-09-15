@@ -22,7 +22,7 @@
 	    </form>
   	</div>
     <div class="container-card">
-        <div class="card-event" th:each="e : ${listEvents}">
+        <div class="card-event" th:each="e : ${listEvents}" th:if="${e.visible == true}">
         	<div class="canceled">
         		<p class="cancel">Canceled</p>
         	</div>
@@ -55,10 +55,21 @@
 	            </div>
             </div>
             <div class="buttons">
+            	<th:block th:if="${e.publishedStatus == true}">
             	<div class="images-button">
 	            	<a th:href="@{|/booket/${e.id}|}" class="btn btn-here">
 						<i class="fa-solid fa-ticket fs-1"></i>	            	
 					</a>
+            	</div>
+				</th:block>
+				<th:block th:if="${e.publishedStatus == false}">
+            	<div class="images-button">
+	            	<p href="" class="text-danger fs-1" disabled>
+            			EVENTO ANNULLATO
+					</p>
+            	</div>
+				</th:block>
+				
             	</div>
             	<!-- PLACEHOLDER SECOND BTN
             	<div class="images-button">
