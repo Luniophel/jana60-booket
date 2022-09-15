@@ -25,13 +25,12 @@
        		</li>
     	</ul>
     	<div class="col-4 form-check" >
+    	<h1 th:text=" ${booking.eventBooket.eventLocation.booketAvailable}"></h1>
     	<p class="txt">Posti disponibili: <span th:text="${booking.eventBooket.eventLocation.booketAvailable}"></span></p>
 			<label class="txt" for="quantity">Enter number of people:</label>
 			<input type="hidden" th:field="*{eventBooket}">
  				<input class="form-bar" type="number" id="quantity" name="quantity" min="1" th:field="*{numberBooket}">
  				<div th:if="${#fields.hasErrors('numberBooket')}">
- 				 <p><th:text||></p>
- 					<ul>
  						<li th:each="error : ${#fiels.errors('numberBooket')}" th:text="${error}"></li>
  					</ul>
  				</div>		

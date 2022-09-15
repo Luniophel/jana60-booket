@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@800&display=swap');
 *{  
 	font-family: "Poppins", sans-serif;
     box-sizing: border-box;
@@ -17,7 +17,7 @@ body{
 }
 
 h1{ margin-top:100px;
-	color: rgb(107, 205, 244);
+	color: var(--main-color);
 	text-align: center;
 	font-size: 40px;
 	text-transform: uppercase;
@@ -46,10 +46,12 @@ h1{ margin-top:100px;
 }
 
 .card-event{
-	border: 2px solid white;
-	padding: 10px 10px 10px 10px;
+	box-shadow: 5px 5px 10px 5px black;	
 	border-radius: 10px;
-	margin: 5px;
+	margin: 20px;
+}
+.card-event:hover{
+	transform: scale(1.02);
 }
 
 .card-event h4{ 
@@ -59,9 +61,10 @@ h1{ margin-top:100px;
 }
 
 .card-event h2{
-	color:rgb(107, 205, 244);
-	font-size:30px;
+	color: var(--main-color);
+	font-size:50px;
 	font-weight:700;
+	font-family: 'Nunito', sans-serif;
 }
 
 .canceled .cancel{
@@ -83,27 +86,42 @@ h1{ margin-top:100px;
 	display: contents;
 }
 
-.title-block{
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+.title-block h2{
+	text-align: center;
+	text-transform: uppercase;
 }
 
 .info-button{
-	margin: 10px 0px;
-	justify-content: end;
+	margin: auto;
+	justify-content: center;
 }
 
 .info-button a{
+	position: relative;
 	border: 3px solid white;
-	padding: 5px 10px;
-	font-size: 10px;
-	border-radius: 20px;
+	padding: 15px 40px;
+	font-size: 50px;
+	border-radius: 100px;
+	left: 40%;
+	bottom: 50px;
+	background-color: white;
+	box-shadow: 5px 5px 20px 5px black;
+	opacity: 0.5;
+	filter: blur(2px);
+}
+
+.info-button a:hover{
+	opacity: 1;
+	filter: blur(0px);
+}
+
+.info-button i{
+	color: #222;
 }
 
 .img-container img{
 	border-radius: 5px;
-	width: 400px;
+	width: 100%;
 	height: 300px;
 	margin-bottom: 10px;
 }
@@ -138,14 +156,13 @@ h1{ margin-top:100px;
 
 .dates{
 	display: flex;
-	justify-content: center;
+	justify-content: space-evenly;
 }
 
 .dates p{
-	font-size: 18px;
+	font-size: 15px;
 	font-weight: 600;
 	margin-bottom: 20px;
-	margin: 0px 10px;
 
 }
 
@@ -153,11 +170,11 @@ h1{ margin-top:100px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	margin: 20px 0px 10px 0px;
+	margin: 20px;
 }
 
 .edit-button a{
-	border: 3px solid rgb(0, 128, 255);
+	border: 3px solid var(--main-color);
 	padding: 5px 20px;
 	margin: 0px 10px;
 	font-size: 15px;
@@ -165,26 +182,19 @@ h1{ margin-top:100px;
 }
 
 .edit-button i{
-	color:rgb(0, 128, 255);
+	color: var(--main-color);
 }
 
 .images-button a{
-	border: 3px solid white;
-	padding: 5px 20px;
+	padding: 10px 20px;
 	margin: 0px 10px;
-	font-size: 15px;
+	font-size: 14px;
 	border-radius: 20px;
 }
 
 
-.card-event{
-	border: 2px solid white;
-	padding: 10px 10px 10px 10px;
-	border-radius: 10px;
-}
-
 h1{ 
-	color: rgb(107, 205, 244);
+	color: var(--main-color);
 	text-align: center;
 	text-transform: uppercase;
 	font-weight: 500;
@@ -242,7 +252,7 @@ h3{
 .text{
 	color:var(--main-color);
 	margin-top: 30px;
-	font-size:30px;
+	font-size: 30px;
 	text-align: left;
 	font-weight: 600;
 }
