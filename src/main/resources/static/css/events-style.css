@@ -237,14 +237,6 @@ h3{
 	justify-content: center;
 	align-items: center;
 }
-.btn-red{
-	margin-left:20px;
-	padding:6px 18px;
-}
-
-.btn-red:hover{
-	background-color:red;
-}
 
 .btn-warning:hover{
 	background-color:yellow;
@@ -275,16 +267,11 @@ input .status{
 }
 
 .col-4{
-	margin-top:30px;
-	text-align:left;
+
 	font-weight:600;
+	align-items: center;
 }
-.cat{
-	font-weight:600;
-	margin-left:50px;
-	text-align:left;
-	
-}
+
 .form-check-label{
 	font-size:15px;
 	text-transform: uppercase;
@@ -300,9 +287,12 @@ input .status{
 .form-check{
 	color:var(--main-color);
 	font-size: 15px;
-	
-}
 
+}
+.form-select{
+	width:450px;
+	border-radius:15px;
+}
 .error{
 	font-size:15px;
 	color:red;
@@ -373,3 +363,17 @@ input .status{
 	margin: 50px auto;
 	
 }
+.container{
+	justify-content:center;
+	align-items:center;
+	margin-top:25px;
+
+}
+.btn-save{
+justify-content:center;
+align-items: center;
+}
+.btn-cancel{
+	margin-left:20px;	
+}
+

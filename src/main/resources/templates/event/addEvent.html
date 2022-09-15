@@ -12,7 +12,6 @@
 <!-- TITOLO -->
 	<h1 class="heading">Create your amazing event <span>sponsored by us: </span></h1>
 <!-- TITOLO -->
-<div class="container">
 	<form
      id = "formEvent"
      th:object="${event}"
@@ -25,9 +24,8 @@
 		<input type="hidden" th:field="*{eventBooket}">
 		<!-- HIDDEN INPUT PER ID -->
 		
-	<div class="container">
   		<!-- INIZIO DIV NOME + DESCRIZIONE -->
-	  	<div>
+	  	<div class="col-4 container">
 
 	  		<!-- INIZIO INPUT NOME FORM -->
 			<div class="mb-3">
@@ -54,7 +52,7 @@
 	  	</div>
   		<!-- FINE DIV NOME + DESCRIZIONE -->
   		<!-- INIZIO DIV DATE INIZIO + FINE -->
-  		<div>
+  		<div class="col-4 container">
   		
 	  		<!-- INIZIO INPUT DATA INIZIO FORM -->
 			<div class="mb-3">
@@ -80,7 +78,7 @@
 		    
 	    </div>
 	    <!-- FINE DIV DATE INIZIO + FINE -->
-	</div>
+	<!--</div>-->
 	    <!-- INIZIO VISIBILITY + PUBLICATION FORM -->
       	<!--
       	<fieldset>
@@ -117,7 +115,7 @@
 		<!-- INIZIO LOCATION + CATEGORY FORM -->
 		<div>
 			<!-- DIV LOCATION -->
-			<div class="col-4"><h2>Location:</h2>
+			<div class="col-4 container"><h2>Location:</h2>
 			<select class="form-select text-dark"th:field="*{eventLocation}">
 				<option
 				 class="form-check-input" type="radio"
@@ -132,7 +130,7 @@
 			</div>
 			<!-- DIV LOCATION -->
 			<!-- DIV CATEGORY -->
-	    	<div class="col-4 cat"><h2>Categories:</h2>
+	    	<div class="col-4 container"><h2>Categories:</h2>
 			<div class="form-checked" th:each="i : ${categoriesList}">
 			    <input class="form-check-input" type="checkbox" th:field="*{categories}" th:id="|${i.id}|" th:value="${i.id}">
 				<label class="form-check-label" th:for="|${i.id}|" th:text="${i.name}"></label>
@@ -143,14 +141,13 @@
 		<!-- FINE LOCATION + CATEGORY FORM -->
 		
 		<!-- BOTTONI SAVE E CANCEL -->
-		<div class="mb-3 ml-5">
-		  	<button type="submit" class="btn">Save</button>
-		  	<a class="btn btn-red" href="">Cancel</a>
+		<div class=" buttons">
+		  	<button type="submit" class="btn btn-save">Save</button>
+		  	<a class="btn btn-cancel" href="">Cancel</a>
 	  	</div>
 	  	<!-- BOTTONI SAVE E CANCEL -->
 	  	
 	</form>
-    </div>
 <th:block th:replace="fragments/themeToggler :: themeToggler"></th:block>
 <th:block th:replace="fragments/script :: swiper-js"></th:block>
 <th:block th:replace="fragments/footer :: footer"></th:block>
