@@ -30,18 +30,17 @@
         	<div class="canceled">
         		<p class="cancel">Canceled</p>
         	</div>
-	        <div class="title-block">
-	            <h2 th:text="${e.name}"></h2>
-	            <div class="info-button" >
+        	<div class="img-container">
+				<img th:if="${e.eventImage.size() == 0}" src="/img/concert-love.webp">
+            	<img class="card-img" th:if="${e.eventImage.isEmpty() == false}" th:src="@{|/images/${e.getPosterImg.id}/content|}">
+	        </div>
+	        <div class="info-button" >
 					<a th:href="@{|/events/${e.id}|}" title="Info">
 				  		<i class="fa-solid fa-info"></i>
 				  	</a>
-	            </div>
 	        </div>
-	    	<div class="img-container">
-				<img th:if="${e.eventImage.size() == 0}" src="/img/concert-love.webp">
-            	<img class="card-img" th:if="${e.eventImage.isEmpty() == false}" th:src="@{|/images/${e.getPosterImg.id}/content|}">
-
+	        <div class="title-block">
+	            <h2 th:text="${e.name}"></h2>
 	        </div>
 	        <div class="tags">
 	        	<p th:each="c : ${e.categories}" th:text="${c.name}"></p>
@@ -49,7 +48,7 @@
 	        <div class="location">
 	            <p th:each="l : ${e.eventLocation}" th:text="${l.name}"></p>
 	        </div>
-	        <div class="dates row">
+	        <div class="dates">
 		        <div class="start-date">
 	            	<h4>Start date</h4>
 	            	<p th:text="${#temporals.format(e.startDate, 'dd MMMM yyyy HH:mm')}"></p>
