@@ -77,6 +77,16 @@ public class EventsController
 	public String event(Model model) 
 	{
 		List<Events> listEvents = (List<Events>) repo.findAll();
+		Iterator<Events> iter = listEvents.iterator();
+		while(iter.hasNext())
+		{
+			Events curEvent = iter.next();
+			LocalDateTime today = LocalDateTime.now();
+			if(today.isAfter(curEvent.getEndDate()))
+					{
+						curEvent.setVisible(false);
+					}
+		}
 		model.addAttribute("listEvents", listEvents);
 		return "/event/events";
 	}
@@ -243,6 +253,7 @@ public class EventsController
 	@PostMapping("/editEvent/{id}")
 	public String edit(@Valid @ModelAttribute("event") Events formEvent,@PathVariable("id") Integer eventId,  BindingResult br) 
 	{
+		formEvent.setModificed(true);
 		Image img = repoImg.findByPosterAndImageEvent(true, formEvent).get(formEvent.getId());
 		if( !(img.isPoster()) && formEvent.getEventLocation().getId()<= 1) {
 			formEvent.setVisible(false);
