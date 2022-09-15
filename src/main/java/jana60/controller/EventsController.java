@@ -187,7 +187,7 @@ public class EventsController
 
 		List<Events> listEventLocation = repo.findAllByEventLocation(formEvent.getEventLocation());
 //INIZIO NUOVO CODICE
-		boolean dateValid = false;
+		boolean dateValid = true;
 		Iterator<Events> iter = listEventLocation.iterator();
 		if(iter.hasNext()==false)
 		{
@@ -218,7 +218,7 @@ public class EventsController
 			else 
 			{
 				//CASO ID IDENTICO. GLI ID DELL'EVENTO CORRENTE DELLA LISTA E' IDENTICO A QUELLO DEL FORMEVENT,
-				//PERTANTO QUESTO ELSE NON ESEGUE ALCUN CODICE, MA FA PROSEGUIRE L'ITERATOR
+				formEvent.setModificed(true);
 			}
 		}
 //FINE NUOVO CODICE
@@ -264,7 +264,6 @@ public class EventsController
 	@PostMapping("/editEvent/{id}")
 	public String edit(@Valid @ModelAttribute("event") Events formEvent,@PathVariable("id") Integer eventId,  BindingResult br) 
 	{
-		formEvent.setModificed(true);
 		Image img = repoImg.findByPosterAndImageEvent(true, formEvent).get(formEvent.getId());
 		if( !(img.isPoster()) && formEvent.getEventLocation().getId()<= 1) {
 			formEvent.setVisible(false);
