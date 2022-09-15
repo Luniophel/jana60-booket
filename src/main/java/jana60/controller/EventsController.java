@@ -177,7 +177,7 @@ public class EventsController
 
 		List<Events> listEventLocation = repo.findAllByEventLocation(formEvent.getEventLocation());
 //INIZIO NUOVO CODICE
-		boolean dateValid = false;
+		boolean dateValid = true;
 		Iterator<Events> iter = listEventLocation.iterator();
 		if(iter.hasNext()==false)
 		{

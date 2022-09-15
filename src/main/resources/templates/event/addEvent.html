@@ -2,136 +2,120 @@
 <html lang="en">
 <head>
     <th:block th:replace="fragments/resources :: src-head"></th:block>
-    <link rel="stylesheet" href="/css/events-style.css" />
-</head>
-<body>
-    <th:block th:replace="fragments/navbar :: navbar"></th:block>   
+    <link rel="stylesheet" href="/css/events-style.css">
     <title>Add Events</title>
 </head>
 <body>
+    <th:block th:replace="fragments/navbar :: navbar"></th:block>   
+</head>
+<body>
+	<!-- INIZIO TITOLO -->
     <h1 class="heading">Create your amazing event <span>sponsored by us: </span></h1>
     <hr/>
-    <div class="container col-10">
+    <!-- FINE TITOLO   -->
+	<!-- INIZIO SECTION FORM -->
+    <div class="container">
 	<form
-   id = "formEvent"
-   th:object="${event}"
-   th:action="@{/addEvent}"
-   method="POST"
-   class=" m-auto"
-   >
-  <div class="m-auto text-center">
-  	<div>
-	    <div class="mb-3 col-6">
-	    
-	      	<input type="hidden" th:field="*{id}">
-			
-	      <input type="text" id="name" class="form-control" th:field="*{name}"  placeholder="Nome Evento" th:errorClass="is-invalid">
+     id = "formEvent"
+     th:object="${event}"
+     th:action="@{/addEvent}"
+     method="POST"
+	 class=" m-auto"
+	>
 	
-	      <div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
-	        <ul>
-	          <li class="error" th:each="err : ${#fields.errors('name')}" th:text="${err}">
-	        </ul>
-	      </div>
+		<div class="mb-3 col-6">
+		<!-- INPUT HIDDEN -->
+		<input type="hidden" th:field="*{id}">
+		<input type="text" id="name" class="form-control" th:field="*{name}"  placeholder="Nome Evento" th:errorClass="is-invalid">
+		<!-- INPUT HIDDEN -->
+		<div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
+		<ul>
+		<li class="error" th:each="err : ${#fields.errors('name')}" th:text="${err}">
+		</ul>
+		</div>
+		</div>
+		<div class="mb-3 col-6">
+		<input type="text" id="description" class="form-control" th:field="*{description}" placeholder="Description" th:errorClass="is-invalid">
+		<div th:if="${#fields.hasErrors('description')}" class="invalid-feedback">
+		<ul>
+		<li class="error" th:each="err : ${#fields.errors('description')}" th:text="${err}">
+		</ul>
+		</div>
+		</div>
+	  	</div>
+	    <div class="row">
+	    <div class="mb-3 col-6">
+	    <input pattern="yyyy-MM-dd'T'HH:mm" type="datetime-local" id="startDate" class="form-control" th:field="*{startDate}"  th:errorClass="is-invalid" required>
+	    <div th:if="${#fields.hasErrors('startDate')}" class="invalid-feedback">
+	    <ul>
+	    <li class="error" th:each="err : ${#fields.errors('startDate')}" th:text="${err}">
+	    </ul>
+	    </div>
 	    </div>
 	    <div class="mb-3 col-6">
-	      <input type="text" id="description" class="form-control" th:field="*{description}" placeholder="Description" th:errorClass="is-invalid">
-	      <div th:if="${#fields.hasErrors('description')}" class="invalid-feedback">
-	        <ul>
-	          <li class="error" th:each="err : ${#fields.errors('description')}" th:text="${err}">
-	        </ul>
-	      </div>
+	    <input pattern="yyyy-MM-dd'T'HH:mm" type="datetime-local" id="endDate" class="form-control" th:field="*{endDate}"  th:errorClass="is-invalid" required>
+	    <div th:if="${#fields.hasErrors('endDate')}" class="invalid-feedback">
+	    <ul>
+	    <li class="error" th:each="err : ${#fields.errors('endDate')}" th:text="${err}">
+	    </ul>
 	    </div>
-  	</div>
-    <div class="row">
-    <div class="mb-3 col-6">
-      <input pattern="yyyy-MM-dd'T'HH:mm" type="datetime-local" id="startDate" class="form-control" th:field="*{startDate}"  th:errorClass="is-invalid" required>
-      <div th:if="${#fields.hasErrors('startDate')}" class="invalid-feedback">
-        <ul>
-          <li class="error" th:each="err : ${#fields.errors('startDate')}" th:text="${err}">
-        </ul>
-      </div>
-    </div>
-    <div class="mb-3 col-6">
-        <input pattern="yyyy-MM-dd'T'HH:mm" type="datetime-local" id="endDate" class="form-control" th:field="*{endDate}"  th:errorClass="is-invalid" required>
-        <div th:if="${#fields.hasErrors('endDate')}" class="invalid-feedback">
-          <ul>
-            <li class="error" th:each="err : ${#fields.errors('endDate')}" th:text="${err}">
-          </ul>
-        </div>
-    </div>
-    </div>
-      <fieldset>
-        <legend class="text">Insert publication status:</legend>
-         <div class="status">
-          <input type="radio" id="publishedStatus" name="publishedStatus" value="true"
-                 checked>
-          <label for="activeted">Active</label>
-        </div>
-        
-        <div class="status">
-          <input type="radio"  id="publishedStatus" name="publishedStatus" value="false"> 
-          <label for="notActived">Inactive</label>
-        </divclass>
-    </fieldset>
-
-    <fieldset>
-        <legend class=text>Insert visibility  status:</legend>
-    
-        <div class="status">
-          <input type="radio" id="visible" name="visible" value="false" 
-                 checked>
-          <label for="activeted">Not visible</label>
-        </div>
-    
-    </fieldset>
-<!--
-    <div class="col-4">
-			<h2>Location:</h2>
-				<div class="form-check" th:each="i : ${listLocation}">
-		
-				  <input class="form-check-input" type="radio" th:field="*{eventLocation}" th:id="|${i.id}|" th:value="${i.id}" th:selected="${i.id==1}">
-					  <label class="form-check-label" th:for="|${i.id}|" th:text="${i.name}"></label>
-
-	</div>
--->
-	<div class="col-4">
+	    </div>
+	    </div>
+	    <fieldset>
+	    <legend class="text">Insert publication status:</legend>
+	    <div class="status">
+	    <input type="radio" id="publishedStatus" name="publishedStatus" value="true" checked>
+	    <label for="activeted">Active</label>
+	    </div>
+	        
+	    <div class="status">
+	    <input type="radio"  id="publishedStatus" name="publishedStatus" value="false"> 
+	    <label for="notActived">Inactive</label>
+	    </divclass>
+	    </fieldset>
+	
+	    <fieldset>
+	    <legend class=text>Insert visibility  status:</legend>
+	    
+	    <div class="status">
+	    <input type="radio" id="visible" name="visible" value="false" checked>
+	    <label for="activeted">Not visible</label>
+	    </div>
+	    
+	    </fieldset>
+	
+		<div class="col-4">
 		<h2>Location:</h2>
 		<select class="form-select text-dark"th:field="*{eventLocation}">
-			<option
-			 class="form-check-input" type="radio"
-			 th:each="i : ${listLocation}"
-			 th:value="${i.id}"
-			 th:selected="${i.id==1}"
-			 th:id="${i.id}"
-			>
-			<label class="form-check-label" th:for="|${i.id}|" th:text="${i.name}"></label>
-			</option>
-			
+		<option
+		 class="form-check-input" type="radio"
+		 th:each="i : ${listLocation}"
+		 th:value="${i.id}"
+		 th:selected="${i.id==1}"
+		 th:id="${i.id}"
+		>
+		<label class="form-check-label" th:for="|${i.id}|" th:text="${i.name}"></label>
+		</option>
+				
 		</select>
-	</div>
-	
-    <div class="col-4 cat">
-			<h2>Categories:</h2>
-				<div class="form-checked" th:each="i : ${categoriesList}">
-				  <input class="form-check-input" type="checkbox" th:field="*{categories}" th:id="|${i.id}|" th:value="${i.id}">
-					<label class="form-check-label" th:for="|${i.id}|" th:text="${i.name}"></label>
-	</div>
-				
-	</div>
-
-
-				
-	</div>
-	
-	
-	  <div class="mb-3 ml-5">
-  	<button type="submit" class="btn">Save</button>
-  	<a class="btn btn-red" href="">Cancel</a>
-  </div>
+		</div>
+		
+	    <div class="col-4 cat">
+		<h2>Categories:</h2>
+		<div class="form-checked" th:each="i : ${categoriesList}">
+	  	<input class="form-check-input" type="checkbox" th:field="*{categories}" th:id="|${i.id}|" th:value="${i.id}">
+		<label class="form-check-label" th:for="|${i.id}|" th:text="${i.name}"></label>
+		</div>
+		
+	  	<div class="mb-3 ml-5">
+	  	<button type="submit" class="btn">Save</button>
+	  	<a class="btn btn-red" href="">Cancel</a>
+	  	</div>
 	</form>
     </div>
- <th:block th:replace="fragments/themeToggler :: themeToggler"></th:block>
- <th:block th:replace="fragments/script :: swiper-js"></th:block>
+	<!-- FINE SECTION FORM   -->
+<th:block th:replace="fragments/themeToggler :: themeToggler"></th:block>
+<th:block th:replace="fragments/script :: swiper-js"></th:block>
 <th:block th:replace="fragments/footer :: footer"></th:block>
 </body>
 </html>
