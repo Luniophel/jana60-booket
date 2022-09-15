@@ -85,6 +85,7 @@ public class EventsController
 			if(today.isAfter(curEvent.getEndDate()))
 					{
 						curEvent.setVisible(false);
+						repo.save(curEvent);
 					}
 		}
 		model.addAttribute("listEvents", listEvents);
@@ -126,7 +127,7 @@ public class EventsController
 		else {
 				formBooking.getEventBooket().getEventLocation().setBooketAvailable(formBooking.getEventBooket().getEventLocation().getBooketAvailable() - formBooking.getNumberBooket());
 				if(formBooking.getEventBooket().getEventLocation().getBooketAvailable() < 0 ) {
-					br.addError(new FieldError("booking", "quantity", formBooking.getNumberBooket(), false, null, null, "Posti per " + formBooking.getEventBooket().getEventLocation().getName() + " finiti"));
+					br.addError(new FieldError("booking", "quantity", formBooking.getNumberBooket(), false, null, null, "Impossible to booking " + formBooking.getNumberBooket() + "you can book up to  " + formBooking.getEventBooket().getEventLocation().getBooketAvailable()));
 				}
 			 }
 		if(formBooking.getEmail().isEmpty())
@@ -228,7 +229,8 @@ public class EventsController
 //				br.addError(new FieldError("event", "startDate", formEvent.getStartDate(), false, null, null, "la data e la location sono stati giá prenotati" ));
 //			}
 //			}
-//FINE VECCHIO CODICE				
+//FINE VECCHIO CODICE
+		
 		if (br.hasErrors() || dateValid==false) 
 		{
 			model.addAttribute("listLocation", repoLoc.findAll());
