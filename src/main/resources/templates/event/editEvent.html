@@ -56,28 +56,31 @@
         </div>
       </div>
       <fieldset>
-        <legend class="text">Insert publication status:</legend>
-         <div class="status">
-          <input type="radio" id="publishedStatus" name="publishedStatus" value="true"
-                 checked>
-          <label for="activeted">Active</label>
-        </div>
-        
-        <div class="status">
-          <input type="radio"  id="publishedStatus" name="publishedStatus" value="false"> 
-          <label for="notActived">Inactive</label>
-        </divclass>
-    </fieldset>
-
-    <fieldset>
-        <legend class=text>Insert visibility  status:</legend>
-    
-        <div class="status">
-          <input type="radio" id="visible" name="visible" value="false"/>
-          <label for="activeted">Not visible</label>
-        </div>
-    
-    </fieldset>
+      	
+	        <legend class="text">Insert publication status:</legend>
+	        <div class="status">
+	        <input type="radio" id="publishedStatus" name="publishedStatus" value="true">
+	        <label for="activeted">Active</label>
+	        </div>
+	        
+	        <div class="status">
+	        <input type="radio"  id="publishedStatus" name="publishedStatus" value="false"> 
+	        <label for="notActived">Inactive</label>
+	        </div>
+	   </fieldset>
+	
+	   <fieldset>
+	        <legend class=text>Insert visibility  status:</legend>
+	    
+	        <div class="status">
+	        <input type="radio" id="visible" name="visible" value="false">
+	        <label for="activeted">Not visible</label>
+	        </div>
+	        <div class="status">
+	        <input type="radio" id="visible" name="visible" value="true">
+	        <label for="activeted">Visible</label>
+	        </div>
+    	</fieldset>
     <div class="col-4">
 			<h4>Location:</h4>
 				<div class="form-check" th:each="i : ${listLocation}">

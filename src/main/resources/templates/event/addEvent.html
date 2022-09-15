@@ -81,8 +81,7 @@
 	    <!-- FINE DIV DATE INIZIO + FINE -->
 	</div>
 	    <!-- INIZIO VISIBILITY + PUBLICATION FORM -->
-      	<fieldset>
-      	<!--
+      	<fieldset th:if="*{id} != null">
 	        <legend class="text">Insert publication status:</legend>
 	        <div class="status">
 	        <input type="radio" id="publishedStatus" name="publishedStatus" value="true" checked>
@@ -92,17 +91,20 @@
 	        <div class="status">
 	        <input type="radio"  id="publishedStatus" name="publishedStatus" value="false"> 
 	        <label for="notActived">Inactive</label>
-	        </divclass>
-	    	</fieldset>
-	
-	    	<fieldset>
+	        </div>
+	    </fieldset>
+	    <fieldset th:if="*{id} != null">
 	        <legend class=text>Insert visibility  status:</legend>
 	    
 	        <div class="status">
 	        <input type="radio" id="visible" name="visible" value="false" checked>
 	        <label for="activeted">Not visible</label>
 	        </div>
-	    -->
+	        <div class="status">
+	        <input type="radio" id="visible" name="visible" value="true">
+	        <label for="activeted">Visible</label>
+	        </div>
+
     	</fieldset>
     	<!-- FINE VISIBILITY + PUBLICATION FORM -->
 		<!-- INIZIO LOCATION + CATEGORY FORM -->

@@ -22,7 +22,7 @@
 	    </form>
   	</div>
     <div class="container-card">
-        <div class="card-event" th:each="e : ${listEvents}">
+        <div class="card-event" th:each="e : ${listEvents}" th:if="${e.visible == true}">
         	<div class="canceled">
         		<p class="cancel">Canceled</p>
         	</div>
@@ -70,6 +70,7 @@
             </div>
         </div>
     </div>
+   
     <th:block th:replace="fragments/themeToggler :: themeToggler"></th:block>
     <th:block th:replace="fragments/script :: swiper-js"></th:block>
     <th:block th:replace="fragments/footer :: footer"></th:block>
