@@ -12,25 +12,24 @@
 <!-- TITOLO -->
 	<h1 class="heading">Create your amazing event <span>sponsored by us: </span></h1>
 	<hr/>
-	<div class="container">
 <!-- TITOLO -->
-
+<div class="container">
 	<form
      id = "formEvent"
      th:object="${event}"
      th:action="@{/addEvent}"
      method="POST"
-     class=" m-auto"
    	>
   		<!-- HIDDEN INPUT PER ID -->
 		<input type="hidden" th:field="*{id}">
 		<!-- HIDDEN INPUT PER ID -->
 		
+	<div class="m-auto">
   		<!-- INIZIO DIV NOME + DESCRIZIONE -->
 	  	<div>
 
 	  		<!-- INIZIO INPUT NOME FORM -->
-			<div class="mb-3 col-6">
+			<div class="mb-3">
 				<input type="text" id="name" class="form-control" th:field="*{name}"  placeholder="Nome Evento" th:errorClass="is-invalid">
 				<!-- DIV ERRORI NOME -->
 				<div th:if="${#fields.hasErrors('name')}" class="invalid-feedback">
@@ -41,8 +40,8 @@
 		    <!-- FINE INPUT NOME FORM -->
 		    
 		    <!-- INIZIO INPUT DESCRIZIONE FORM -->
-		    <div class="mb-3 col-6">
-			    <input type="text" id="description" class="form-control" th:field="*{description}" placeholder="Description" th:errorClass="is-invalid">
+		    <div class="mb-3">
+			    <textarea type="text" rows="10" id="description" class="form-control h-100" th:field="*{description}" placeholder="Description" th:errorClass="is-invalid"></textarea>
 			    <!-- DIV ERRORI NOME -->
 			    <div th:if="${#fields.hasErrors('description')}" class="invalid-feedback">
 			    <ul><li class="error" th:each="err : ${#fields.errors('description')}" th:text="${err}"></ul>
@@ -57,7 +56,7 @@
   		<div>
   		
 	  		<!-- INIZIO INPUT DATA INIZIO FORM -->
-			<div class="mb-3 col-6">
+			<div class="mb-3">
 			    <input pattern="yyyy-MM-dd'T'HH:mm" type="datetime-local" id="startDate" class="form-control" th:field="*{startDate}"  th:errorClass="is-invalid" required>
 				<!-- DIV ERRORI DATA INIZIO -->
 				<div th:if="${#fields.hasErrors('startDate')}" class="invalid-feedback">
@@ -68,7 +67,7 @@
 		    <!-- FINE INPUT DATA INIZIO FORM -->
 		
 			<!-- INIZIO INPUT DATA FINE FORM -->
-		    <div class="mb-3 col-6">
+		    <div class="mb-3">
 		    <input pattern="yyyy-MM-dd'T'HH:mm" type="datetime-local" id="endDate" class="form-control" th:field="*{endDate}"  th:errorClass="is-invalid" required>
 		        <!-- DIV ERRORI DATA FINE -->
 		        <div th:if="${#fields.hasErrors('endDate')}" class="invalid-feedback">
@@ -80,9 +79,10 @@
 		    
 	    </div>
 	    <!-- FINE DIV DATE INIZIO + FINE -->
+	</div>
 	    <!-- INIZIO VISIBILITY + PUBLICATION FORM -->
       	<fieldset>
-      	
+      	<!--
 	        <legend class="text">Insert publication status:</legend>
 	        <div class="status">
 	        <input type="radio" id="publishedStatus" name="publishedStatus" value="true" checked>
@@ -102,7 +102,7 @@
 	        <input type="radio" id="visible" name="visible" value="false" checked>
 	        <label for="activeted">Not visible</label>
 	        </div>
-	        
+	    -->
     	</fieldset>
     	<!-- FINE VISIBILITY + PUBLICATION FORM -->
 		<!-- INIZIO LOCATION + CATEGORY FORM -->
