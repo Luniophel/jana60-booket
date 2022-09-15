@@ -16,7 +16,7 @@
   	th:object="${booking}"
   	th:action="@{/booket}"
   	method="POST"
-   	class=" m-auto"
+   	class="m-auto"
     >
     	<ul>
     		<li th:each="error : ${#fields.allErrors()}" th:text="${error}">
@@ -27,6 +27,7 @@
 			<input type="hidden" th:field="*{eventBooket}">
  				<input class="form-bar" type="number" id="quantity" name="quantity" min="1" th:field="*{numberBooket}">
  				<div th:if="${#fields.hasErrors('numberBooket')}">
+ 				 <p><th:text||></p>
  					<ul>
  						<li th:each="error : ${#fiels.errors('numberBooket')}" th:text="${error}"></li>
  					</ul>
@@ -43,6 +44,8 @@
  				</div>		
 	</div>
 	  	<button type="submit" class="btn save-info">Save</button>
-<th:block th:replace="fragments/themeToggler :: themeToggler"></th:block>	  	
+<th:block th:replace="fragments/themeToggler :: themeToggler"></th:block>
+<th:block th:replace="fragments/script :: swiper-js"></th:block>
+<th:block th:replace="fragments/footer :: footer"></th:block>	  	
 </body>
 </html>
