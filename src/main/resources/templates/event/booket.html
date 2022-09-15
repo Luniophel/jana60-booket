@@ -1,16 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <th:block th:replace="fragments/resources :: src-head"></th:block>
-    <link rel="stylesheet" href="/css/events-style.css" />
-        <th:block th:replace="fragments/navbar :: navbar"></th:block>   
-    <title>Events Info</title>
-</head>
-<body>
- <h1>Events <span>Info</span></h1>
-<h3 class="call-to-action">
-    To add an event click <a href="/addEvent" class="btn btn-here">here</a>
-</h3>
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+ <th:block th:replace="fragments/resources :: src-head"></th:block>
+ <link rel="stylesheet" href="/css/booket-style.css" />
+ </head>
+ <body>  
+ <th:block th:replace="fragments/navbar :: navbar"></th:block> 
+  <title>Events Info</title>      
+ <h1>
+    Events <span>info:</span>
+</h1>
+ 
+ <div class="card">
+ 	<div class="card-section">
 <form
     id = "formBooking"
   	th:object="${booking}"
@@ -23,9 +25,8 @@
        		</li>
     	</ul>
     	<div class="col-4 form-check" >
-    			<h1 th:text=" ${booking.eventBooket.eventLocation.booketAvailable}"></h1>
-    	<p>Posti disponibili: <span th:text="${booking.eventBooket.eventLocation.booketAvailable}"></span></p>
-
+    	<h1 th:text=" ${booking.eventBooket.eventLocation.booketAvailable}"></h1>
+    	<p class="txt">Posti disponibili: <span th:text="${booking.eventBooket.eventLocation.booketAvailable}"></span></p>
 			<label class="txt" for="quantity">Enter number of people:</label>
 			<input type="hidden" th:field="*{eventBooket}">
  				<input class="form-bar" type="number" id="quantity" name="quantity" min="1" th:field="*{numberBooket}">
@@ -34,7 +35,7 @@
  					</ul>
  				</div>		
 	</div>
-	   	<div class="col-4 form-check" >
+	   	<div class="col-4 form-check2" >
 			<label class="txt" for="email">Enter your email address:</label>
 			<input type="hidden" th:field="*{eventBooket}">
  				<input class="form-bar2" type="email" id="email" size="30" required name="email" th:field="*{email}">
@@ -45,6 +46,8 @@
  				</div>		
 	</div>
 	  	<button type="submit" class="btn save-info">Save</button>
+    	</div>
+ </div>
 <th:block th:replace="fragments/themeToggler :: themeToggler"></th:block>
 <th:block th:replace="fragments/script :: swiper-js"></th:block>
 <th:block th:replace="fragments/footer :: footer"></th:block>	  	

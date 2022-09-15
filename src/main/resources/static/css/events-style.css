@@ -315,18 +315,20 @@ input .status{
 	
 }
  .form-check{
-	margin-left:710px;
-		
+	margin-left:710px;	
 }
 
 .form-bar{
 	border-radius:20px;
+	color:black;
+	
 	
 }
 .form-bar2{
 	border-radius:20px;
 	width:190px;
 	padding-left:5px;
+	color:black;
 	
 }
 .txt{
