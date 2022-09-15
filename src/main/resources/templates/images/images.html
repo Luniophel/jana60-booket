@@ -13,7 +13,7 @@
 	<!-- INIZIO SEZIONE EDITOR DELLA LISTA IMMAGINI -->
 	<section class="home">
 		<div class="content">
-		    <h3>Perché non caricare un' <span>immagine</span>? Hai un'intera <span>Galleria </span>a tua disposizione!</h3>
+		    <h3>Why don't you upload<span> an image</span>? You have an entire <span> Gallery </span>at your disposal!</h3>
 		</div>
 	</section>
 	<!-- FINE SEZIONE EDITOR DELLA LISTA IMMAGINI   -->
@@ -31,8 +31,8 @@
 	<!-- INIZIO FORM UPLOAD IMMAGINI -->
 	    <div class="mb-3 d-flex">
 	      <label for="contentMultipart" class="form-label"></label>
-	      <input class="form-control" type="file" id="contentMultipart" th:field="*{contentMultipart}">
-	      <button class="btn" type="submit">Save</button>
+	      <input class="form-control img" type="file" id="contentMultipart" th:field="*{contentMultipart}">
+	      <button class="btn mx-3" type="submit">Save</button>
 	    </div>
 	<!-- FINE FORM UPLOAD IMMAGINI -->  
   	<!-- INIZIO SEZIONE ERRORI  -->
@@ -96,7 +96,7 @@
 				    		class="btn btn-warning p-1 text-light col-3" 
 				    		th:href="@{|/images/${img.imageEvent.id}/${img.id}/setPoster|}" 
 				    		title="Seleziona"
-				    		onclick="return confirm('Vuoi usare questa immagine come Poster?')"
+				    		onclick="return confirm('Do you want to use this image as a Poster?')"
 				    	>
 			    			<i class="fa-solid fa-star"></i></a>
 			    		</a>
