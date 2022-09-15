@@ -50,6 +50,8 @@ public class Events {
 	@Column(nullable = false, columnDefinition = "boolean default false")
 	private Boolean visible;
 	
+	private Boolean modificed; 
+	
 	@ManyToMany
 	List<Category> categories;
 	
@@ -155,6 +157,14 @@ public class Events {
 		this.eventBooket = eventBooket;
 	}
 	
+
+	public Boolean getModificed() {
+		return modificed;
+	}
+
+	public void setModificed(Boolean modificed) {
+		this.modificed = modificed;
+	}
 
 	public Image getPosterImg() {
 		List<Image> imgList = getEventImage();
