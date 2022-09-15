@@ -5,10 +5,7 @@
 	
  }
  
-.container-card p{
-	margin: 0px;
-	padding: 0px;
-}
+
 
 body{
 	margin-top:70px;
@@ -49,6 +46,8 @@ h1{ margin-top:100px;
 	box-shadow: 5px 5px 10px 5px black;	
 	border-radius: 10px;
 	margin: 20px;
+	width: 500px;
+	
 }
 .card-event:hover{
 	transform: scale(1.02);
@@ -61,8 +60,10 @@ h1{ margin-top:100px;
 }
 
 .card-event h2{
+	margin: auto;
+	width: 90%;
 	color: var(--main-color);
-	font-size:50px;
+	font-size:30px;
 	font-weight:700;
 	font-family: 'Nunito', sans-serif;
 }
@@ -102,7 +103,7 @@ h1{ margin-top:100px;
 	padding: 15px 40px;
 	font-size: 50px;
 	border-radius: 100px;
-	left: 40%;
+	left: 38%;
 	bottom: 50px;
 	background-color: white;
 	box-shadow: 5px 5px 20px 5px black;
@@ -135,7 +136,8 @@ h1{ margin-top:100px;
 
 .tags{
 	display: flex;
-	margin-bottom: 10px;
+	margin: 20px 0px 10px 0px;
+	justify-content: center;
 }
 
 .tags p{
