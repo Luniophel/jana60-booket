@@ -12,7 +12,7 @@
 <h1 class="heading">
     List of <span>active events:</span>
 </h1>
-
+	
 	<div class="form-search">
 	  	<form action="/ourEvents/search">
 	    	<input class="form-name" type="text" name="queryName" placeholder="Name...">
@@ -21,6 +21,9 @@
 	    	<button class="button-search">Search</button>
 	    </form>
   	</div>
+  	<th:block th:if="${successMessage != null && successMessage != ''}">
+  	<div class="alert alert-success" th:text="${successMessage}"></div>
+  	</th:block>
     <div class="container-card">
         <div class="card-event" th:each="e : ${listEvents}" th:if="${e.visible == true}">
         	<div class="canceled">
