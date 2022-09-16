@@ -303,9 +303,16 @@ public class EventsController
 	}
 	
 	@GetMapping("/publish/{id}")
-	public String publishEvent(@PathVariable("id") Integer eventId)
+	public String publishEvent(@PathVariable("id") Integer eventId, Model model)
 	{
 		Events curEvent = repo.findById(eventId).get();
+		//SE MANCA IMMAGINE O LOCATION NON E' SPECIFICATA, RESTITUISCE ERRORE E NON PUBBLICA
+		if(curEvent.getEventImage().isEmpty()||curEvent.getEventLocation().getId()==1)
+		{
+			//INSERIRE ERRORE QUI
+			model.addAttribute("listEvents", repo.findAll());
+			return "/event/events";
+		}
 		curEvent.setVisible(true);
 		repo.save(curEvent);
 		return "redirect:/events";
