@@ -87,9 +87,6 @@ section{
 .header-swiper .logo span{
     color: var(--main-color);
 }
-.navbar-swiper{
-	padding-left:180px;
-}
 
 .header-swiper .navbar-swiper a{
 	
@@ -355,7 +352,7 @@ margin-top:50px;
 
         display: initial;
     }
-     .header-swiper .navbar-swiper{
+     .header-swiper  .navbar-swiper{
         position: absolute;
         top: 100%; left: 0; right: 0;
         border-top: .1rem solid #111;
@@ -370,7 +367,7 @@ margin-top:50px;
      }
             
      .header-swiper .navbar-swiper a{
-        display: flex;
+        display:flex;
         background: #111;
         border-radius: .5rem;
         padding: 1.3rem;

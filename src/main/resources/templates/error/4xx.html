@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
      <th:block th:replace="fragments/resources :: src-head"></th:block> 
-      <link rel="stylesheet" href="/css/error-style.css" />  
+      <link rel="stylesheet" href="/css/error-style.css" />
 <title>404 Error page</title>
 </head>
 <body>
@@ -11,9 +11,11 @@
 <div class="container-error">
   <img src="img/error404.gif" alt="">
   <h2>Hmm....</h2>
-  <p>OPS!PAGE NOT FOUND</p>
-  <a class="btn" href="/">Back to Home</a>
+  <p class="message">OPS!PAGE NOT FOUND</p>
+  <a class="btn back-home" href="/">Back to Home</a>
 </div>
- <th:block th:replace="fragments/script :: swiper-js"></th:block> 
+ <th:block th:replace="fragments/themeToggler :: themeToggler"></th:block>	
+<th:block th:replace="fragments/script :: swiper-js"></th:block>
+<th:block th:replace="fragments/footer :: footer"></th:block>
 </body>
 </html>
