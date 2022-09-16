@@ -29,6 +29,10 @@
 	<th:block th:if="${successMessage != null && successMessage != ''}">
 		<div class="alert alert-success" th:text="${successMessage}"></div>
 	</th:block>
+	
+	<th:block th:if="${failMessage != null && failMessage != ''}">
+		<div class="alert alert-success" th:text="${failMessage}"></div>
+	</th:block>
   	
     <div class="container-card">
         <div class="card-event" th:each="e : ${listEvents}">

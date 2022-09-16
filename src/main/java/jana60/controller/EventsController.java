@@ -312,7 +312,7 @@ public class EventsController
 		//SE MANCA IMMAGINE O LOCATION NON E' SPECIFICATA, RESTITUISCE ERRORE E NON PUBBLICA
 		if(curEvent.getEventImage().isEmpty()||curEvent.getEventLocation().getId()==1)
 		{
-			//INSERIRE ERRORE QUI
+			ra.addFlashAttribute("failMessage", "Failed to publish your event; you need to set at least a Poster and a Location");
 			return "redirect:/events";
 		}
 		curEvent.setVisible(true);
