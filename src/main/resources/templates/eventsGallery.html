@@ -22,7 +22,7 @@
 	    </form>
   	</div>
   	<th:block th:if="${successMessage != null && successMessage != ''}">
-  	<div class="alert alert-success" th:text="${successMessage}"></div>
+  	<div class="success-message" th:text="${successMessage}"></div>
   	</th:block>
     <div class="container-card">
         <div class="card-event" th:each="e : ${listEvents}" th:if="${e.visible == true}">
