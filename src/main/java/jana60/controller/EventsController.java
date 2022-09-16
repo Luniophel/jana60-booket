@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import antlr.debug.Event;
 import jana60.model.Booking;
@@ -104,13 +105,14 @@ public class EventsController
 	}
 	
 	@GetMapping("/booket/{id}")
-	public String saveEventInfo(@PathVariable("id") Integer eventId,  Model model)
+	public String saveEventInfo(@PathVariable("id") Integer eventId, RedirectAttributes ra, Model model)
 	{
 		Optional<Events> result = repo.findById(eventId);
 		if (result.isPresent())
 		{
 		Booking booking = new Booking();
 		booking.setEventBooket(result.get());
+		ra.addFlashAttribute("successMessage", "You have successfully booked " + result.get().getEventBooket() + " ticket(s)");
 		model.addAttribute("booking", booking);
 		}
 		
