@@ -37,7 +37,6 @@ import jana60.repository.LocationRepository;
 @RequestMapping("/")
 public class EventsController 
 {
-	
 	@Autowired
 	private EventsRepository repo;
 	@Autowired

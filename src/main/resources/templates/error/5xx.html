@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
      <th:block th:replace="fragments/resources :: src-head"></th:block> 
-      <link rel="stylesheet" href="/css/error-style.css" />  
-<title>500 Error page</title>
+      <link rel="stylesheet" href="/css/error-style.css" />
+<title>Error 500 page</title>
 </head>
 <body>
 <th:block th:replace="fragments/navbar :: navbar"></th:block> 
 <div class="container-error">
-  <img src="img/500error.png" alt="">
+  <img src="img/500error.gif" alt="">
   <h2>Hmm....</h2>
-  <p>OPS!PAGE NOT FOUND</p>
-  <a class="btn" href="/">Back to Home</a>
+  <p class="message">OPS!INTERNAL ERROR</p>
+  <a class="btn back-home" href="/">Back to Home</a>
 </div>
- <th:block th:replace="fragments/script :: swiper-js"></th:block> 
+ <th:block th:replace="fragments/themeToggler :: themeToggler"></th:block>	
+<th:block th:replace="fragments/script :: swiper-js"></th:block>
+<th:block th:replace="fragments/footer :: footer"></th:block>
 </body>
 </html>
