@@ -10,7 +10,6 @@
    
   body 
   {
-     display:flex;
 	 justify-content:center;
 	 align-items:center;
 	 height:100vh;
@@ -23,4 +22,10 @@
 	 align-items:center;
 	 flex-direction:column;
     }
-
+  .back-home{
+	margin-bottom:35px;
+}
+  .message{
+	font-size:35px;
+	color:var(--main-color);
+}
