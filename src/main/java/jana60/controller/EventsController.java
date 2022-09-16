@@ -6,7 +6,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
-import javax.swing.text.html.FormSubmitEvent;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import antlr.debug.Event;
 import jana60.model.Booking;
 import jana60.model.Category;
 import jana60.model.Events;
@@ -105,14 +103,13 @@ public class EventsController
 	}
 	
 	@GetMapping("/booket/{id}")
-	public String saveEventInfo(@PathVariable("id") Integer eventId, RedirectAttributes ra, Model model)
+	public String saveEventInfo(@PathVariable("id") Integer eventId, Model model)
 	{
 		Optional<Events> result = repo.findById(eventId);
 		if (result.isPresent())
 		{
 		Booking booking = new Booking();
 		booking.setEventBooket(result.get());
-		ra.addFlashAttribute("successMessage", "You have successfully booked " + result.get().getEventBooket() + " ticket(s)");
 		model.addAttribute("booking", booking);
 		}
 		
@@ -120,8 +117,10 @@ public class EventsController
 		return "/event/booket";	
 	}
 	@PostMapping("/booket")
-	public String saveEventInfo(@Valid @ModelAttribute("booking") Booking formBooking, BindingResult br)
+	public String saveEventInfo(@Valid @ModelAttribute("booking") Booking formBooking, BindingResult br, RedirectAttributes ra )
 	{	
+		ra.addFlashAttribute("successMessage", "You have successfully booked " + formBooking.getNumberBooket() + " ticket(s)");
+
 		if (formBooking.getEventBooket().getEventLocation().getBooketAvailable() - formBooking.getNumberBooket() < 0)
 		{
 			br.addError(new FieldError("booking", "quantity", formBooking.getNumberBooket(), false, null, null, "Impossible to book: there are just " + formBooking.getEventBooket().getEventLocation().getBooketAvailable() + " tickets available."));
