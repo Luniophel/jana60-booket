@@ -64,6 +64,10 @@
 		            <tr class="list" th:each="cl : ${categoriesList}">
 		                <td class="name" th:text="${cl.name}"></td>
 		                <td class="description" th:text="${cl.description}"></td>
+		                <td style="background-color:dimgray">
+		    				<a class=" delete-button" th:href="@{|/categories/delete/${cl.id}|}"><i class="fa-solid fa-trash-can"></i></a>
+		    				<a class="edit-button" th:href="@{|/categories/edit/${cl.id}|}"><i class="fa-solid fa-pen-to-square"></i></a>
+    					</td>
 		            </tr>
 		        </tbody>
 	   		</table>

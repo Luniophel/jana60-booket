@@ -21,7 +21,7 @@
    	class="m-auto"
     >
     	<ul>
-    		<li th:each="error : ${#fields.allErrors()}" th:text="${error}">
+    		<li class="li-error"th:each="error : ${#fields.allErrors()}" th:text="${error}">
        		</li>
     	</ul>
     	<div class="col-4 form-check" >
