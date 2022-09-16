@@ -310,8 +310,7 @@ public class EventsController
 		if(curEvent.getEventImage().isEmpty()||curEvent.getEventLocation().getId()==1)
 		{
 			//INSERIRE ERRORE QUI
-			model.addAttribute("listEvents", repo.findAll());
-			return "/event/events";
+			return "redirect:/events";
 		}
 		curEvent.setVisible(true);
 		repo.save(curEvent);
