@@ -27,11 +27,11 @@
   	</div>
   	
 	<th:block th:if="${successMessage != null && successMessage != ''}">
-		<div class="alert alert-success" th:text="${successMessage}"></div>
+		<div class="success-message" th:text="${successMessage}"></div>
 	</th:block>
 	
 	<th:block th:if="${failMessage != null && failMessage != ''}">
-		<div class="alert alert-success" th:text="${failMessage}"></div>
+		<div class="fail-message" th:text="${failMessage}"></div>
 	</th:block>
   	
     <div class="container-card">
@@ -50,6 +50,20 @@
 	        </div>
 	        <div class="title-block">
 	            <h2 th:text="${e.name}"></h2>
+				<!-- NOTIFICHE EVENTO -->
+	            <th:block th:if="${e.modificed}==null and ${e.visible}==true and ${e.publishedStatus}==true">
+	        		<h2><i class="fa-solid fa-circle-check text-success"></i></h2>
+	        		<p class="text-center text-success">Confirmed</p>
+	        	</th:block>
+	            <th:block th:if="${e.modificed}==true and ${e.visible}==true or ${e.publishedStatus}==false">
+	        		<h2><i class="fa-solid fa-circle-exclamation text-danger"></i></h2>
+	        		<p class="text-center text-danger">Modified</p>
+	        	</th:block>
+	        	<th:block th:if="${e.visible}==false">
+	        		<h2><i class="fa-solid fa-circle-exclamation text-warning"></i></h2>
+	        		<p class="text-center text-warning">Draft</p>
+	        	</th:block>
+	        	<!-- NOTIFICHE EVENTO -->
 	        </div>
 	        <div class="tags">
 	        	<p th:each="c : ${e.categories}" th:text="${c.name}"></p>
@@ -101,7 +115,7 @@
             	</div>
             	</th:block>
             	<div class="cancel-button">
-	            	<a class="" th:href="@{|/cancel/${e.id}|}" title="Cancel">
+	            	<a class="" th:href="@{|/cancel/${e.id}|}" title="Cancel" onclick="return confirm('Do you want to cancel this event?')">
 						<i class="fa-solid fa-xmark"></i>				  	
 					</a>
             	</div>

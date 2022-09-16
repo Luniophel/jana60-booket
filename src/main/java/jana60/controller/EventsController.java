@@ -224,7 +224,8 @@ public class EventsController
 			else 
 			{
 				//CASO ID IDENTICO. GLI ID DELL'EVENTO CORRENTE DELLA LISTA E' IDENTICO A QUELLO DEL FORMEVENT,
-				formEvent.setModificed(true);
+				if(repo.findById(formEvent.getId()).get().getVisible()==true)
+					formEvent.setModificed(true);
 			}
 		}
 //FINE NUOVO CODICE

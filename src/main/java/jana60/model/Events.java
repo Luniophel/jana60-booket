@@ -50,6 +50,7 @@ public class Events {
 	@Column(nullable = false, columnDefinition = "boolean default false")
 	private Boolean visible; //PER EVENTO PUBBLICATO || BOZZA
 	
+	@Column(columnDefinition = "boolean default false")
 	private Boolean modificed; // PER EVENTO MODIFICATO 
 	
 	@ManyToMany
