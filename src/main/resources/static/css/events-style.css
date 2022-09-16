@@ -133,6 +133,10 @@ h1{ margin-top:100px;
 	filter: blur(2px);
 }
 
+.iloveblur{
+	filter: blur(10px);
+}
+
 .info-button a:hover{
 	opacity: 1;
 	filter: blur(0px);
@@ -329,6 +333,30 @@ input .status{
 	margin-left:25px;
 	border-radius: 30px;
 	border: 5px solid white;
+	font-size: 13px;
+	text-align:left;
+	max-width:400px;
+	align-items:center;
+	
+}
+.form-control-images{
+	position:flex;
+	height: 45px;
+	margin: 3px;
+	margin-left:260px;
+	border-radius: 30px;
+	border: 5px solid white;
+	font-size: 13px;
+	text-align:left;
+	max-width:400px;
+	align-items:center;
+	
+}
+.form-control-images-err{
+	position:flex;
+	height: 45px;
+	margin: 3px;
+	margin-left:260px;
 	font-size: 13px;
 	text-align:left;
 	max-width:400px;

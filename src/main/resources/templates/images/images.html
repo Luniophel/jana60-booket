@@ -3,6 +3,8 @@
 	<head>
 	
 	    <th:block th:replace="fragments/resources :: src-head"></th:block>
+	    <link rel="stylesheet" href="/css/events-style.css" />
+   		<link rel="stylesheet" href="/css/search.css"></link>
 	    <title>Categories</title>
 	    
 	</head>
@@ -31,7 +33,7 @@
 	<!-- INIZIO FORM UPLOAD IMMAGINI -->
 	    <div class="mb-3 d-flex">
 	      <label for="contentMultipart" class="form-label"></label>
-	      <input class="form-control img" type="file" id="contentMultipart" th:field="*{contentMultipart}">
+	      <input class="form-control form-control-images img" type="file" id="contentMultipart" th:field="*{contentMultipart}">
 	      <button class="btn mx-3" type="submit">Save</button>
 	    </div>
 	<!-- FINE FORM UPLOAD IMMAGINI -->  
@@ -39,7 +41,7 @@
 
 		<div>
 		<li 
-			 class="text-danger fs-4"
+			 class="form-control-images-err text-danger fs-4"
 	         th:each="err : ${#fields.allErrors()}" 
 	         th:text="${err}">
 		</li>
@@ -49,30 +51,54 @@
 	  </form>
 	</div>
 	<!-- FINE SEZIONE FORM IMMAGINI  -->
-	
-	<!-- IMMAGINE POSTER -->
-	<div class="row">
-	  <div class="col-4" th:each="ps : ${poster}">
-		    <!-- Inizio Card -->
-		    <div class="bg-dark text-center rounded-bottom py-2">
-			</div>
-		    <div class="my-5 mx-2">
-			      <img th:src="@{|/images/${ps.id}/content|}" class="img-fluid image-controller" alt="PLACEHOLDER">
-			      <!-- Inizio Footer -->
-			      <div class="bg-dark text-center rounded-bottom py-2">
-			      </div>
-			      <!-- Fine Footer   -->
-		    </div>
-		    <!-- Fine Card   -->
-	  </div>
-	</div>
-		<!-- IMMAGINE POSTER -->
-	
-	<!-- __Aggiungere un th:if per far apparire il messaggio soltanto se la lista è vuota__
-	  <div class="container col-6 py-5">
-	      <h1 class="text-center">La lista è vuota.</h1>
-	  </div>
-	-->
+
+	<!-- TEST -->	
+	<th:block th:if="${poster.size() != 0}">
+	<div class="container-card">
+        <div class="card-event">
+        	<div class="canceled">
+        		<p class="cancel">Canceled</p>
+        	</div>
+        	<div class="img-container" th:each="ps : ${poster}">
+            	<img class="card-img" th:src="@{|/images/${ps.id}/content|}">
+	        </div>
+	        <div class="info-button" >
+					<a title="Info">
+				  		<i class="fa-solid fa-info"></i>
+				  	</a>
+	        </div>
+        <div class="iloveblur">
+	        <div class="title-block">
+	            <h2>SIUMSIUM</h2>
+				<!-- NOTIFICHE EVENTO -->
+	        		<h2><i class="fa-solid fa-circle-check text-success"></i></h2>
+	        		<p class="text-center text-success">Confirmed</p>
+	        	<!-- NOTIFICHE EVENTO -->
+	        </div>
+	        <div class="tags">
+	        	<p>Sium</p>
+	        </div>
+	        <div class="location">
+	            <p>Siummia</p>
+	        </div>
+	        <div class="dates">
+		        <div class="start-date">
+	            	<h4>Start date</h4>
+	            	<p>12/12/2012</p>
+	            </div>
+	            <div class="end-date">
+	            	<h4>End date</h4>
+	            	<p>12/12/2012</p>
+	            </div>
+            </div>
+            <div class="buttons">
+			
+            </div>
+        </div>
+        </div>
+    </div>
+	</th:block>
+	<!-- TEST -->
 	
 	<div class="row">
 	  <div class="col-4" th:each="img : ${listImage}">
