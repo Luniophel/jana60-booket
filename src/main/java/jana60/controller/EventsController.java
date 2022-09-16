@@ -290,21 +290,23 @@ public class EventsController
 	}
 	
 	@GetMapping("/cancel/{id}")
-	public String cancelEvent(@PathVariable("id") Integer eventId)
+	public String cancelEvent(@PathVariable("id") Integer eventId, RedirectAttributes ra)
 	{
 		Events curEvent = repo.findById(eventId).get();
 		if (curEvent.getVisible()==false)
 		{
 			repo.deleteById(eventId);
+			ra.addFlashAttribute("successMessage", "You successfully deleted your event");
 			return "redirect:/events";
 		}
 		curEvent.setPublishedStatus(false);
 		repo.save(curEvent);
+		ra.addFlashAttribute("successMessage", "You have canceled your event, you can't book anymore tickets");
 		return "redirect:/events";
 	}
 	
 	@GetMapping("/publish/{id}")
-	public String publishEvent(@PathVariable("id") Integer eventId, Model model)
+	public String publishEvent(@PathVariable("id") Integer eventId, RedirectAttributes ra)
 	{
 		Events curEvent = repo.findById(eventId).get();
 		//SE MANCA IMMAGINE O LOCATION NON E' SPECIFICATA, RESTITUISCE ERRORE E NON PUBBLICA
@@ -314,6 +316,7 @@ public class EventsController
 			return "redirect:/events";
 		}
 		curEvent.setVisible(true);
+		ra.addFlashAttribute("successMessage", "You have successfully published your event");
 		repo.save(curEvent);
 		return "redirect:/events";
 	}
