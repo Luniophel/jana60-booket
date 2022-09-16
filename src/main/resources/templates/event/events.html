@@ -22,7 +22,7 @@
 	    	<input class="form-name" type="text" name="queryName" placeholder="Name...">
 	    	<input class="form-location" type="text" name="queryLocation" placeholder="Location...">
 	    	<input class="form-category" type="text" name="queryCategory" placeholder="Category...">
-	    	<button class="button-search">Sort</button>
+	    	<button class="button-search">Search</button>
 	    </form>
   	</div>
     <div class="container-card">
@@ -30,18 +30,17 @@
         	<div class="canceled">
         		<p class="cancel">Canceled</p>
         	</div>
-	        <div class="title-block">
-	            <h2 th:text="${e.name}"></h2>
-	            <div class="info-button" >
+        	<div class="img-container">
+				<img th:if="${e.eventImage.size() == 0}" src="/img/concert-love.webp">
+            	<img class="card-img" th:if="${e.eventImage.isEmpty() == false}" th:src="@{|/images/${e.getPosterImg.id}/content|}">
+	        </div>
+	        <div class="info-button" >
 					<a th:href="@{|/events/${e.id}|}" title="Info">
 				  		<i class="fa-solid fa-info"></i>
 				  	</a>
-	            </div>
 	        </div>
-	    	<div class="img-container">
-				<img th:if="${e.eventImage.size() == 0}" src="/img/concert-love.webp">
-            	<img class="card-img" th:if="${e.eventImage.isEmpty() == false}" th:src="@{|/images/${e.getPosterImg.id}/content|}">
-
+	        <div class="title-block">
+	            <h2 th:text="${e.name}"></h2>
 	        </div>
 	        <div class="tags">
 	        	<p th:each="c : ${e.categories}" th:text="${c.name}"></p>
@@ -49,17 +48,25 @@
 	        <div class="location">
 	            <p th:each="l : ${e.eventLocation}" th:text="${l.name}"></p>
 	        </div>
-	        <div class="dates row">
+	        <div class="dates">
 		        <div class="start-date">
 	            	<h4>Start date</h4>
-	            	<p th:text="${#temporals.format(e.startDate, 'dd MMMM yyyy HH:mm')}"></p>
+	            	<p th:text="${#temporals.format(e.startDate, 'dd/MM/yyyy HH:mm')}"></p>
 	            </div>
 	            <div class="end-date">
 	            	<h4>End date</h4>
-	            	<p th:text="${#temporals.format(e.endDate, 'dd MMMM yyyy HH:mm')}"></p>
+	            	<p th:text="${#temporals.format(e.endDate, 'dd/MM/yyyy HH:mm')}"></p>
 	            </div>
             </div>
             <div class="buttons">
+            <th:block th:if="${e.publishedStatus == false}">
+            	<div class="images-button">
+	            	<p href="" class="text-danger fs-1" disabled>
+            			EVENTO ANNULLATO
+					</p>
+            	</div>
+			</th:block>
+			<th:block th:if="${e.publishedStatus == true}">
             	<div class="edit-button">
 	            	<a class="" th:href="@{|/editEvent/${e.id}|}" title="Edit">
 				  		<i class="fa-solid fa-pen-to-square"></i>
@@ -70,7 +77,28 @@
 			  			<i class="fa-regular fa-images"></i>
 			  		</a> 
             	</div>
+            	<th:block th:if="${e.visible == true}">
+            	<div class="images-button">
+	            	<a class="bg-success" title="Evento Pubblicato!">
+				  		<i class="fa-solid fa-upload"></i>
+				  	</a>
+            	</div>
+            	</th:block>
+            	<th:block th:if="${e.visible == false}">
+            	<div class="images-button">
+	            	<a class="" th:href="@{|/publish/${e.id}|}" title="Publish">
+				  		<i class="fa-solid fa-upload"></i>
+				  	</a>
+            	</div>
+            	</th:block>
+            	<div class="cancel-button">
+	            	<a class="" th:href="@{|/cancel/${e.id}|}" title="Cancel">
+						<i class="fa-solid fa-xmark"></i>				  	
+					</a>
+            	</div>
+            </th:block>
             </div>
+            
         </div>
     </div>
     <th:block th:replace="fragments/themeToggler :: themeToggler"></th:block>

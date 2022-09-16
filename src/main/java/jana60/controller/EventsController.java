@@ -124,7 +124,7 @@ public class EventsController
 	{	
 		if (formBooking.getEventBooket().getEventLocation().getBooketAvailable() - formBooking.getNumberBooket() < 0)
 		{
-			br.addError(new FieldError("booking", "quantity", formBooking.getNumberBooket(), false, null, null, "Posti per " + formBooking.getEventBooket().getEventLocation().getName() + " finiti"));
+			br.addError(new FieldError("booking", "quantity", formBooking.getNumberBooket(), false, null, null, "Impossible to book: there are just " + formBooking.getEventBooket().getEventLocation().getBooketAvailable() + " tickets available."));
 		}
 		else {
 				formBooking.getEventBooket().getEventLocation().setBooketAvailable(formBooking.getEventBooket().getEventLocation().getBooketAvailable() - formBooking.getNumberBooket());
@@ -144,7 +144,7 @@ public class EventsController
 		else {
 			repoBooket.save(formBooking);
 		}
-		return "redirect:/events";
+		return "redirect:/ourEvents";
 	}
 	
 	@GetMapping("/addEvent")
@@ -163,6 +163,8 @@ public class EventsController
 		//SE NON CI SONO EVENTI
 		if(repo.findAll().iterator().hasNext()==false)
 		{
+			formEvent.setVisible(false);
+			formEvent.setPublishedStatus(true);
 			repo.save(formEvent);
 			return "redirect:/events";
 		}
@@ -194,6 +196,8 @@ public class EventsController
 		Iterator<Events> iter = listEventLocation.iterator();
 		if(iter.hasNext()==false)
 		{
+			formEvent.setVisible(false);
+			formEvent.setPublishedStatus(true);
 			repo.save(formEvent);
 			return "redirect:/events";
 		}
@@ -241,6 +245,8 @@ public class EventsController
 		} 
 		else 
 		{
+			formEvent.setVisible(false);
+			formEvent.setPublishedStatus(true);
 			repo.save(formEvent);
 			return "redirect:/events";
 		}
@@ -283,6 +289,30 @@ public class EventsController
 			return "redirect:/events";
 		}
 	}
+	
+	@GetMapping("/cancel/{id}")
+	public String cancelEvent(@PathVariable("id") Integer eventId)
+	{
+		Events curEvent = repo.findById(eventId).get();
+		if (curEvent.getVisible()==false)
+		{
+			repo.deleteById(eventId);
+			return "redirect:/events";
+		}
+		curEvent.setPublishedStatus(false);
+		repo.save(curEvent);
+		return "redirect:/events";
+	}
+	
+	@GetMapping("/publish/{id}")
+	public String publishEvent(@PathVariable("id") Integer eventId)
+	{
+		Events curEvent = repo.findById(eventId).get();
+		curEvent.setVisible(true);
+		repo.save(curEvent);
+		return "redirect:/events";
+	}
+	
 	
 }
 	

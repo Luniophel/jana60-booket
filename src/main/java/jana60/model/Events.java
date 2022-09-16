@@ -45,12 +45,12 @@ public class Events {
 	private LocalDateTime endDate;
 	
 	@Column(nullable = false, columnDefinition = "boolean default false")
-	private Boolean publishedStatus;
+	private Boolean publishedStatus; //PER EVENTO CANCELLATO
 	
 	@Column(nullable = false, columnDefinition = "boolean default false")
-	private Boolean visible;
+	private Boolean visible; //PER EVENTO PUBBLICATO || BOZZA
 	
-	private Boolean modificed; 
+	private Boolean modificed; // PER EVENTO MODIFICATO 
 	
 	@ManyToMany
 	List<Category> categories;
